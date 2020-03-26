@@ -37,6 +37,7 @@ Public Class Main
     Dim Set_Trg_Count1 As Int16, Set_Trg_Count2 As Int16, Set_Trg_Count3, Set_Trg_Count_All As Int16
     Dim Line_Table_1() As Integer, Line_Table_2() As Integer, Line_Table_3() As Integer
     Dim Image_Memory_Left, Image_Memory_Right, Image_Memory_Left_Save, Image_Memory_Right_Save As New MemoryStream
+    Dim CogToolBlock_Fixture_Left, CogToolBlock_Fixture_Right As New CogToolBlock
     Dim DataCode_Left As String = "", DataCode_Right As String = "", DataCode_Com As String = "", DataCode_Left_New As String = "", DataCode_Right_New As String = ""
     Dim DataCode_Left_tmp As String = "", DataCode_Right_tmp As String = ""
     Dim Line_1_Index As List(Of Integer), Line_4_Index As List(Of Integer)
@@ -46,6 +47,12 @@ Public Class Main
     Dim Data_2 As New List(Of Double), Data_5 As New List(Of Double)
     Dim Data_3 As New List(Of Double), Data_6 As New List(Of Double)
     Dim LINK_CAMERA As Boolean
+    Dim hJobManager As New Cognex.VisionPro.QuickBuild.CogJobManager
+    Dim hJobs As New Cognex.VisionPro.QuickBuild.CogJob
+    Dim hToolGroup As New CogToolGroup
+    Dim ToolBlock_left, toolblock_right As New CogToolBlock
+    Dim ImageFile_right, ImageFile_left As New CogImageFileTool
+    Dim tmpRecord_Left, tmpRecord_Right As Cognex.VisionPro.ICogRecord
     Dim Laser_Trigger_AxidID As Int16
     Dim Card_Trg, Card_Trg_00, Card_Trg_01 As TrgParam_STR
     Dim LJV7000 As New KEYENCE_LIB.LINE_LASER.KEYENCE_FUN, Device_ID As Integer = 0
@@ -190,8 +197,8 @@ Public Class Main
 
         If SW_Fully_automatic.Value = False Then
             Try
-                'ImageFile_Parallel_Left.Operator.Open(CognexImagefile_IDB_Left_tmp, CogImageFileModeConstants.Read)
-                'ImageFile_Parallel_Left.Run()
+                ImageFile_Parallel_Left.Operator.Open(CognexImagefile_IDB_Left_tmp, CogImageFileModeConstants.Read)
+                ImageFile_Parallel_Left.Run()
                 Write_Err_Left(DataCode_Left_New, " ImageFile_Parallel_Left.Run")
             Catch ex As Exception
                 Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "1工位图像处理打开IDB文件错误:" & ex.ToString, "", Color.Red)
@@ -257,7 +264,7 @@ Public Class Main
                 Fs_Left.Flush()
                 Fs_Left.Close()
                 Fs_Left.Dispose()
-                'ImageFile_Parallel_Left.Operator.Close()
+                ImageFile_Parallel_Left.Operator.Close()
                 If PARAM_BOOL.S是否删除IDB文件 = True Then
                     System.IO.File.Delete(CognexImagefile_IDB_Left_tmp)
                 End If
@@ -313,8 +320,8 @@ Public Class Main
 
         If SW_Fully_automatic.Value = False Then
             Try
-                'ImageFile_Parallel_Right.Operator.Open(CognexImagefile_IDB_Right_tmp, CogImageFileModeConstants.Read)
-                'ImageFile_Parallel_Right.Run()
+                ImageFile_Parallel_Right.Operator.Open(CognexImagefile_IDB_Right_tmp, CogImageFileModeConstants.Read)
+                ImageFile_Parallel_Right.Run()
                 Write_Err_Right(DataCode_Right_New, " ImageFile_Parallel_Right.Run")
             Catch ex As Exception
                 Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "2工位图像处理打开IDB文件错误:" & ex.ToString, DataCode_Right_New, Color.Red)
@@ -380,7 +387,7 @@ Public Class Main
                 Fs_Right.Flush()
                 Fs_Right.Close()
                 Fs_Right.Dispose()
-                'ImageFile_Parallel_Right.Operator.Close()
+                ImageFile_Parallel_Right.Operator.Close()
                 If PARAM_BOOL.S是否删除IDB文件 = True Then
                     System.IO.File.Delete(CognexImagefile_IDB_Right_tmp)
                 End If
@@ -427,51 +434,2436 @@ Public Class Main
 
 #Region "Vision"
 
+    Dim FUN_TOP_FIXTURE_L, N1X1_l, FUN_DOWN_FIXTURE_l, FUN_TOP_LEFT_l, N1X1_Tilde_l, FUN_TOP_RIGHT_l, KEY_14_l, KEY_15_l, KEY_29_l, KEY_30_l, KEY_31_l, KEY_32_l, KEY_44_l, KEY_45_l, KEY_46_l, KEY_47_l, KEY_48_l, KEY_59_l, KEY_60_l, KEY_61_l, KEY_65_l, KEY_71_l, N1X1_DOWN_LEFT_l, N1X1_DOWN_RIGHT_l, N1X1_TOP_LEFT_l, N1X1_TOP_RIGHT_l, FUN_DOWN_LEFT_l, FUN_DOWN_RIGHT_l As New CogPMAlignPattern
+    Dim FUN_TOP_FIXTURE_r, N1X1_r, FUN_DOWN_FIXTURE_r, FUN_TOP_LEFT_r, N1X1_Tilde_r, FUN_TOP_RIGHT_r, KEY_14_r, KEY_15_r, KEY_29_r, KEY_30_r, KEY_31_r, KEY_32_r, KEY_44_r, KEY_45_r, KEY_46_r, KEY_47_r, KEY_48_r, KEY_59_r, KEY_60_r, KEY_61_r, KEY_65_r, KEY_71_r, N1X1_DOWN_LEFT_r, N1X1_DOWN_RIGHT_r, N1X1_TOP_LEFT_r, N1X1_TOP_RIGHT_r, FUN_DOWN_LEFT_r, FUN_DOWN_RIGHT_r As New CogPMAlignPattern
 
-
-    'Dim CogToolBlock_Group_Left, CogToolBlock_Group_Right As New CogToolBlock
-    'Dim ImageFile_Parallel_Left, ImageFile_Parallel_Right As New CogImageFileTool
+    Dim CogToolBlock_Group_Left, CogToolBlock_Group_Right As New CogToolBlock
+    Dim ImageFile_Parallel_Left, ImageFile_Parallel_Right As New CogImageFileTool
     Dim Threshold As Integer = 180
-    'Dim CogToolBlock_Shard_Left As New CogToolBlock
-    'Dim CogToolBlock_Shard_Right As New CogToolBlock
+    Dim CogToolBlock_Shard_Left As New CogToolBlock
+    Dim CogToolBlock_Shard_Right As New CogToolBlock
     Dim GRAB_IMAGE_BOOLEAN_LEFT, GRAB_IMAGE_BOOLEAN_RIGHT As Boolean
     Structure Image_Param
         Dim ImageBuf As Image
         Dim KeyName As String
     End Structure
     Sub Measure_Left_Ansi_1(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Dim Index_Increase As Integer = 13   '增长因子
+            Select Case Image_Index
+                Case 1
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Esc, Image_Index, 0, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 2
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F1, Image_Index, 1, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 3
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F2, Image_Index, 2, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 4
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F3, Image_Index, 3, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 5
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F4, Image_Index, 4, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 6
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F5, Image_Index, 5, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 7
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F6, Image_Index, 6, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 8
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F7, Image_Index, 7, KeyType, "D:\System\HOOK_SNAP\Left\")
 
+                Case 9
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F8, Image_Index, 8, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 10
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F9, Image_Index, 9, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 11
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F10, Image_Index, 10, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 12
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F11, Image_Index, 11, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 13
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.F12, Image_Index, 12, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 14
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Power, Image_Index, 13, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 15
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Tilde, Image_Index, 14, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 16
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num1, Image_Index, 15, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 17
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num2, Image_Index, 16, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 18
+
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num3, Image_Index, 17, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 19
+
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num4, Image_Index, 18, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 20
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num5, Image_Index, 19, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+
+                Case 21
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num6, Image_Index, 20, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 22
+
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num7, Image_Index, 21, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 23
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num8, Image_Index, 22, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 24
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num9, Image_Index, 23, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 25
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num0, Image_Index, 24, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 26
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Minus, Image_Index, 25, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 27
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Equal, Image_Index, 26, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 28
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 27, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 16 + Index_Increase To 28 + Index_Increase
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 16 + Index_Increase
+                            _keyname = KEYNAME.BackSlash : Measure_Index = 43
+                        Case 17 + Index_Increase
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 44
+                        Case 18 + Index_Increase
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 45
+                        Case 19 + Index_Increase
+                            _keyname = KEYNAME.P : Measure_Index = 46
+                        Case 20 + Index_Increase
+                            _keyname = KEYNAME.O : Measure_Index = 47
+                        Case 21 + Index_Increase
+                            _keyname = KEYNAME.I : Measure_Index = 48
+                        Case 22 + Index_Increase
+                            _keyname = KEYNAME.U : Measure_Index = 49
+                        Case 23 + Index_Increase
+                            _keyname = KEYNAME.Y : Measure_Index = 50
+                        Case 24 + Index_Increase
+                            _keyname = KEYNAME.T : Measure_Index = 51
+                        Case 25 + Index_Increase
+                            _keyname = KEYNAME.R : Measure_Index = 52
+                        Case 26 + Index_Increase
+                            _keyname = KEYNAME.E : Measure_Index = 53
+                        Case 27 + Index_Increase
+                            _keyname = KEYNAME.W : Measure_Index = 54
+                        Case 28 + Index_Increase
+                            _keyname = KEYNAME.Q : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 29 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Tab01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Tab01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 30 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Tab02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Tab02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 31 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_CapsLock01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_CapsLock01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 58, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 32 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_CapsLock02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_CapsLock02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 59, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 33 + Index_Increase To 43 + Index_Increase
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 33 + Index_Increase
+                            _keyname = KEYNAME.A : Measure_Index = 60
+                        Case 34 + Index_Increase
+                            _keyname = KEYNAME.S : Measure_Index = 61
+                        Case 35 + Index_Increase
+                            _keyname = KEYNAME.D : Measure_Index = 62
+                        Case 36 + Index_Increase
+                            _keyname = KEYNAME.F : Measure_Index = 63
+                        Case 37 + Index_Increase
+                            _keyname = KEYNAME.G : Measure_Index = 64
+                        Case 38 + Index_Increase
+                            _keyname = KEYNAME.H : Measure_Index = 65
+                        Case 39 + Index_Increase
+                            _keyname = KEYNAME.J : Measure_Index = 66
+                        Case 40 + Index_Increase
+                            _keyname = KEYNAME.K : Measure_Index = 67
+                        Case 41 + Index_Increase
+                            _keyname = KEYNAME.L : Measure_Index = 68
+                        Case 42 + Index_Increase
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 69
+                        Case 43 + Index_Increase
+                            _keyname = KEYNAME.Quote : Measure_Index = 70
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 44 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Return01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 45 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Return02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 46 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 47 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 48 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift03")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 49 + Index_Increase To 58 + Index_Increase
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 49 + Index_Increase
+                            _keyname = KEYNAME.Question : Measure_Index = 76
+                        Case 50 + Index_Increase
+                            _keyname = KEYNAME.Period : Measure_Index = 77
+                        Case 51 + Index_Increase
+                            _keyname = KEYNAME.Comma : Measure_Index = 78
+                        Case 52 + Index_Increase
+                            _keyname = KEYNAME.M : Measure_Index = 79
+                        Case 53 + Index_Increase
+                            _keyname = KEYNAME.N : Measure_Index = 80
+                        Case 54 + Index_Increase
+                            _keyname = KEYNAME.B : Measure_Index = 80
+                        Case 55 + Index_Increase
+                            _keyname = KEYNAME.V : Measure_Index = 82
+                        Case 56 + Index_Increase
+                            _keyname = KEYNAME.C : Measure_Index = 83
+                        Case 57 + Index_Increase
+                            _keyname = KEYNAME.X : Measure_Index = 84
+                        Case 58 + Index_Increase
+                            _keyname = KEYNAME.Z : Measure_Index = 85
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 59 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 86, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 60 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 87, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 61 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift03")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 88, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 62 + Index_Increase To 64 + Index_Increase
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 62 + Index_Increase
+                            _keyname = KEYNAME.Fn : Measure_Index = 89
+                        Case 63 + Index_Increase
+                            _keyname = KEYNAME.Control : Measure_Index = 90
+                        Case 64 + Index_Increase
+                            _keyname = KEYNAME.LeftOption : Measure_Index = 91
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 65 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Command")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftCommand, Image_Index, 92, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 71 + Index_Increase
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Command")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightCommand, Image_Index, 93, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 72 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightOption, Image_Index, 94, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 73 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 95, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 74 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Up")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 96, KeyType, "D:\System\HOOK_SNAP\Left\")
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 97, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 75 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 98, KeyType, "D:\System\HOOK_SNAP\Left\")
+            End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "左图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
     Sub Measure_Sub_Left(ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyName As String, ByVal ImageIndex As Integer, ByVal ToolsIndex As Integer, ByVal InputKeyType As String, ByVal ParameterDir As String, Optional ByVal OutputImageUse As Boolean = True)
+        Dim sub_Name As String = GetCurrentMethod.Name & ":"
+        Dim ValueName() As String = Nothing, Value() As String = Nothing
+        Dim Data_Name() As String = Nothing, Data_Value() As Object = Nothing
+        Dim OutputResultValueName As String = Nothing
+        Dim OutputResultValue As String = Nothing
+        Try
+            If OutputImageUse = True Then
+                CogToolBlock_Shard_Left.Inputs("OutputImage").Value = ImageFile_Parallel_Left.Operator.Item(ImageIndex - 1)
+            End If
+            CogToolBlock_Shard_Left.Inputs("InputLogFile").Value = Barcode & "_Left.txt"
+            CogToolBlock_Shard_Left.Inputs("ToolsIndex").Value = ToolsIndex
+            CogToolBlock_Shard_Left.Inputs("InputKeyType").Value = InputKeyType
+            CogToolBlock_Shard_Left.Inputs("ParameterDir").Value = ParameterDir
+            CogToolBlock_Shard_Left.Run()
 
+            OutputResultValueName = CogToolBlock_Shard_Left.Outputs("OutputResultValueName").Value
+            OutputResultValue = CogToolBlock_Shard_Left.Outputs("OutputResultValue").Value
+            ValueName = Split(OutputResultValueName, ",")
+            Value = Split(OutputResultValue, ",")
+            '新增4////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            If PARAM_BOOL.UpDown键测试选择 = False Then
+                If KeyName = "Up" Or KeyName = "Down" Then
+                    For i As Int16 = 0 To Value.Length - 1
+                        Value(i) = 0
+                    Next
+                End If
+            End If
+
+            '新增4////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            If CogToolBlock_Shard_Left.RunStatus.Result <> CogToolResultConstants.Accept Then
+                For i As Int16 = 0 To Value.Length - 1
+                    Value(i) = 0
+                Next
+                Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "左：" & ImageIndex & CogToolBlock_Shard_Left.RunStatus.Message, Barcode, Color.Red)
+            End If
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "左：" & sub_Name & ex.ToString, Barcode, Color.Red)
+        End Try
+
+        If ValueName.Length >= 0 Then
+            Array.Resize(Data_Name, ValueName.Length)
+            Array.Resize(Data_Value, ValueName.Length)
+            Dim m_Result As Int16 = 1
+            For a As Integer = 0 To ValueName.Length - 1
+                Data_Name(a) = ValueName(a)
+                Data_Value(a) = CType(Value(a), Double)
+                If Data_Value(a) <= ProjectParam.Limit_Up Then
+                    m_Result *= 1
+                Else
+                    m_Result *= 0
+                End If
+            Next
+
+            If m_Result = 0 Then
+                NG_count_Left += 1
+            End If
+
+            Save_Window_Image_Left(CogToolBlock_Shard_Left, KeyName, ImageIndex, m_Result, Barcode, ImageFile_Parallel_Left.Operator.Item(ImageIndex - 1))
+            SQLCON.Insert_Measure_data_Left(Project_Name, Barcode, KeyName, Data_Name, Data_Value) '插入测量数据
+
+        Else
+            Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "左：" & ImageIndex & "次获取长度错误。", Barcode, Color.Red)
+        End If
     End Sub
+
     Sub Measure_Sub_Right(ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyName As String, ByVal ImageIndex As Integer, ByVal ToolsIndex As Integer, ByVal InputKeyType As String, ByVal ParameterDir As String, Optional ByVal OutputImageUse As Boolean = True)
+        Dim sub_Name As String = GetCurrentMethod.Name & ":"
+        Dim ValueName() As String = Nothing, Value() As String = Nothing
+        Dim Data_Name() As String = Nothing, Data_Value() As Object = Nothing
+        Dim OutputResultValueName As String = Nothing
+        Dim OutputResultValue As String = Nothing
+        Try
+            If OutputImageUse = True Then
+                CogToolBlock_Shard_Right.Inputs("OutputImage").Value = ImageFile_Parallel_Right.Operator.Item(ImageIndex - 1)
+            End If
+            CogToolBlock_Shard_Right.Inputs("InputLogFile").Value = Barcode & "_Right.txt"
+            CogToolBlock_Shard_Right.Inputs("ToolsIndex").Value = ToolsIndex
+            CogToolBlock_Shard_Right.Inputs("InputKeyType").Value = InputKeyType
+            CogToolBlock_Shard_Right.Inputs("ParameterDir").Value = ParameterDir
+            CogToolBlock_Shard_Right.Run()
 
+            OutputResultValueName = CogToolBlock_Shard_Right.Outputs("OutputResultValueName").Value
+            OutputResultValue = CogToolBlock_Shard_Right.Outputs("OutputResultValue").Value
+            ValueName = Split(OutputResultValueName, ",")
+            Value = Split(OutputResultValue, ",")
+            '新增4////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            If PARAM_BOOL.UpDown键测试选择 = False Then
+                If KeyName = "Up" Or KeyName = "Down" Then
+                    For i As Int16 = 0 To Value.Length - 1
+                        Value(i) = 0
+                    Next
+                End If
+            End If
+            '新增4////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            If CogToolBlock_Shard_Right.RunStatus.Result <> CogToolResultConstants.Accept Then
+                For i As Int16 = 0 To Value.Length - 1
+                    Value(i) = 0
+                Next
+                Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "右：" & ImageIndex & CogToolBlock_Shard_Right.RunStatus.Message, Barcode, Color.Red)
+            End If
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "右：" & sub_Name & ex.ToString, Barcode, Color.Red)
+        End Try
+
+        If ValueName.Length >= 0 Then
+            Array.Resize(Data_Name, ValueName.Length)
+            Array.Resize(Data_Value, ValueName.Length)
+            Dim m_Result As Int16 = 1
+            For a As Integer = 0 To ValueName.Length - 1
+                Data_Name(a) = ValueName(a)
+                Data_Value(a) = CType(Value(a), Double)
+                If Data_Value(a) <= ProjectParam.Limit_Up Then
+                    m_Result *= 1
+                Else
+                    m_Result *= 0
+                End If
+            Next
+
+            If m_Result = 0 Then
+                NG_Count_Right += 1
+            End If
+
+            Save_Window_Image_Right(CogToolBlock_Shard_Right, KeyName, ImageIndex, m_Result, Barcode, ImageFile_Parallel_Right.Operator.Item(ImageIndex - 1))
+            SQLCON.Insert_Measure_data_Right(Project_Name, Barcode, KeyName, Data_Name, Data_Value) '插入测量数据
+        Else
+            Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "右：" & ImageIndex & "次获取长度错误。", Barcode, Color.Red)
+        End If
     End Sub
-  
+
     Sub Measure_Left_Ansi(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Select Case Image_Index
+                Case 1 To 13
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 1
+                            _keyname = KEYNAME.Esc : Measure_Index = 0
+                        Case 2
+                            _keyname = KEYNAME.F1 : Measure_Index = 1
+                        Case 3
+                            _keyname = KEYNAME.F2 : Measure_Index = 2
+                        Case 4
+                            _keyname = KEYNAME.F3 : Measure_Index = 3
+                        Case 5
+                            _keyname = KEYNAME.F4 : Measure_Index = 4
+                        Case 6
+                            _keyname = KEYNAME.F5 : Measure_Index = 5
+                        Case 7
+                            _keyname = KEYNAME.F6 : Measure_Index = 6
+                        Case 8
+                            _keyname = KEYNAME.F7 : Measure_Index = 7
+                        Case 9
+                            _keyname = KEYNAME.F8 : Measure_Index = 8
+                        Case 10
+                            _keyname = KEYNAME.F9 : Measure_Index = 9
+                        Case 11
+                            _keyname = KEYNAME.F10 : Measure_Index = 10
+                        Case 12
+                            _keyname = KEYNAME.F11 : Measure_Index = 11
+                        Case 13
+                            _keyname = KEYNAME.F12 : Measure_Index = 12
+
+                    End Select
+
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_X10")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_FunX10")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 14
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_Delete01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Delete01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 13, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 15
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_Delete02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Delete02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 14, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 16 To 28
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 16
+                            _keyname = KEYNAME.Equal : Measure_Index = 15
+                        Case 17
+                            _keyname = KEYNAME.Minus : Measure_Index = 16
+                        Case 18
+                            _keyname = KEYNAME.Num0 : Measure_Index = 17
+                        Case 19
+                            _keyname = KEYNAME.Num9 : Measure_Index = 18
+                        Case 20
+                            _keyname = KEYNAME.Num8 : Measure_Index = 19
+                        Case 21
+                            _keyname = KEYNAME.Num7 : Measure_Index = 20
+                        Case 22
+                            _keyname = KEYNAME.Num6 : Measure_Index = 21
+                        Case 23
+                            _keyname = KEYNAME.Num5 : Measure_Index = 22
+                        Case 24
+                            _keyname = KEYNAME.Num4 : Measure_Index = 23
+                        Case 25
+                            _keyname = KEYNAME.Num3 : Measure_Index = 24
+                        Case 26
+                            _keyname = KEYNAME.Num2 : Measure_Index = 25
+                        Case 27
+                            _keyname = KEYNAME.Num1 : Measure_Index = 26
+                        Case 28
+                            _keyname = KEYNAME.Tilde : Measure_Index = 27
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 29
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Tab01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Tab01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 28, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 30
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Tab02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Tab02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 29, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 31 To 43
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 31
+                            _keyname = KEYNAME.Q : Measure_Index = 30
+                        Case 32
+                            _keyname = KEYNAME.W : Measure_Index = 31
+                        Case 33
+                            _keyname = KEYNAME.E : Measure_Index = 32
+                        Case 34
+                            _keyname = KEYNAME.R : Measure_Index = 33
+                        Case 35
+                            _keyname = KEYNAME.T : Measure_Index = 34
+                        Case 36
+                            _keyname = KEYNAME.Y : Measure_Index = 35
+                        Case 37
+                            _keyname = KEYNAME.U : Measure_Index = 36
+                        Case 38
+                            _keyname = KEYNAME.I : Measure_Index = 37
+                        Case 39
+                            _keyname = KEYNAME.O : Measure_Index = 38
+                        Case 40
+                            _keyname = KEYNAME.P : Measure_Index = 39
+                        Case 41
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 40
+                        Case 42
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 41
+                        Case 43
+                            _keyname = KEYNAME.BackSlash : Measure_Index = 42
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 44
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Return01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 43, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 45
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Return02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 44, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 46 To 56
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 46
+                            _keyname = KEYNAME.Quote : Measure_Index = 45
+                        Case 47
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 46
+                        Case 48
+                            _keyname = KEYNAME.L : Measure_Index = 47
+                        Case 49
+                            _keyname = KEYNAME.K : Measure_Index = 48
+                        Case 50
+                            _keyname = KEYNAME.J : Measure_Index = 49
+                        Case 51
+                            _keyname = KEYNAME.H : Measure_Index = 50
+                        Case 52
+                            _keyname = KEYNAME.G : Measure_Index = 51
+                        Case 53
+                            _keyname = KEYNAME.F : Measure_Index = 52
+                        Case 54
+                            _keyname = KEYNAME.D : Measure_Index = 53
+                        Case 55
+                            _keyname = KEYNAME.S : Measure_Index = 54
+                        Case 56
+                            _keyname = KEYNAME.A : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 57
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_CapsLock01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_CapsLock01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 58
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_CapsLock02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_CapsLock02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 59
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 58, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 60
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 59, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 61
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift03")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 60, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 62 To 71
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 62
+                            _keyname = KEYNAME.Z : Measure_Index = 61
+                        Case 63
+                            _keyname = KEYNAME.X : Measure_Index = 62
+                        Case 64
+                            _keyname = KEYNAME.C : Measure_Index = 63
+                        Case 65
+                            _keyname = KEYNAME.V : Measure_Index = 64
+                        Case 66
+                            _keyname = KEYNAME.B : Measure_Index = 65
+                        Case 67
+                            _keyname = KEYNAME.N : Measure_Index = 66
+                        Case 68
+                            _keyname = KEYNAME.M : Measure_Index = 67
+                        Case 69
+                            _keyname = KEYNAME.Comma : Measure_Index = 68
+                        Case 70
+                            _keyname = KEYNAME.Period : Measure_Index = 69
+                        Case 71
+                            _keyname = KEYNAME.Question : Measure_Index = 70
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 72
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 73
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 74
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift03")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 75
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 76
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Up")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Left\")
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 76, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 77
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 77, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 78
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightOption, Image_Index, 78, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 79
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Command")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightCommand, Image_Index, 79, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 85
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Command")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftCommand, Image_Index, 80, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 86 To 88
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 86
+                            _keyname = KEYNAME.LeftOption : Measure_Index = 81
+                        Case 87
+                            _keyname = KEYNAME.Control : Measure_Index = 82
+                        Case 88
+                            _keyname = KEYNAME.Fn : Measure_Index = 83
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+
+            End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "左图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
 
     Sub Measure_Left_Iso(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Select Case Image_Index
+                Case 1 To 13
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 1
+                            _keyname = KEYNAME.Esc : Measure_Index = 0
+                        Case 2
+                            _keyname = KEYNAME.F1 : Measure_Index = 1
+                        Case 3
+                            _keyname = KEYNAME.F2 : Measure_Index = 2
+                        Case 4
+                            _keyname = KEYNAME.F3 : Measure_Index = 3
+                        Case 5
+                            _keyname = KEYNAME.F4 : Measure_Index = 4
+                        Case 6
+                            _keyname = KEYNAME.F5 : Measure_Index = 5
+                        Case 7
+                            _keyname = KEYNAME.F6 : Measure_Index = 6
+                        Case 8
+                            _keyname = KEYNAME.F7 : Measure_Index = 7
+                        Case 9
+                            _keyname = KEYNAME.F8 : Measure_Index = 8
+                        Case 10
+                            _keyname = KEYNAME.F9 : Measure_Index = 9
+                        Case 11
+                            _keyname = KEYNAME.F10 : Measure_Index = 10
+                        Case 12
+                            _keyname = KEYNAME.F11 : Measure_Index = 11
+                        Case 13
+                            _keyname = KEYNAME.F12 : Measure_Index = 12
+                    End Select
+
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_X10")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_FunX10")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 14
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_Delete01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Delete01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 13, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 15
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_Delete02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Delete02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 14, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 16 To 28
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 16
+                            _keyname = KEYNAME.Equal : Measure_Index = 15
+                        Case 17
+                            _keyname = KEYNAME.Minus : Measure_Index = 16
+                        Case 18
+                            _keyname = KEYNAME.Num0 : Measure_Index = 17
+                        Case 19
+                            _keyname = KEYNAME.Num9 : Measure_Index = 18
+                        Case 20
+                            _keyname = KEYNAME.Num8 : Measure_Index = 19
+                        Case 21
+                            _keyname = KEYNAME.Num7 : Measure_Index = 20
+                        Case 22
+                            _keyname = KEYNAME.Num6 : Measure_Index = 21
+                        Case 23
+                            _keyname = KEYNAME.Num5 : Measure_Index = 22
+                        Case 24
+                            _keyname = KEYNAME.Num4 : Measure_Index = 23
+                        Case 25
+                            _keyname = KEYNAME.Num3 : Measure_Index = 24
+                        Case 26
+                            _keyname = KEYNAME.Num2 : Measure_Index = 25
+                        Case 27
+                            _keyname = KEYNAME.Num1 : Measure_Index = 26
+                        Case 28
+                            _keyname = KEYNAME.ISO : Measure_Index = 27
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 29
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Tab01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Tab01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 28, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 30
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Tab02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Tab02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 29, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 31 To 42
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 31
+                            _keyname = KEYNAME.Q : Measure_Index = 30
+                        Case 32
+                            _keyname = KEYNAME.W : Measure_Index = 31
+                        Case 33
+                            _keyname = KEYNAME.E : Measure_Index = 32
+                        Case 34
+                            _keyname = KEYNAME.R : Measure_Index = 33
+                        Case 35
+                            _keyname = KEYNAME.T : Measure_Index = 34
+                        Case 36
+                            _keyname = KEYNAME.Y : Measure_Index = 35
+                        Case 37
+                            _keyname = KEYNAME.U : Measure_Index = 36
+                        Case 38
+                            _keyname = KEYNAME.I : Measure_Index = 37
+                        Case 39
+                            _keyname = KEYNAME.O : Measure_Index = 38
+                        Case 40
+                            _keyname = KEYNAME.P : Measure_Index = 39
+                        Case 41
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 40
+                        Case 42
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 41
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 43
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Return01_Iso")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 42, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 44
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Return02_Iso")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 43, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 45 To 56
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 45
+                            _keyname = KEYNAME.BackSlash : Measure_Index = 44
+                        Case 46
+                            _keyname = KEYNAME.Quote : Measure_Index = 45
+                        Case 47
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 46
+                        Case 48
+                            _keyname = KEYNAME.L : Measure_Index = 47
+                        Case 49
+                            _keyname = KEYNAME.K : Measure_Index = 48
+                        Case 50
+                            _keyname = KEYNAME.J : Measure_Index = 49
+                        Case 51
+                            _keyname = KEYNAME.H : Measure_Index = 50
+                        Case 52
+                            _keyname = KEYNAME.G : Measure_Index = 51
+                        Case 53
+                            _keyname = KEYNAME.F : Measure_Index = 52
+                        Case 54
+                            _keyname = KEYNAME.D : Measure_Index = 53
+                        Case 55
+                            _keyname = KEYNAME.S : Measure_Index = 54
+                        Case 56
+                            _keyname = KEYNAME.A : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 57
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_CapsLock01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_CapsLock01")
+
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 58
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_CapsLock02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_CapsLock02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 59
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_1X1.25")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1.25")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 87, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 60 To 70
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 60
+                            _keyname = KEYNAME.Tilde : Measure_Index = 59
+                        Case 61
+                            _keyname = KEYNAME.Z : Measure_Index = 60
+                        Case 62
+                            _keyname = KEYNAME.X : Measure_Index = 61
+                        Case 63
+                            _keyname = KEYNAME.C : Measure_Index = 62
+                        Case 64
+                            _keyname = KEYNAME.V : Measure_Index = 63
+                        Case 65
+                            _keyname = KEYNAME.B : Measure_Index = 64
+                        Case 66
+                            _keyname = KEYNAME.N : Measure_Index = 65
+                        Case 67
+                            _keyname = KEYNAME.M : Measure_Index = 66
+                        Case 68
+                            _keyname = KEYNAME.Comma : Measure_Index = 67
+                        Case 69
+                            _keyname = KEYNAME.Period : Measure_Index = 68
+                        Case 70
+                            _keyname = KEYNAME.Question : Measure_Index = 69
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 71
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift01")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 70, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 72
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift02")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 73
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift03")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 74
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 75
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Up")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Left\")
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 76
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 76, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 77
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightOption, Image_Index, 77, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 78
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Command")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightCommand, Image_Index, 78, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 84
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Command")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftCommand, Image_Index, 79, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 85 To 87
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 85
+                            _keyname = KEYNAME.LeftOption : Measure_Index = 80
+                        Case 86
+                            _keyname = KEYNAME.Control : Measure_Index = 81
+                        Case 87
+                            _keyname = KEYNAME.Fn : Measure_Index = 82
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+            End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "左图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
 
     Sub Measure_Left_Jis(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Select Case Image_Index
+                Case 1 To 13
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 1
+                            _keyname = KEYNAME.Esc : Measure_Index = 0
+                        Case 2
+                            _keyname = KEYNAME.F1 : Measure_Index = 1
+                        Case 3
+                            _keyname = KEYNAME.F2 : Measure_Index = 2
+                        Case 4
+                            _keyname = KEYNAME.F3 : Measure_Index = 3
+                        Case 5
+                            _keyname = KEYNAME.F4 : Measure_Index = 4
+                        Case 6
+                            _keyname = KEYNAME.F5 : Measure_Index = 5
+                        Case 7
+                            _keyname = KEYNAME.F6 : Measure_Index = 6
+                        Case 8
+                            _keyname = KEYNAME.F7 : Measure_Index = 7
+                        Case 9
+                            _keyname = KEYNAME.F8 : Measure_Index = 8
+                        Case 10
+                            _keyname = KEYNAME.F9 : Measure_Index = 9
+                        Case 11
+                            _keyname = KEYNAME.F10 : Measure_Index = 10
+                        Case 12
+                            _keyname = KEYNAME.F11 : Measure_Index = 11
+                        Case 13
+                            _keyname = KEYNAME.F12 : Measure_Index = 12
 
+                    End Select
+
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Fun_X10")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_FunX10")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 14 To 26
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 14
+                            _keyname = KEYNAME.Delete : Measure_Index = 13
+                        Case 15
+                            _keyname = KEYNAME.Yen : Measure_Index = 14
+                        Case 16
+                            _keyname = KEYNAME.Tilde : Measure_Index = 15
+                        Case 17
+                            _keyname = KEYNAME.Minus : Measure_Index = 16
+                        Case 18
+                            _keyname = KEYNAME.Num0 : Measure_Index = 17
+                        Case 19
+                            _keyname = KEYNAME.Num9 : Measure_Index = 18
+                        Case 20
+                            _keyname = KEYNAME.Num8 : Measure_Index = 19
+                        Case 21
+                            _keyname = KEYNAME.Num7 : Measure_Index = 20
+                        Case 22
+                            _keyname = KEYNAME.Num6 : Measure_Index = 21
+                        Case 23
+                            _keyname = KEYNAME.Num5 : Measure_Index = 22
+                        Case 24
+                            _keyname = KEYNAME.Num4 : Measure_Index = 23
+                        Case 25
+                            _keyname = KEYNAME.Num3 : Measure_Index = 24
+                        Case 26
+                            _keyname = KEYNAME.Num2 : Measure_Index = 25
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 27
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Num1.01.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Num1.01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num1, Image_Index, 26, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 28
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Num1.02.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Num1.02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Num1, Image_Index, 27, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 29 To 41
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 29
+                            _keyname = KEYNAME.Tab : Measure_Index = 28
+                        Case 30
+                            _keyname = KEYNAME.Q : Measure_Index = 29
+                        Case 31
+                            _keyname = KEYNAME.W : Measure_Index = 30
+                        Case 32
+                            _keyname = KEYNAME.E : Measure_Index = 31
+                        Case 33
+                            _keyname = KEYNAME.R : Measure_Index = 32
+                        Case 34
+                            _keyname = KEYNAME.T : Measure_Index = 33
+                        Case 35
+                            _keyname = KEYNAME.Y : Measure_Index = 34
+                        Case 36
+                            _keyname = KEYNAME.U : Measure_Index = 35
+                        Case 37
+                            _keyname = KEYNAME.I : Measure_Index = 36
+                        Case 38
+                            _keyname = KEYNAME.O : Measure_Index = 37
+                        Case 39
+                            _keyname = KEYNAME.P : Measure_Index = 38
+                        Case 40
+                            _keyname = KEYNAME.AT : Measure_Index = 39
+                        Case 41
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 40
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 42
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Return01.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 41, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 43
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Return02.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 42, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 44
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Return03.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Return03")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 43, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 45 To 56
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 45
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 44
+                        Case 46
+                            _keyname = KEYNAME.Colon : Measure_Index = 45
+                        Case 47
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 46
+                        Case 48
+                            _keyname = KEYNAME.L : Measure_Index = 47
+                        Case 49
+                            _keyname = KEYNAME.K : Measure_Index = 48
+                        Case 50
+                            _keyname = KEYNAME.J : Measure_Index = 49
+                        Case 51
+                            _keyname = KEYNAME.H : Measure_Index = 50
+                        Case 52
+                            _keyname = KEYNAME.G : Measure_Index = 51
+                        Case 53
+                            _keyname = KEYNAME.F : Measure_Index = 52
+                        Case 54
+                            _keyname = KEYNAME.D : Measure_Index = 53
+                        Case 55
+                            _keyname = KEYNAME.S : Measure_Index = 54
+                        Case 56
+                            _keyname = KEYNAME.A : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 57
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_1X1.25")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1.25")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Control, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 58
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift.01.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 59
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Left_Shift.02.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 58, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 60 To 70
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 60
+                            _keyname = KEYNAME.Z : Measure_Index = 59
+                        Case 61
+                            _keyname = KEYNAME.X : Measure_Index = 60
+                        Case 62
+                            _keyname = KEYNAME.C : Measure_Index = 61
+                        Case 63
+                            _keyname = KEYNAME.V : Measure_Index = 62
+                        Case 64
+                            _keyname = KEYNAME.B : Measure_Index = 63
+                        Case 65
+                            _keyname = KEYNAME.N : Measure_Index = 64
+                        Case 66
+                            _keyname = KEYNAME.M : Measure_Index = 65
+                        Case 67
+                            _keyname = KEYNAME.Comma : Measure_Index = 66
+                        Case 68
+                            _keyname = KEYNAME.Period : Measure_Index = 67
+                        Case 69
+                            _keyname = KEYNAME.Question : Measure_Index = 68
+                        Case 70
+                            _keyname = KEYNAME.Ro : Measure_Index = 69
+                    End Select
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 71
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift.01.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 70, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 72
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_Right_Shift.02.Jis")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 73
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 74
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Up")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Left\")
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 75
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Down")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Left\")
+                Case 76
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.Fn, Image_Index, 76, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+
+                Case 77 To 83
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 77
+                            _keyname = KEYNAME.RightCommand : Measure_Index = 77
+                        Case 78
+                            _keyname = KEYNAME.Kana : Measure_Index = 78
+                        Case 82
+                            _keyname = KEYNAME.Eisu : Measure_Index = 79
+                        Case 83
+                            _keyname = KEYNAME.LeftCommand : Measure_Index = 80
+                    End Select
+
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_Command")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 84
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.LeftOption, Image_Index, 81, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+                Case 85
+                    CogToolBlock_Fixture_Left = CogToolBlock_Group_Left.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Left = CogToolBlock_Fixture_Left.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Left(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 82, KeyType, "D:\System\HOOK_SNAP\Left\")
+
+
+
+            End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "左图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
 
+
     Sub Measure_Right_Ansi_1(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Dim Index_Increase As Integer = 13   '增长因子
+            Select Case Image_Index
+                Case 1
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Esc, Image_Index, 0, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 2
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F1, Image_Index, 1, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 3
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F2, Image_Index, 2, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 4
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F3, Image_Index, 3, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 5
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F4, Image_Index, 4, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 6
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F5, Image_Index, 5, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 7
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F6, Image_Index, 6, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 8
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F7, Image_Index, 7, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 9
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F8, Image_Index, 8, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 10
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F9, Image_Index, 9, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 11
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F10, Image_Index, 10, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 12
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F11, Image_Index, 11, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 13
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.F12, Image_Index, 12, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 14
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Power, Image_Index, 13, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 15
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Tilde, Image_Index, 14, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 16
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num1, Image_Index, 15, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 17
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num2, Image_Index, 16, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 18
+
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num3, Image_Index, 17, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 19
+
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num4, Image_Index, 18, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 20
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num5, Image_Index, 19, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 21
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num6, Image_Index, 20, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 22
+
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num7, Image_Index, 21, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 23
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num8, Image_Index, 22, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 24
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num9, Image_Index, 23, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 25
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num0, Image_Index, 24, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 26
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Minus, Image_Index, 25, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 27
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Equal, Image_Index, 26, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 28
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 27, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 16 + Index_Increase To 28 + Index_Increase
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 16 + Index_Increase
+                            _keyname = KEYNAME.BackSlash : Measure_Index = 43
+                        Case 17 + Index_Increase
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 44
+                        Case 18 + Index_Increase
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 45
+                        Case 19 + Index_Increase
+                            _keyname = KEYNAME.P : Measure_Index = 46
+                        Case 20 + Index_Increase
+                            _keyname = KEYNAME.O : Measure_Index = 47
+                        Case 21 + Index_Increase
+                            _keyname = KEYNAME.I : Measure_Index = 48
+                        Case 22 + Index_Increase
+                            _keyname = KEYNAME.U : Measure_Index = 49
+                        Case 23 + Index_Increase
+                            _keyname = KEYNAME.Y : Measure_Index = 50
+                        Case 24 + Index_Increase
+                            _keyname = KEYNAME.T : Measure_Index = 51
+                        Case 25 + Index_Increase
+                            _keyname = KEYNAME.R : Measure_Index = 52
+                        Case 26 + Index_Increase
+                            _keyname = KEYNAME.E : Measure_Index = 53
+                        Case 27 + Index_Increase
+                            _keyname = KEYNAME.W : Measure_Index = 54
+                        Case 28 + Index_Increase
+                            _keyname = KEYNAME.Q : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 29 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Tab01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Tab01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 30 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Tab02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Tab02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 31 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_CapsLock01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_CapsLock01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 58, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 32 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_CapsLock02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_CapsLock02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 59, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 33 + Index_Increase To 43 + Index_Increase
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 33 + Index_Increase
+                            _keyname = KEYNAME.A : Measure_Index = 60
+                        Case 34 + Index_Increase
+                            _keyname = KEYNAME.S : Measure_Index = 61
+                        Case 35 + Index_Increase
+                            _keyname = KEYNAME.D : Measure_Index = 62
+                        Case 36 + Index_Increase
+                            _keyname = KEYNAME.F : Measure_Index = 63
+                        Case 37 + Index_Increase
+                            _keyname = KEYNAME.G : Measure_Index = 64
+                        Case 38 + Index_Increase
+                            _keyname = KEYNAME.H : Measure_Index = 65
+                        Case 39 + Index_Increase
+                            _keyname = KEYNAME.J : Measure_Index = 66
+                        Case 40 + Index_Increase
+                            _keyname = KEYNAME.K : Measure_Index = 67
+                        Case 41 + Index_Increase
+                            _keyname = KEYNAME.L : Measure_Index = 68
+                        Case 42 + Index_Increase
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 69
+                        Case 43 + Index_Increase
+                            _keyname = KEYNAME.Quote : Measure_Index = 70
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 44 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Return01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 45 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Return02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 46 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 47 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 48 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift03")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 49 + Index_Increase To 58 + Index_Increase
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 49 + Index_Increase
+                            _keyname = KEYNAME.Question : Measure_Index = 76
+                        Case 50 + Index_Increase
+                            _keyname = KEYNAME.Period : Measure_Index = 77
+                        Case 51 + Index_Increase
+                            _keyname = KEYNAME.Comma : Measure_Index = 78
+                        Case 52 + Index_Increase
+                            _keyname = KEYNAME.M : Measure_Index = 79
+                        Case 53 + Index_Increase
+                            _keyname = KEYNAME.N : Measure_Index = 80
+                        Case 54 + Index_Increase
+                            _keyname = KEYNAME.B : Measure_Index = 81
+                        Case 55 + Index_Increase
+                            _keyname = KEYNAME.V : Measure_Index = 82
+                        Case 56 + Index_Increase
+                            _keyname = KEYNAME.C : Measure_Index = 83
+                        Case 57 + Index_Increase
+                            _keyname = KEYNAME.X : Measure_Index = 84
+                        Case 58 + Index_Increase
+                            _keyname = KEYNAME.Z : Measure_Index = 85
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 59 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 86, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 60 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 87, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 61 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift03")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 88, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 62 + Index_Increase To 64 + Index_Increase
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 62 + Index_Increase
+                            _keyname = KEYNAME.Fn : Measure_Index = 89
+                        Case 63 + Index_Increase
+                            _keyname = KEYNAME.Control : Measure_Index = 90
+                        Case 64 + Index_Increase
+                            _keyname = KEYNAME.LeftOption : Measure_Index = 91
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 65 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Command")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftCommand, Image_Index, 92, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 71 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Command")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightCommand, Image_Index, 93, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 72 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightOption, Image_Index, 94, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 73 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 95, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 74 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Up")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 96, KeyType, "D:\System\HOOK_SNAP\Right\")
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 97, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 75 + Index_Increase
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 98, KeyType, "D:\System\HOOK_SNAP\Right\")
+            End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "右图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
 
 
     Sub Measure_Right_Ansi(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Select Case Image_Index
+                Case 1 To 13
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 1
+                            _keyname = KEYNAME.Esc : Measure_Index = 0
+                        Case 2
+                            _keyname = KEYNAME.F1 : Measure_Index = 1
+                        Case 3
+                            _keyname = KEYNAME.F2 : Measure_Index = 2
+                        Case 4
+                            _keyname = KEYNAME.F3 : Measure_Index = 3
+                        Case 5
+                            _keyname = KEYNAME.F4 : Measure_Index = 4
+                        Case 6
+                            _keyname = KEYNAME.F5 : Measure_Index = 5
+                        Case 7
+                            _keyname = KEYNAME.F6 : Measure_Index = 6
+                        Case 8
+                            _keyname = KEYNAME.F7 : Measure_Index = 7
+                        Case 9
+                            _keyname = KEYNAME.F8 : Measure_Index = 8
+                        Case 10
+                            _keyname = KEYNAME.F9 : Measure_Index = 9
+                        Case 11
+                            _keyname = KEYNAME.F10 : Measure_Index = 10
+                        Case 12
+                            _keyname = KEYNAME.F11 : Measure_Index = 11
+                        Case 13
+                            _keyname = KEYNAME.F12 : Measure_Index = 12
+
+                    End Select
+
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_X10")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_FunX10")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 14
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_Delete01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Delete01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 13, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 15
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_Delete02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Delete02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 14, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 16 To 28
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 16
+                            _keyname = KEYNAME.Equal : Measure_Index = 15
+                        Case 17
+                            _keyname = KEYNAME.Minus : Measure_Index = 16
+                        Case 18
+                            _keyname = KEYNAME.Num0 : Measure_Index = 17
+                        Case 19
+                            _keyname = KEYNAME.Num9 : Measure_Index = 18
+                        Case 20
+                            _keyname = KEYNAME.Num8 : Measure_Index = 19
+                        Case 21
+                            _keyname = KEYNAME.Num7 : Measure_Index = 20
+                        Case 22
+                            _keyname = KEYNAME.Num6 : Measure_Index = 21
+                        Case 23
+                            _keyname = KEYNAME.Num5 : Measure_Index = 22
+                        Case 24
+                            _keyname = KEYNAME.Num4 : Measure_Index = 23
+                        Case 25
+                            _keyname = KEYNAME.Num3 : Measure_Index = 24
+                        Case 26
+                            _keyname = KEYNAME.Num2 : Measure_Index = 25
+                        Case 27
+                            _keyname = KEYNAME.Num1 : Measure_Index = 26
+                        Case 28
+                            _keyname = KEYNAME.Tilde : Measure_Index = 27
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 29
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Tab01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Tab01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 28, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 30
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Tab02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Tab02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 29, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 31 To 43
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 31
+                            _keyname = KEYNAME.Q : Measure_Index = 30
+                        Case 32
+                            _keyname = KEYNAME.W : Measure_Index = 31
+                        Case 33
+                            _keyname = KEYNAME.E : Measure_Index = 32
+                        Case 34
+                            _keyname = KEYNAME.R : Measure_Index = 33
+                        Case 35
+                            _keyname = KEYNAME.T : Measure_Index = 34
+                        Case 36
+                            _keyname = KEYNAME.Y : Measure_Index = 35
+                        Case 37
+                            _keyname = KEYNAME.U : Measure_Index = 36
+                        Case 38
+                            _keyname = KEYNAME.I : Measure_Index = 37
+                        Case 39
+                            _keyname = KEYNAME.O : Measure_Index = 38
+                        Case 40
+                            _keyname = KEYNAME.P : Measure_Index = 39
+                        Case 41
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 40
+                        Case 42
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 41
+                        Case 43
+                            _keyname = KEYNAME.BackSlash : Measure_Index = 42
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 44
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Return01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 43, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 45
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Return02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 44, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 46 To 56
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 46
+                            _keyname = KEYNAME.Quote : Measure_Index = 45
+                        Case 47
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 46
+                        Case 48
+                            _keyname = KEYNAME.L : Measure_Index = 47
+                        Case 49
+                            _keyname = KEYNAME.K : Measure_Index = 48
+                        Case 50
+                            _keyname = KEYNAME.J : Measure_Index = 49
+                        Case 51
+                            _keyname = KEYNAME.H : Measure_Index = 50
+                        Case 52
+                            _keyname = KEYNAME.G : Measure_Index = 51
+                        Case 53
+                            _keyname = KEYNAME.F : Measure_Index = 52
+                        Case 54
+                            _keyname = KEYNAME.D : Measure_Index = 53
+                        Case 55
+                            _keyname = KEYNAME.S : Measure_Index = 54
+                        Case 56
+                            _keyname = KEYNAME.A : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 57
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_CapsLock01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_CapsLock01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 58
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_CapsLock02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_CapsLock02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 59
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 58, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 60
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 59, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 61
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift03")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 60, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 62 To 71
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 62
+                            _keyname = KEYNAME.Z : Measure_Index = 61
+                        Case 63
+                            _keyname = KEYNAME.X : Measure_Index = 62
+                        Case 64
+                            _keyname = KEYNAME.C : Measure_Index = 63
+                        Case 65
+                            _keyname = KEYNAME.V : Measure_Index = 64
+                        Case 66
+                            _keyname = KEYNAME.B : Measure_Index = 65
+                        Case 67
+                            _keyname = KEYNAME.N : Measure_Index = 66
+                        Case 68
+                            _keyname = KEYNAME.M : Measure_Index = 67
+                        Case 69
+                            _keyname = KEYNAME.Comma : Measure_Index = 68
+                        Case 70
+                            _keyname = KEYNAME.Period : Measure_Index = 69
+                        Case 71
+                            _keyname = KEYNAME.Question : Measure_Index = 70
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 72
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 73
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 74
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift03")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 75
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 76
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Up")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Right\")
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 76, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 77
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 77, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 78
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightOption, Image_Index, 78, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 79
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Command")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightCommand, Image_Index, 79, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 85
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Command")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftCommand, Image_Index, 80, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 86 To 88
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 86
+                            _keyname = KEYNAME.LeftOption : Measure_Index = 81
+                        Case 87
+                            _keyname = KEYNAME.Control : Measure_Index = 82
+                        Case 88
+                            _keyname = KEYNAME.Fn : Measure_Index = 83
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+
+            End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "右图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
 
     Sub Measure_Right_Iso(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Select Image_Index
+                Case 1 To 13
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 1
+                            _keyname = KEYNAME.Esc : Measure_Index = 0
+                        Case 2
+                            _keyname = KEYNAME.F1 : Measure_Index = 1
+                        Case 3
+                            _keyname = KEYNAME.F2 : Measure_Index = 2
+                        Case 4
+                            _keyname = KEYNAME.F3 : Measure_Index = 3
+                        Case 5
+                            _keyname = KEYNAME.F4 : Measure_Index = 4
+                        Case 6
+                            _keyname = KEYNAME.F5 : Measure_Index = 5
+                        Case 7
+                            _keyname = KEYNAME.F6 : Measure_Index = 6
+                        Case 8
+                            _keyname = KEYNAME.F7 : Measure_Index = 7
+                        Case 9
+                            _keyname = KEYNAME.F8 : Measure_Index = 8
+                        Case 10
+                            _keyname = KEYNAME.F9 : Measure_Index = 9
+                        Case 11
+                            _keyname = KEYNAME.F10 : Measure_Index = 10
+                        Case 12
+                            _keyname = KEYNAME.F11 : Measure_Index = 11
+                        Case 13
+                            _keyname = KEYNAME.F12 : Measure_Index = 12
+                    End Select
+
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_X10")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_FunX10")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 14
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_Delete01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Delete01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 13, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 15
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_Delete02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Delete02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Delete, Image_Index, 14, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 16 To 28
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 16
+                            _keyname = KEYNAME.Equal : Measure_Index = 15
+                        Case 17
+                            _keyname = KEYNAME.Minus : Measure_Index = 16
+                        Case 18
+                            _keyname = KEYNAME.Num0 : Measure_Index = 17
+                        Case 19
+                            _keyname = KEYNAME.Num9 : Measure_Index = 18
+                        Case 20
+                            _keyname = KEYNAME.Num8 : Measure_Index = 19
+                        Case 21
+                            _keyname = KEYNAME.Num7 : Measure_Index = 20
+                        Case 22
+                            _keyname = KEYNAME.Num6 : Measure_Index = 21
+                        Case 23
+                            _keyname = KEYNAME.Num5 : Measure_Index = 22
+                        Case 24
+                            _keyname = KEYNAME.Num4 : Measure_Index = 23
+                        Case 25
+                            _keyname = KEYNAME.Num3 : Measure_Index = 24
+                        Case 26
+                            _keyname = KEYNAME.Num2 : Measure_Index = 25
+                        Case 27
+                            _keyname = KEYNAME.Num1 : Measure_Index = 26
+                        Case 28
+                            _keyname = KEYNAME.ISO : Measure_Index = 27
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 29
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Tab01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Tab01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 28, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 30
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Tab02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Tab02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Tab, Image_Index, 29, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 31 To 42
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 31
+                            _keyname = KEYNAME.Q : Measure_Index = 30
+                        Case 32
+                            _keyname = KEYNAME.W : Measure_Index = 31
+                        Case 33
+                            _keyname = KEYNAME.E : Measure_Index = 32
+                        Case 34
+                            _keyname = KEYNAME.R : Measure_Index = 33
+                        Case 35
+                            _keyname = KEYNAME.T : Measure_Index = 34
+                        Case 36
+                            _keyname = KEYNAME.Y : Measure_Index = 35
+                        Case 37
+                            _keyname = KEYNAME.U : Measure_Index = 36
+                        Case 38
+                            _keyname = KEYNAME.I : Measure_Index = 37
+                        Case 39
+                            _keyname = KEYNAME.O : Measure_Index = 38
+                        Case 40
+                            _keyname = KEYNAME.P : Measure_Index = 39
+                        Case 41
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 40
+                        Case 42
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 41
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 43
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Return01_Iso")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 42, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 44
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Return02_Iso")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 43, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 45 To 56
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 45
+                            _keyname = KEYNAME.BackSlash : Measure_Index = 44
+                        Case 46
+                            _keyname = KEYNAME.Quote : Measure_Index = 45
+                        Case 47
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 46
+                        Case 48
+                            _keyname = KEYNAME.L : Measure_Index = 47
+                        Case 49
+                            _keyname = KEYNAME.K : Measure_Index = 48
+                        Case 50
+                            _keyname = KEYNAME.J : Measure_Index = 49
+                        Case 51
+                            _keyname = KEYNAME.H : Measure_Index = 50
+                        Case 52
+                            _keyname = KEYNAME.G : Measure_Index = 51
+                        Case 53
+                            _keyname = KEYNAME.F : Measure_Index = 52
+                        Case 54
+                            _keyname = KEYNAME.D : Measure_Index = 53
+                        Case 55
+                            _keyname = KEYNAME.S : Measure_Index = 54
+                        Case 56
+                            _keyname = KEYNAME.A : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 57
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_CapsLock01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_CapsLock01")
+
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 58
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_CapsLock02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_CapsLock02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 59
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_1X1.25")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1.25")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 87, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 60 To 70
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 60
+                            _keyname = KEYNAME.Tilde : Measure_Index = 59
+                        Case 61
+                            _keyname = KEYNAME.Z : Measure_Index = 60
+                        Case 62
+                            _keyname = KEYNAME.X : Measure_Index = 61
+                        Case 63
+                            _keyname = KEYNAME.C : Measure_Index = 62
+                        Case 64
+                            _keyname = KEYNAME.V : Measure_Index = 63
+                        Case 65
+                            _keyname = KEYNAME.B : Measure_Index = 64
+                        Case 66
+                            _keyname = KEYNAME.N : Measure_Index = 65
+                        Case 67
+                            _keyname = KEYNAME.M : Measure_Index = 66
+                        Case 68
+                            _keyname = KEYNAME.Comma : Measure_Index = 67
+                        Case 69
+                            _keyname = KEYNAME.Period : Measure_Index = 68
+                        Case 70
+                            _keyname = KEYNAME.Question : Measure_Index = 69
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 71
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift01")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 70, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 72
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift02")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 73
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift03")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift03")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 74
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 75
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Up")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Right\")
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 76
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 76, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 77
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightOption, Image_Index, 77, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 78
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Command")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightCommand, Image_Index, 78, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 84
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Command")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftCommand, Image_Index, 79, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 85 To 87
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 85
+                            _keyname = KEYNAME.LeftOption : Measure_Index = 80
+                        Case 86
+                            _keyname = KEYNAME.Control : Measure_Index = 81
+                        Case 87
+                            _keyname = KEYNAME.Fn : Measure_Index = 82
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                    End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "右图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
 
     Sub Measure_Right_Jis(ByVal Image_Index As Integer, ByVal Project_Name As String, ByVal Barcode As String, ByVal KeyType As String)
+        Try
+            Select Case Image_Index
+                Case 1 To 13
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 1
+                            _keyname = KEYNAME.Esc : Measure_Index = 0
+                        Case 2
+                            _keyname = KEYNAME.F1 : Measure_Index = 1
+                        Case 3
+                            _keyname = KEYNAME.F2 : Measure_Index = 2
+                        Case 4
+                            _keyname = KEYNAME.F3 : Measure_Index = 3
+                        Case 5
+                            _keyname = KEYNAME.F4 : Measure_Index = 4
+                        Case 6
+                            _keyname = KEYNAME.F5 : Measure_Index = 5
+                        Case 7
+                            _keyname = KEYNAME.F6 : Measure_Index = 6
+                        Case 8
+                            _keyname = KEYNAME.F7 : Measure_Index = 7
+                        Case 9
+                            _keyname = KEYNAME.F8 : Measure_Index = 8
+                        Case 10
+                            _keyname = KEYNAME.F9 : Measure_Index = 9
+                        Case 11
+                            _keyname = KEYNAME.F10 : Measure_Index = 10
+                        Case 12
+                            _keyname = KEYNAME.F11 : Measure_Index = 11
+                        Case 13
+                            _keyname = KEYNAME.F12 : Measure_Index = 12
+
+                    End Select
+
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Fun_X10")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_FunX10")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 14 To 26
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 14
+                            _keyname = KEYNAME.Delete : Measure_Index = 13
+                        Case 15
+                            _keyname = KEYNAME.Yen : Measure_Index = 14
+                        Case 16
+                            _keyname = KEYNAME.Tilde : Measure_Index = 15
+                        Case 17
+                            _keyname = KEYNAME.Minus : Measure_Index = 16
+                        Case 18
+                            _keyname = KEYNAME.Num0 : Measure_Index = 17
+                        Case 19
+                            _keyname = KEYNAME.Num9 : Measure_Index = 18
+                        Case 20
+                            _keyname = KEYNAME.Num8 : Measure_Index = 19
+                        Case 21
+                            _keyname = KEYNAME.Num7 : Measure_Index = 20
+                        Case 22
+                            _keyname = KEYNAME.Num6 : Measure_Index = 21
+                        Case 23
+                            _keyname = KEYNAME.Num5 : Measure_Index = 22
+                        Case 24
+                            _keyname = KEYNAME.Num4 : Measure_Index = 23
+                        Case 25
+                            _keyname = KEYNAME.Num3 : Measure_Index = 24
+                        Case 26
+                            _keyname = KEYNAME.Num2 : Measure_Index = 25
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 27
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Num1.01.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Num1.01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num1, Image_Index, 26, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 28
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Num1.02.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Num1.02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Num1, Image_Index, 27, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 29 To 41
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 29
+                            _keyname = KEYNAME.Tab : Measure_Index = 28
+                        Case 30
+                            _keyname = KEYNAME.Q : Measure_Index = 29
+                        Case 31
+                            _keyname = KEYNAME.W : Measure_Index = 30
+                        Case 32
+                            _keyname = KEYNAME.E : Measure_Index = 31
+                        Case 33
+                            _keyname = KEYNAME.R : Measure_Index = 32
+                        Case 34
+                            _keyname = KEYNAME.T : Measure_Index = 33
+                        Case 35
+                            _keyname = KEYNAME.Y : Measure_Index = 34
+                        Case 36
+                            _keyname = KEYNAME.U : Measure_Index = 35
+                        Case 37
+                            _keyname = KEYNAME.I : Measure_Index = 36
+                        Case 38
+                            _keyname = KEYNAME.O : Measure_Index = 37
+                        Case 39
+                            _keyname = KEYNAME.P : Measure_Index = 38
+                        Case 40
+                            _keyname = KEYNAME.AT : Measure_Index = 39
+                        Case 41
+                            _keyname = KEYNAME.LeftBracket : Measure_Index = 40
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 42
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Return01.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 41, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 43
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Return02.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 42, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 44
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Return03.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Return03")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Return_, Image_Index, 43, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 45 To 56
+                    Dim _keyname As String = Nothing
+                    Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 45
+                            _keyname = KEYNAME.RightBracket : Measure_Index = 44
+                        Case 46
+                            _keyname = KEYNAME.Colon : Measure_Index = 45
+                        Case 47
+                            _keyname = KEYNAME.Semicolon : Measure_Index = 46
+                        Case 48
+                            _keyname = KEYNAME.L : Measure_Index = 47
+                        Case 49
+                            _keyname = KEYNAME.K : Measure_Index = 48
+                        Case 50
+                            _keyname = KEYNAME.J : Measure_Index = 49
+                        Case 51
+                            _keyname = KEYNAME.H : Measure_Index = 50
+                        Case 52
+                            _keyname = KEYNAME.G : Measure_Index = 51
+                        Case 53
+                            _keyname = KEYNAME.F : Measure_Index = 52
+                        Case 54
+                            _keyname = KEYNAME.D : Measure_Index = 53
+                        Case 55
+                            _keyname = KEYNAME.S : Measure_Index = 54
+                        Case 56
+                            _keyname = KEYNAME.A : Measure_Index = 55
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 57
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_1X1.25")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1.25")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Control, Image_Index, 56, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 58
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift.01.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 57, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 59
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Left_Shift.02.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftShift, Image_Index, 58, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 60 To 70
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 60
+                            _keyname = KEYNAME.Z : Measure_Index = 59
+                        Case 61
+                            _keyname = KEYNAME.X : Measure_Index = 60
+                        Case 62
+                            _keyname = KEYNAME.C : Measure_Index = 61
+                        Case 63
+                            _keyname = KEYNAME.V : Measure_Index = 62
+                        Case 64
+                            _keyname = KEYNAME.B : Measure_Index = 63
+                        Case 65
+                            _keyname = KEYNAME.N : Measure_Index = 64
+                        Case 66
+                            _keyname = KEYNAME.M : Measure_Index = 65
+                        Case 67
+                            _keyname = KEYNAME.Comma : Measure_Index = 66
+                        Case 68
+                            _keyname = KEYNAME.Period : Measure_Index = 67
+                        Case 69
+                            _keyname = KEYNAME.Question : Measure_Index = 68
+                        Case 70
+                            _keyname = KEYNAME.Ro : Measure_Index = 69
+                    End Select
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 71
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift.01.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift01")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 70, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 72
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_Right_Shift.02.Jis")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Shift02")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.RightShift, Image_Index, 71, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 73
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Right, Image_Index, 72, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 74
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Up")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Up, Image_Index, 73, KeyType, "D:\System\HOOK_SNAP\Right\")
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Down, Image_Index, 74, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 75
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Up_Down")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Down")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Left, Image_Index, 75, KeyType, "D:\System\HOOK_SNAP\Right\")
+                Case 76
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.Fn, Image_Index, 76, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+
+                Case 77 To 83
+                    Dim _keyname As String = Nothing : Dim Measure_Index As Integer
+                    Select Case Image_Index
+                        Case 77
+                            _keyname = KEYNAME.RightCommand : Measure_Index = 77
+                        Case 78
+                            _keyname = KEYNAME.Kana : Measure_Index = 78
+                        Case 82
+                            _keyname = KEYNAME.Eisu : Measure_Index = 79
+                        Case 83
+                            _keyname = KEYNAME.LeftCommand : Measure_Index = 80
+                    End Select
+
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Mesure_Command")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_Command")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, _keyname, Image_Index, Measure_Index, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 84
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.LeftOption, Image_Index, 81, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+                Case 85
+                    CogToolBlock_Fixture_Right = CogToolBlock_Group_Right.Tools("CogToolBlock_Measure_1X1")
+                    CogToolBlock_Shard_Right = CogToolBlock_Fixture_Right.Tools("CogToolBlock_1X1")
+                    Measure_Sub_Right(Select_Product_Name, Barcode, KEYNAME.CapsLock, Image_Index, 82, KeyType, "D:\System\HOOK_SNAP\Right\")
+
+
+
+            End Select
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "右图像处理错误:[" & Image_Index & "]" & ex.ToString, Barcode, Color.Red)
+        End Try
     End Sub
 
+    Delegate Sub Delegate_CogDisplay_Left(ByVal ToolBlock As CogToolBlock)
+    Sub CogDisplay_Left(ByVal ToolBlock As CogToolBlock)
+        'If ToolBlock.CreateLastRunRecord.SubRecords.Count >= 2 Then
+        '    CogRecordDisplay1.Record = ToolBlock.CreateLastRunRecord.SubRecords.Item(2)
+        'Else
+        '    CogRecordDisplay1.Record = ToolBlock.CreateLastRunRecord.SubRecords.Item(0)
+        'End If
+        'CogRecordDisplay1.AutoFit = True
+    End Sub
+
+    Delegate Sub Delegate_CogDisplay_Right(ByVal ToolBlock As CogToolBlock)
+    Sub CogDisplay_Right(ByVal ToolBlock As CogToolBlock)
+        'If ToolBlock.CreateLastRunRecord.SubRecords.Count >= 2 Then
+        '    CogRecordDisplay2.Record = ToolBlock.CreateLastRunRecord.SubRecords.Item(2)
+        'Else
+        '    CogRecordDisplay2.Record = ToolBlock.CreateLastRunRecord.SubRecords.Item(0)
+        'End If
+        'CogRecordDisplay2.AutoFit = True
+    End Sub
+
+    Sub Save_Window_Image_Left(ByVal ToolBlock As CogToolBlock, ByVal KeyName As String, ByVal Image_Index As Int16, ByVal OKNG As Integer, ByVal SN As String, ByVal m_ICogImage As ICogImage)
+        Dim subname As String = GetCurrentMethod.Name & "："
+        Dim mSave_Image As Save_Image_Stru = Nothing
+        Try
+            Invoke(New Delegate_CogDisplay_Left(AddressOf CogDisplay_Left), ToolBlock)
+
+            Dim Image_Memory As New MemoryStream
+            Dim ImageInfo() As Byte = Nothing
+            m_ICogImage.ScaleImage(m_ICogImage.Width / 3, m_ICogImage.Height / 3).ToBitmap.Save(Image_Memory, System.Drawing.Imaging.ImageFormat.Jpeg)
+            Dim Images As Image = Image.FromStream(Image_Memory)
+            ImageInfo = Image_Memory.GetBuffer
+            Rw_Left.WriteLine(KeyName & "," & Image_Index & "," & Count_Left & "," & ImageInfo.Length)
+            Count_Left = Count_Left + ImageInfo.Length
+            Fs_Left.Write(ImageInfo, 0, ImageInfo.Length)
+            Image_Memory.Close()
+            Image_Memory.Dispose()
+            m_ICogImage = Nothing
+            Images = Nothing
+
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), subname & ex.ToString, SN, Color.Red)
+        End Try
+    End Sub
+
+    Sub Save_Window_Image_Right(ByVal ToolBlock As CogToolBlock, ByVal KeyName As String, ByVal Image_Index As Int16, ByVal OKNG As Integer, ByVal SN As String, ByVal m_ICogImage As ICogImage)
+        Dim subname As String = GetCurrentMethod.Name & "："
+        Dim mSave_Image As Save_Image_Stru = Nothing
+        Try
+            Invoke(New Delegate_CogDisplay_Right(AddressOf CogDisplay_Right), ToolBlock)
+
+            Dim Image_Memory As New MemoryStream
+            Dim ImageInfo() As Byte = Nothing
+            m_ICogImage.ScaleImage(m_ICogImage.Width / 3, m_ICogImage.Height / 3).ToBitmap.Save(Image_Memory, System.Drawing.Imaging.ImageFormat.Jpeg)
+            Dim Images As Image = Image.FromStream(Image_Memory)
+            ImageInfo = Image_Memory.GetBuffer
+            Rw_Right.WriteLine(KeyName & "," & Image_Index & "," & Count_Right & "," & ImageInfo.Length)
+            Count_Right = Count_Right + ImageInfo.Length
+            Fs_Right.Write(ImageInfo, 0, ImageInfo.Length)
+            Image_Memory.Close()
+            Image_Memory.Dispose()
+            m_ICogImage = Nothing
+            Images = Nothing
+
+        Catch ex As Exception
+            Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), subname & ex.ToString, SN, Color.Red)
+        End Try
+    End Sub
 #End Region
 
     Public Structure CCD
@@ -855,7 +3247,10 @@ Public Class Main
             SQLCON_X816RSAOI.Close_DataBase()
             '关闭congnex
             If LINK_CAMERA = True Then
-    
+                hJobManager.Reset()
+                hJobManager.Shutdown()
+                ToolBlock_left.Dispose()
+                toolblock_right.Dispose()
             End If
             DataConn.KillProcess("excel")
             DataConn.KillProcess(ProductName)
@@ -889,7 +3284,7 @@ Public Class Main
     Private Sub Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim Init_Str As String = Nothing
         Control.CheckForIllegalCrossThreadCalls = False
-        Dim Result As Object = Windows.Forms.DialogResult.OK
+        Dim Result As Object = User_Login_Dialog.ShowDialog
         If Result = Windows.Forms.DialogResult.OK Or Result = Windows.Forms.DialogResult.Yes Then
             If SQLCON.DataBase_Initialization(SQLCON.DataBase_Data_Souce, SQLCON.DataBase_ID, SQLCON.DataBase_PassWord, SQLCON.DataBase_Catalog_Name, 5000, , ) = True And SQLCON_查询上一站.DataBase_Initialization(SQLCON.DataBase_Data_Souce, SQLCON.DataBase_ID, SQLCON.DataBase_PassWord, SQLCON.DataBase_Catalog_Name, 5000, , ) = True Then
                 SQLCON.Read_Home_ParamS(HomeParamObjArray)
@@ -2414,6 +4809,8 @@ START_LEFT:
 
                                         If BOOL.UPH = False Then
                                             Try
+                                                ToolBlock_left.Inputs("InputFile").Value = CognexImagefile_IDB_Left
+                                                ToolBlock_left.Inputs("InputImageCount").Value = INTTYPLE.Left_Trigger_Count
                                             Catch ex As Exception
                                                 rtn_str = "路径错误：" & CognexImagefile_IDB_Left
                                                 Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), rtn_str, DataCode_Left, Color.Red)
@@ -3484,6 +5881,8 @@ START_RIGHT:
 
                                         If BOOL.UPH = False Then
                                             Try
+                                                toolblock_right.Inputs("InputFile").Value = CognexImagefile_IDB_Right
+                                                toolblock_right.Inputs("InputImageCount").Value = INTTYPLE.Right_Trigger_Count
                                             Catch ex As Exception
                                                 rtn_str = "路径错误：" & CognexImagefile_IDB_Right
                                                 Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), rtn_str, DataCode_Right, Color.Red)
@@ -8669,12 +11068,12 @@ LineERR:
     End Sub
 
     Sub Load_Left_Vpp()
-        'CogToolBlock_Group_Left = CType(CogSerializer.LoadObjectFromFile("D:\System\HOOK_SNAP\HOOK_SNAP_ANSI_MEASURE_LEFT.vpp"), CogToolBlock)
+        CogToolBlock_Group_Left = CType(CogSerializer.LoadObjectFromFile("D:\System\HOOK_SNAP\HOOK_SNAP_ANSI_MEASURE_LEFT.vpp"), CogToolBlock)
 
     End Sub
 
     Sub Load_Right_Vpp()
-        'CogToolBlock_Group_Right = CType(CogSerializer.LoadObjectFromFile("D:\System\HOOK_SNAP\HOOK_SNAP_ANSI_MEASURE_RIGHT.vpp"), CogToolBlock)
+        CogToolBlock_Group_Right = CType(CogSerializer.LoadObjectFromFile("D:\System\HOOK_SNAP\HOOK_SNAP_ANSI_MEASURE_RIGHT.vpp"), CogToolBlock)
 
     End Sub
 
@@ -8684,7 +11083,7 @@ LineERR:
             Dim VPP_PATH As String = "D:\System\InitCameraLeft.vpp"
             If System.IO.File.Exists(VPP_PATH) = True Then
 
-                'ToolBlock_left = CType(CogSerializer.LoadObjectFromFile(VPP_PATH), CogToolBlock)
+                ToolBlock_left = CType(CogSerializer.LoadObjectFromFile(VPP_PATH), CogToolBlock)
 
             Else
                 Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "视觉配置文件:" & VPP_PATH & " 不存在！", "", Color.Red)
@@ -8701,7 +11100,7 @@ LineERR:
             Dim VPP_PATH As String = "D:\System\InitCameraRight.vpp"
             If System.IO.File.Exists(VPP_PATH) = True Then
 
-                'toolblock_right = CType(CogSerializer.LoadObjectFromFile(VPP_PATH), CogToolBlock)
+                toolblock_right = CType(CogSerializer.LoadObjectFromFile(VPP_PATH), CogToolBlock)
 
             Else
                 Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "视觉配置文件:" & VPP_PATH & " 不存在！", "", Color.Red)
@@ -9136,6 +11535,7 @@ LineERR:
                 Dim subName As String = "1工位图像采集" & ":"
                 Try
                     Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "Start", DataCode_Left, Color.Blue)
+                    ToolBlock_left.Run()
                     Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "End", DataCode_Left, Color.Blue)
                 Catch ex As Exception
                     Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "：" & ex.ToString, DataCode_Left, Color.Red)
@@ -9152,6 +11552,7 @@ LineERR:
                 Dim subName As String = "2工位图像采集" & ":"
                 Try
                     Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "Start", DataCode_Right, Color.Blue)
+                    toolblock_right.Run()
                     Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "End", DataCode_Right, Color.Blue)
                 Catch ex As Exception
                     Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "：" & ex.ToString, DataCode_Right, Color.Red)
@@ -10131,6 +12532,7 @@ LineERR:
             Dim subName As String = "1工位图像采集" & ":"
             Try
                 Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "Start", DataCode_Left, Color.Blue)
+                ToolBlock_left.Run()
                 Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "End", DataCode_Left, Color.Blue)
             Catch ex As Exception
                 Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "：" & ex.ToString, DataCode_Left, Color.Red)
@@ -10146,6 +12548,7 @@ LineERR:
             Dim subName As String = "2工位图像采集" & ":"
             Try
                 Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "Start", DataCode_Right, Color.Blue)
+                toolblock_right.Run()
                 Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "End", DataCode_Right, Color.Blue)
             Catch ex As Exception
                 Invoke(New Delegate_Display_Message_Public(AddressOf Display_Message_Public), subName & "：" & ex.ToString, DataCode_Right, Color.Red)
@@ -10189,6 +12592,8 @@ LineERR:
             If NG_count_Left >= NG Then
                 Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "1工位检测到NG数量为【" & NG_count_Left & "】图像可能错乱，相机重新启动...", DataCode_Left_tmp, Color.Red)
                 Write_Log_Left(DataCode_Left_tmp, "图像错乱，准备重启相机")
+                ToolBlock_left.Dispose()
+                ToolBlock_left = New CogToolBlock
 
                 Load_VPP_Left()
                 Invoke(New Delegate_Display_Message_Left(AddressOf Display_Message_Left), "1工位相机重启完成", DataCode_Left_tmp, Color.Red)
@@ -10238,7 +12643,8 @@ LineERR:
 
                 Invoke(New Delegate_Display_Message_Right(AddressOf Display_Message_Right), "2工位检测到NG数量为【" & NG_Count_Right & "】图像可能错乱，相机重新启动...", DataCode_Right_tmp, Color.Red)
                 Write_Log_Right(DataCode_Right_tmp, "图像错乱，准备重启相机")
- 
+                toolblock_right.Dispose()
+                toolblock_right = New CogToolBlock
 
                 Load_VPP_Right()
 
@@ -10364,14 +12770,15 @@ LineERR:
     End Sub
 
     Private Sub ButtonItem1_Click(sender As System.Object, e As System.EventArgs) Handles ButtonItem1.Click
-
+        CogToolBlockEditV21.Subject = CogToolBlock_Group_Left
     End Sub
 
     Private Sub ButtonItem2_Click(sender As System.Object, e As System.EventArgs) Handles ButtonItem2.Click
-
+        CogToolBlockEditV22.Subject = CogToolBlock_Group_Right
     End Sub
 
     Private Sub ButtonItem3_Click(sender As System.Object, e As System.EventArgs) Handles ButtonItem3.Click
- 
+        CogToolBlockEditV21.Subject = Nothing
+        CogToolBlockEditV22.Subject = Nothing
     End Sub
 End Class

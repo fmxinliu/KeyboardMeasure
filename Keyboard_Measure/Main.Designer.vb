@@ -26,6 +26,7 @@ Partial Class Main
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -59,6 +60,9 @@ Partial Class Main
         Me.取消ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SuperTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
         Me.SuperTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.CogRecordDisplay2 = New Cognex.VisionPro.CogRecordDisplay()
+        Me.CogRecordDisplay1 = New Cognex.VisionPro.CogRecordDisplay()
         Me.SuperTabItem1 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel6 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.SW_Vision_2 = New DevComponents.DotNetBar.Controls.SwitchButton()
@@ -89,8 +93,10 @@ Partial Class Main
         Me.PanelEx21 = New DevComponents.DotNetBar.PanelEx()
         Me.SuperTabItem6 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel5 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.CogToolBlockEditV22 = New Cognex.VisionPro.ToolBlock.CogToolBlockEditV2()
         Me.SuperTabItem5 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel4 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.CogToolBlockEditV21 = New Cognex.VisionPro.ToolBlock.CogToolBlockEditV2()
         Me.SuperTabItem4 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel2 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PE_LOG_COUNT = New DevComponents.DotNetBar.PanelEx()
@@ -115,7 +121,6 @@ Partial Class Main
         Me.ButtonItem1 = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem2 = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem3 = New DevComponents.DotNetBar.ButtonItem()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.PE_NO_WORK = New DevComponents.DotNetBar.PanelEx()
         Me.OP_Style = New DevComponents.DotNetBar.PanelEx()
@@ -183,12 +188,19 @@ Partial Class Main
         Me.CM_MSG.SuspendLayout()
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControl1.SuspendLayout()
+        Me.SuperTabControlPanel1.SuspendLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CogRecordDisplay2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CogRecordDisplay1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControlPanel6.SuspendLayout()
+        Me.SuperTabControlPanel5.SuspendLayout()
+        CType(Me.CogToolBlockEditV22, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuperTabControlPanel4.SuspendLayout()
+        CType(Me.CogToolBlockEditV21, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControlPanel2.SuspendLayout()
         CType(Me.DATAGRIDVIEW_LOG, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControlPanel3.SuspendLayout()
         CType(Me.DATAGRIDVIEW_data, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
         Me.GP_DataCode.SuspendLayout()
         Me.GP_Current_Style.SuspendLayout()
@@ -213,10 +225,9 @@ Partial Class Main
         Me.GP_Project_Msg.Controls.Add(Me.ComboBox_product_name)
         Me.GP_Project_Msg.Controls.Add(Me.PE_Project_Name)
         Me.GP_Project_Msg.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GP_Project_Msg.Location = New System.Drawing.Point(1, 98)
-        Me.GP_Project_Msg.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GP_Project_Msg.Location = New System.Drawing.Point(1, 78)
         Me.GP_Project_Msg.Name = "GP_Project_Msg"
-        Me.GP_Project_Msg.Size = New System.Drawing.Size(375, 66)
+        Me.GP_Project_Msg.Size = New System.Drawing.Size(281, 53)
         '
         '
         '
@@ -256,10 +267,9 @@ Partial Class Main
         Me.ComboBox_product_name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox_product_name.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.ComboBox_product_name.ItemHeight = 20
-        Me.ComboBox_product_name.Location = New System.Drawing.Point(127, 5)
-        Me.ComboBox_product_name.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ComboBox_product_name.Location = New System.Drawing.Point(95, 4)
         Me.ComboBox_product_name.Name = "ComboBox_product_name"
-        Me.ComboBox_product_name.Size = New System.Drawing.Size(235, 26)
+        Me.ComboBox_product_name.Size = New System.Drawing.Size(177, 26)
         Me.ComboBox_product_name.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.ComboBox_product_name.TabIndex = 2
         Me.ComboBox_product_name.TabStop = False
@@ -269,10 +279,9 @@ Partial Class Main
         Me.PE_Project_Name.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_Project_Name.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PE_Project_Name.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_Project_Name.Location = New System.Drawing.Point(4, 4)
-        Me.PE_Project_Name.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_Project_Name.Location = New System.Drawing.Point(3, 3)
         Me.PE_Project_Name.Name = "PE_Project_Name"
-        Me.PE_Project_Name.Size = New System.Drawing.Size(115, 36)
+        Me.PE_Project_Name.Size = New System.Drawing.Size(86, 29)
         Me.PE_Project_Name.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_Project_Name.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_Project_Name.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -291,10 +300,9 @@ Partial Class Main
         Me.Trigger_Right.CanvasColor = System.Drawing.SystemColors.Control
         Me.Trigger_Right.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Trigger_Right.DisabledBackColor = System.Drawing.Color.Empty
-        Me.Trigger_Right.Location = New System.Drawing.Point(1659, 299)
-        Me.Trigger_Right.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Trigger_Right.Location = New System.Drawing.Point(1244, 239)
         Me.Trigger_Right.Name = "Trigger_Right"
-        Me.Trigger_Right.Size = New System.Drawing.Size(148, 36)
+        Me.Trigger_Right.Size = New System.Drawing.Size(111, 29)
         Me.Trigger_Right.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.Trigger_Right.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.Trigger_Right.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -309,10 +317,9 @@ Partial Class Main
         Me.PE_Trigger_Right.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_Trigger_Right.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PE_Trigger_Right.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_Trigger_Right.Location = New System.Drawing.Point(1505, 300)
-        Me.PE_Trigger_Right.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_Trigger_Right.Location = New System.Drawing.Point(1129, 240)
         Me.PE_Trigger_Right.Name = "PE_Trigger_Right"
-        Me.PE_Trigger_Right.Size = New System.Drawing.Size(148, 36)
+        Me.PE_Trigger_Right.Size = New System.Drawing.Size(111, 29)
         Me.PE_Trigger_Right.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_Trigger_Right.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_Trigger_Right.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -331,10 +338,9 @@ Partial Class Main
         Me.Btn_Home_Set.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Home_Set.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Home_Set.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Home_Set.Location = New System.Drawing.Point(152, 152)
-        Me.Btn_Home_Set.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Home_Set.Location = New System.Drawing.Point(114, 122)
         Me.Btn_Home_Set.Name = "Btn_Home_Set"
-        Me.Btn_Home_Set.Size = New System.Drawing.Size(140, 44)
+        Me.Btn_Home_Set.Size = New System.Drawing.Size(105, 35)
         Me.Btn_Home_Set.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Home_Set.Symbol = ""
         Me.Btn_Home_Set.TabIndex = 35
@@ -346,10 +352,9 @@ Partial Class Main
         Me.Button_Goto_Zero.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Button_Goto_Zero.BackColor = System.Drawing.Color.White
         Me.Button_Goto_Zero.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button_Goto_Zero.Location = New System.Drawing.Point(4, 152)
-        Me.Button_Goto_Zero.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button_Goto_Zero.Location = New System.Drawing.Point(3, 122)
         Me.Button_Goto_Zero.Name = "Button_Goto_Zero"
-        Me.Button_Goto_Zero.Size = New System.Drawing.Size(140, 44)
+        Me.Button_Goto_Zero.Size = New System.Drawing.Size(105, 35)
         Me.Button_Goto_Zero.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Button_Goto_Zero.Symbol = ""
         Me.Button_Goto_Zero.TabIndex = 34
@@ -361,10 +366,9 @@ Partial Class Main
         Me.Button_System_Settings.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Button_System_Settings.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Button_System_Settings.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button_System_Settings.Location = New System.Drawing.Point(4, 199)
-        Me.Button_System_Settings.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button_System_Settings.Location = New System.Drawing.Point(3, 159)
         Me.Button_System_Settings.Name = "Button_System_Settings"
-        Me.Button_System_Settings.Size = New System.Drawing.Size(140, 44)
+        Me.Button_System_Settings.Size = New System.Drawing.Size(105, 35)
         Me.Button_System_Settings.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Button_System_Settings.Symbol = ""
         Me.Button_System_Settings.TabIndex = 32
@@ -376,10 +380,9 @@ Partial Class Main
         Me.Button_System_exit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Button_System_exit.ColorTable = DevComponents.DotNetBar.eButtonColor.BlueOrb
         Me.Button_System_exit.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button_System_exit.Location = New System.Drawing.Point(152, 291)
-        Me.Button_System_exit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button_System_exit.Location = New System.Drawing.Point(114, 233)
         Me.Button_System_exit.Name = "Button_System_exit"
-        Me.Button_System_exit.Size = New System.Drawing.Size(140, 44)
+        Me.Button_System_exit.Size = New System.Drawing.Size(105, 35)
         Me.Button_System_exit.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Button_System_exit.Symbol = ""
         Me.Button_System_exit.TabIndex = 33
@@ -391,10 +394,9 @@ Partial Class Main
         Me.Btn_Change_LR.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Change_LR.ColorTable = DevComponents.DotNetBar.eButtonColor.BlueOrb
         Me.Btn_Change_LR.Font = New System.Drawing.Font("宋体", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Btn_Change_LR.Location = New System.Drawing.Point(1505, 1)
-        Me.Btn_Change_LR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Change_LR.Location = New System.Drawing.Point(1129, 1)
         Me.Btn_Change_LR.Name = "Btn_Change_LR"
-        Me.Btn_Change_LR.Size = New System.Drawing.Size(301, 36)
+        Me.Btn_Change_LR.Size = New System.Drawing.Size(226, 29)
         Me.Btn_Change_LR.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Btn_Change_LR.TabIndex = 41
         Me.Btn_Change_LR.Text = "双工位"
@@ -407,12 +409,11 @@ Partial Class Main
         Me.SW_Fully_automatic.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.SW_Fully_automatic.Cursor = System.Windows.Forms.Cursors.Hand
         Me.SW_Fully_automatic.IsReadOnly = True
-        Me.SW_Fully_automatic.Location = New System.Drawing.Point(1507, 86)
-        Me.SW_Fully_automatic.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SW_Fully_automatic.Location = New System.Drawing.Point(1130, 69)
         Me.SW_Fully_automatic.Name = "SW_Fully_automatic"
         Me.SW_Fully_automatic.OffText = "图像处理开"
         Me.SW_Fully_automatic.OnText = "图像处理关"
-        Me.SW_Fully_automatic.Size = New System.Drawing.Size(301, 36)
+        Me.SW_Fully_automatic.Size = New System.Drawing.Size(226, 29)
         Me.SW_Fully_automatic.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.SW_Fully_automatic.TabIndex = 40
         Me.SW_Fully_automatic.TabStop = False
@@ -424,10 +425,9 @@ Partial Class Main
         Me.GP_RealTime_Msg.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.GP_RealTime_Msg.Controls.Add(Me.DX_MESSAGE_LEFT)
         Me.GP_RealTime_Msg.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GP_RealTime_Msg.Location = New System.Drawing.Point(3, 374)
-        Me.GP_RealTime_Msg.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GP_RealTime_Msg.Location = New System.Drawing.Point(2, 299)
         Me.GP_RealTime_Msg.Name = "GP_RealTime_Msg"
-        Me.GP_RealTime_Msg.Size = New System.Drawing.Size(375, 209)
+        Me.GP_RealTime_Msg.Size = New System.Drawing.Size(281, 167)
         '
         '
         '
@@ -491,7 +491,6 @@ Partial Class Main
         Me.DX_MESSAGE_LEFT.EnableHeadersVisualStyles = False
         Me.DX_MESSAGE_LEFT.GridColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.DX_MESSAGE_LEFT.Location = New System.Drawing.Point(0, 0)
-        Me.DX_MESSAGE_LEFT.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DX_MESSAGE_LEFT.Name = "DX_MESSAGE_LEFT"
         Me.DX_MESSAGE_LEFT.ReadOnly = True
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -504,7 +503,7 @@ Partial Class Main
         Me.DX_MESSAGE_LEFT.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DX_MESSAGE_LEFT.RowHeadersVisible = False
         Me.DX_MESSAGE_LEFT.RowTemplate.Height = 23
-        Me.DX_MESSAGE_LEFT.Size = New System.Drawing.Size(373, 186)
+        Me.DX_MESSAGE_LEFT.Size = New System.Drawing.Size(279, 147)
         Me.DX_MESSAGE_LEFT.TabIndex = 3
         '
         '消息
@@ -552,19 +551,18 @@ Partial Class Main
         Me.SuperTabControl1.ControlBox.MenuBox.Name = ""
         Me.SuperTabControl1.ControlBox.Name = ""
         Me.SuperTabControl1.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl1.ControlBox.MenuBox, Me.SuperTabControl1.ControlBox.CloseBox})
+        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel1)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel6)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel5)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel4)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel2)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel3)
-        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel1)
-        Me.SuperTabControl1.Location = New System.Drawing.Point(385, 1)
-        Me.SuperTabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControl1.Location = New System.Drawing.Point(289, 1)
         Me.SuperTabControl1.Name = "SuperTabControl1"
         Me.SuperTabControl1.ReorderTabsEnabled = True
         Me.SuperTabControl1.SelectedTabFont = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Bold)
         Me.SuperTabControl1.SelectedTabIndex = 1
-        Me.SuperTabControl1.Size = New System.Drawing.Size(1113, 848)
+        Me.SuperTabControl1.Size = New System.Drawing.Size(835, 678)
         Me.SuperTabControl1.TabFont = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.SuperTabControl1.TabIndex = 44
         Me.SuperTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem1, Me.SuperTabItem3, Me.SuperTabItem2, Me.SuperTabItem4, Me.SuperTabItem5, Me.SuperTabItem6, Me.ButtonItem1, Me.ButtonItem2, Me.ButtonItem3})
@@ -572,13 +570,55 @@ Partial Class Main
         '
         'SuperTabControlPanel1
         '
+        Me.SuperTabControlPanel1.Controls.Add(Me.NumericUpDown1)
+        Me.SuperTabControlPanel1.Controls.Add(Me.CogRecordDisplay2)
+        Me.SuperTabControlPanel1.Controls.Add(Me.CogRecordDisplay1)
         Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 31)
-        Me.SuperTabControlPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
-        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(1113, 817)
+        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(835, 650)
         Me.SuperTabControlPanel1.TabIndex = 1
         Me.SuperTabControlPanel1.TabItem = Me.SuperTabItem1
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Enabled = False
+        Me.NumericUpDown1.Location = New System.Drawing.Point(351, 6)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(46, 21)
+        Me.NumericUpDown1.TabIndex = 1
+        Me.NumericUpDown1.Visible = False
+        '
+        'CogRecordDisplay2
+        '
+        Me.CogRecordDisplay2.ColorMapLowerClipColor = System.Drawing.Color.Black
+        Me.CogRecordDisplay2.ColorMapLowerRoiLimit = 0.0R
+        Me.CogRecordDisplay2.ColorMapPredefined = Cognex.VisionPro.Display.CogDisplayColorMapPredefinedConstants.None
+        Me.CogRecordDisplay2.ColorMapUpperClipColor = System.Drawing.Color.Black
+        Me.CogRecordDisplay2.ColorMapUpperRoiLimit = 1.0R
+        Me.CogRecordDisplay2.Location = New System.Drawing.Point(419, 3)
+        Me.CogRecordDisplay2.MouseWheelMode = Cognex.VisionPro.Display.CogDisplayMouseWheelModeConstants.Zoom1
+        Me.CogRecordDisplay2.MouseWheelSensitivity = 1.0R
+        Me.CogRecordDisplay2.Name = "CogRecordDisplay2"
+        Me.CogRecordDisplay2.OcxState = CType(resources.GetObject("CogRecordDisplay2.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.CogRecordDisplay2.Size = New System.Drawing.Size(414, 638)
+        Me.CogRecordDisplay2.TabIndex = 0
+        '
+        'CogRecordDisplay1
+        '
+        Me.CogRecordDisplay1.ColorMapLowerClipColor = System.Drawing.Color.Black
+        Me.CogRecordDisplay1.ColorMapLowerRoiLimit = 0.0R
+        Me.CogRecordDisplay1.ColorMapPredefined = Cognex.VisionPro.Display.CogDisplayColorMapPredefinedConstants.None
+        Me.CogRecordDisplay1.ColorMapUpperClipColor = System.Drawing.Color.Black
+        Me.CogRecordDisplay1.ColorMapUpperRoiLimit = 1.0R
+        Me.CogRecordDisplay1.Location = New System.Drawing.Point(4, 3)
+        Me.CogRecordDisplay1.MouseWheelMode = Cognex.VisionPro.Display.CogDisplayMouseWheelModeConstants.Zoom1
+        Me.CogRecordDisplay1.MouseWheelSensitivity = 1.0R
+        Me.CogRecordDisplay1.Name = "CogRecordDisplay1"
+        Me.CogRecordDisplay1.OcxState = CType(resources.GetObject("CogRecordDisplay1.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.CogRecordDisplay1.Size = New System.Drawing.Size(414, 638)
+        Me.CogRecordDisplay1.TabIndex = 0
         '
         'SuperTabItem1
         '
@@ -616,10 +656,9 @@ Partial Class Main
         Me.SuperTabControlPanel6.Controls.Add(Me.PanelEx20)
         Me.SuperTabControlPanel6.Controls.Add(Me.PanelEx21)
         Me.SuperTabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel6.Location = New System.Drawing.Point(0, 31)
-        Me.SuperTabControlPanel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel6.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel6.Name = "SuperTabControlPanel6"
-        Me.SuperTabControlPanel6.Size = New System.Drawing.Size(1113, 817)
+        Me.SuperTabControlPanel6.Size = New System.Drawing.Size(835, 650)
         Me.SuperTabControlPanel6.TabIndex = 0
         Me.SuperTabControlPanel6.TabItem = Me.SuperTabItem6
         '
@@ -629,10 +668,9 @@ Partial Class Main
         '
         '
         Me.SW_Vision_2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.SW_Vision_2.Location = New System.Drawing.Point(245, 574)
-        Me.SW_Vision_2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SW_Vision_2.Location = New System.Drawing.Point(184, 459)
         Me.SW_Vision_2.Name = "SW_Vision_2"
-        Me.SW_Vision_2.Size = New System.Drawing.Size(247, 36)
+        Me.SW_Vision_2.Size = New System.Drawing.Size(185, 29)
         Me.SW_Vision_2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.SW_Vision_2.TabIndex = 82
         '
@@ -642,10 +680,9 @@ Partial Class Main
         '
         '
         Me.SW_Vision_1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.SW_Vision_1.Location = New System.Drawing.Point(245, 530)
-        Me.SW_Vision_1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SW_Vision_1.Location = New System.Drawing.Point(184, 424)
         Me.SW_Vision_1.Name = "SW_Vision_1"
-        Me.SW_Vision_1.Size = New System.Drawing.Size(247, 36)
+        Me.SW_Vision_1.Size = New System.Drawing.Size(185, 29)
         Me.SW_Vision_1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.SW_Vision_1.TabIndex = 82
         '
@@ -654,10 +691,9 @@ Partial Class Main
         Me.PanelEx13.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx13.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx13.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx13.Location = New System.Drawing.Point(40, 530)
-        Me.PanelEx13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx13.Location = New System.Drawing.Point(30, 424)
         Me.PanelEx13.Name = "PanelEx13"
-        Me.PanelEx13.Size = New System.Drawing.Size(197, 36)
+        Me.PanelEx13.Size = New System.Drawing.Size(148, 29)
         Me.PanelEx13.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx13.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx13.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -676,10 +712,9 @@ Partial Class Main
         Me.PanelEx14.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx14.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx14.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx14.Location = New System.Drawing.Point(40, 574)
-        Me.PanelEx14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx14.Location = New System.Drawing.Point(30, 459)
         Me.PanelEx14.Name = "PanelEx14"
-        Me.PanelEx14.Size = New System.Drawing.Size(197, 36)
+        Me.PanelEx14.Size = New System.Drawing.Size(148, 29)
         Me.PanelEx14.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx14.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx14.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -701,11 +736,10 @@ Partial Class Main
         Me.TB_JASON_PROJECTS.Border.Class = "TextBoxBorder"
         Me.TB_JASON_PROJECTS.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JASON_PROJECTS.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JASON_PROJECTS.Location = New System.Drawing.Point(193, 94)
-        Me.TB_JASON_PROJECTS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JASON_PROJECTS.Location = New System.Drawing.Point(145, 75)
         Me.TB_JASON_PROJECTS.Name = "TB_JASON_PROJECTS"
         Me.TB_JASON_PROJECTS.PreventEnterBeep = True
-        Me.TB_JASON_PROJECTS.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JASON_PROJECTS.Size = New System.Drawing.Size(185, 30)
         Me.TB_JASON_PROJECTS.TabIndex = 79
         Me.TB_JASON_PROJECTS.Text = "816"
         '
@@ -717,11 +751,10 @@ Partial Class Main
         Me.TB_JASON_AGENT_TYPE.Border.Class = "TextBoxBorder"
         Me.TB_JASON_AGENT_TYPE.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JASON_AGENT_TYPE.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JASON_AGENT_TYPE.Location = New System.Drawing.Point(193, 139)
-        Me.TB_JASON_AGENT_TYPE.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JASON_AGENT_TYPE.Location = New System.Drawing.Point(145, 111)
         Me.TB_JASON_AGENT_TYPE.Name = "TB_JASON_AGENT_TYPE"
         Me.TB_JASON_AGENT_TYPE.PreventEnterBeep = True
-        Me.TB_JASON_AGENT_TYPE.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JASON_AGENT_TYPE.Size = New System.Drawing.Size(185, 30)
         Me.TB_JASON_AGENT_TYPE.TabIndex = 79
         Me.TB_JASON_AGENT_TYPE.Text = "roi"
         '
@@ -733,11 +766,10 @@ Partial Class Main
         Me.TB_JASON_COMPONENT.Border.Class = "TextBoxBorder"
         Me.TB_JASON_COMPONENT.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JASON_COMPONENT.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JASON_COMPONENT.Location = New System.Drawing.Point(193, 225)
-        Me.TB_JASON_COMPONENT.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JASON_COMPONENT.Location = New System.Drawing.Point(145, 180)
         Me.TB_JASON_COMPONENT.Name = "TB_JASON_COMPONENT"
         Me.TB_JASON_COMPONENT.PreventEnterBeep = True
-        Me.TB_JASON_COMPONENT.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JASON_COMPONENT.Size = New System.Drawing.Size(185, 30)
         Me.TB_JASON_COMPONENT.TabIndex = 78
         Me.TB_JASON_COMPONENT.Text = "kc"
         '
@@ -749,11 +781,10 @@ Partial Class Main
         Me.TB_JASON_PROCESS.Border.Class = "TextBoxBorder"
         Me.TB_JASON_PROCESS.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JASON_PROCESS.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JASON_PROCESS.Location = New System.Drawing.Point(193, 181)
-        Me.TB_JASON_PROCESS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JASON_PROCESS.Location = New System.Drawing.Point(145, 145)
         Me.TB_JASON_PROCESS.Name = "TB_JASON_PROCESS"
         Me.TB_JASON_PROCESS.PreventEnterBeep = True
-        Me.TB_JASON_PROCESS.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JASON_PROCESS.Size = New System.Drawing.Size(185, 30)
         Me.TB_JASON_PROCESS.TabIndex = 77
         Me.TB_JASON_PROCESS.Text = "lle"
         '
@@ -762,10 +793,9 @@ Partial Class Main
         Me.PanelEx6.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx6.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx6.Location = New System.Drawing.Point(40, 225)
-        Me.PanelEx6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx6.Location = New System.Drawing.Point(30, 180)
         Me.PanelEx6.Name = "PanelEx6"
-        Me.PanelEx6.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx6.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -784,10 +814,9 @@ Partial Class Main
         Me.PanelEx11.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx11.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx11.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx11.Location = New System.Drawing.Point(40, 138)
-        Me.PanelEx11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx11.Location = New System.Drawing.Point(30, 110)
         Me.PanelEx11.Name = "PanelEx11"
-        Me.PanelEx11.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx11.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx11.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx11.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx11.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -806,10 +835,9 @@ Partial Class Main
         Me.PanelEx12.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx12.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx12.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx12.Location = New System.Drawing.Point(40, 181)
-        Me.PanelEx12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx12.Location = New System.Drawing.Point(30, 145)
         Me.PanelEx12.Name = "PanelEx12"
-        Me.PanelEx12.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx12.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx12.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx12.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx12.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -831,11 +859,10 @@ Partial Class Main
         Me.TB_JSON_BUILDS.Border.Class = "TextBoxBorder"
         Me.TB_JSON_BUILDS.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JSON_BUILDS.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JSON_BUILDS.Location = New System.Drawing.Point(193, 270)
-        Me.TB_JSON_BUILDS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JSON_BUILDS.Location = New System.Drawing.Point(145, 216)
         Me.TB_JSON_BUILDS.Name = "TB_JSON_BUILDS"
         Me.TB_JSON_BUILDS.PreventEnterBeep = True
-        Me.TB_JSON_BUILDS.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JSON_BUILDS.Size = New System.Drawing.Size(185, 30)
         Me.TB_JSON_BUILDS.TabIndex = 73
         Me.TB_JSON_BUILDS.Text = "PVT/DVT/EVT/MP"
         '
@@ -844,10 +871,9 @@ Partial Class Main
         Me.PanelEx27.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx27.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx27.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx27.Location = New System.Drawing.Point(40, 42)
-        Me.PanelEx27.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx27.Location = New System.Drawing.Point(30, 34)
         Me.PanelEx27.Name = "PanelEx27"
-        Me.PanelEx27.Size = New System.Drawing.Size(145, 44)
+        Me.PanelEx27.Size = New System.Drawing.Size(109, 35)
         Me.PanelEx27.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx27.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx27.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -864,31 +890,28 @@ Partial Class Main
         '
         '
         Me.SW_JSON_UPLOAD.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.SW_JSON_UPLOAD.Location = New System.Drawing.Point(193, 42)
-        Me.SW_JSON_UPLOAD.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SW_JSON_UPLOAD.Location = New System.Drawing.Point(145, 34)
         Me.SW_JSON_UPLOAD.Name = "SW_JSON_UPLOAD"
         Me.SW_JSON_UPLOAD.OffText = "NO"
         Me.SW_JSON_UPLOAD.OnText = "YES"
-        Me.SW_JSON_UPLOAD.Size = New System.Drawing.Size(247, 44)
+        Me.SW_JSON_UPLOAD.Size = New System.Drawing.Size(185, 35)
         Me.SW_JSON_UPLOAD.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.SW_JSON_UPLOAD.TabIndex = 71
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(760, 446)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button2.Location = New System.Drawing.Point(570, 357)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(96, 36)
+        Me.Button2.Size = New System.Drawing.Size(72, 29)
         Me.Button2.TabIndex = 70
         Me.Button2.Text = "选择..."
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(37, 689)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Location = New System.Drawing.Point(28, 551)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(400, 46)
+        Me.Button1.Size = New System.Drawing.Size(300, 37)
         Me.Button1.TabIndex = 69
         Me.Button1.Text = "参数保存"
         Me.Button1.UseVisualStyleBackColor = True
@@ -902,11 +925,10 @@ Partial Class Main
         Me.TB_JSON_FILE_PATH.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JSON_FILE_PATH.Enabled = False
         Me.TB_JSON_FILE_PATH.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JSON_FILE_PATH.Location = New System.Drawing.Point(193, 445)
-        Me.TB_JSON_FILE_PATH.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JSON_FILE_PATH.Location = New System.Drawing.Point(145, 356)
         Me.TB_JSON_FILE_PATH.Name = "TB_JSON_FILE_PATH"
         Me.TB_JSON_FILE_PATH.PreventEnterBeep = True
-        Me.TB_JSON_FILE_PATH.Size = New System.Drawing.Size(559, 36)
+        Me.TB_JSON_FILE_PATH.Size = New System.Drawing.Size(419, 30)
         Me.TB_JSON_FILE_PATH.TabIndex = 66
         Me.TB_JSON_FILE_PATH.Text = "D:\"
         '
@@ -918,11 +940,10 @@ Partial Class Main
         Me.TB_JSON_LINE_NUMBER.Border.Class = "TextBoxBorder"
         Me.TB_JSON_LINE_NUMBER.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JSON_LINE_NUMBER.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JSON_LINE_NUMBER.Location = New System.Drawing.Point(193, 400)
-        Me.TB_JSON_LINE_NUMBER.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JSON_LINE_NUMBER.Location = New System.Drawing.Point(145, 320)
         Me.TB_JSON_LINE_NUMBER.Name = "TB_JSON_LINE_NUMBER"
         Me.TB_JSON_LINE_NUMBER.PreventEnterBeep = True
-        Me.TB_JSON_LINE_NUMBER.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JSON_LINE_NUMBER.Size = New System.Drawing.Size(185, 30)
         Me.TB_JSON_LINE_NUMBER.TabIndex = 65
         Me.TB_JSON_LINE_NUMBER.Text = "1"
         '
@@ -934,11 +955,10 @@ Partial Class Main
         Me.TB_JSON_AOI_VENDOR.Border.Class = "TextBoxBorder"
         Me.TB_JSON_AOI_VENDOR.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JSON_AOI_VENDOR.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JSON_AOI_VENDOR.Location = New System.Drawing.Point(193, 356)
-        Me.TB_JSON_AOI_VENDOR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JSON_AOI_VENDOR.Location = New System.Drawing.Point(145, 285)
         Me.TB_JSON_AOI_VENDOR.Name = "TB_JSON_AOI_VENDOR"
         Me.TB_JSON_AOI_VENDOR.PreventEnterBeep = True
-        Me.TB_JSON_AOI_VENDOR.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JSON_AOI_VENDOR.Size = New System.Drawing.Size(185, 30)
         Me.TB_JSON_AOI_VENDOR.TabIndex = 68
         Me.TB_JSON_AOI_VENDOR.Text = "RS"
         '
@@ -950,11 +970,10 @@ Partial Class Main
         Me.TB_JSON_PROGRAM_VER.Border.Class = "TextBoxBorder"
         Me.TB_JSON_PROGRAM_VER.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TB_JSON_PROGRAM_VER.Font = New System.Drawing.Font("宋体", 15.0!)
-        Me.TB_JSON_PROGRAM_VER.Location = New System.Drawing.Point(193, 312)
-        Me.TB_JSON_PROGRAM_VER.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TB_JSON_PROGRAM_VER.Location = New System.Drawing.Point(145, 250)
         Me.TB_JSON_PROGRAM_VER.Name = "TB_JSON_PROGRAM_VER"
         Me.TB_JSON_PROGRAM_VER.PreventEnterBeep = True
-        Me.TB_JSON_PROGRAM_VER.Size = New System.Drawing.Size(247, 36)
+        Me.TB_JSON_PROGRAM_VER.Size = New System.Drawing.Size(185, 30)
         Me.TB_JSON_PROGRAM_VER.TabIndex = 64
         Me.TB_JSON_PROGRAM_VER.Text = "X1359_20171115"
         '
@@ -963,10 +982,9 @@ Partial Class Main
         Me.PanelEx24.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx24.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx24.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx24.Location = New System.Drawing.Point(40, 356)
-        Me.PanelEx24.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx24.Location = New System.Drawing.Point(30, 285)
         Me.PanelEx24.Name = "PanelEx24"
-        Me.PanelEx24.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx24.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx24.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx24.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx24.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -985,10 +1003,9 @@ Partial Class Main
         Me.PanelEx25.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx25.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx25.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx25.Location = New System.Drawing.Point(40, 445)
-        Me.PanelEx25.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx25.Location = New System.Drawing.Point(30, 356)
         Me.PanelEx25.Name = "PanelEx25"
-        Me.PanelEx25.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx25.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx25.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx25.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx25.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1007,10 +1024,9 @@ Partial Class Main
         Me.PanelEx23.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx23.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx23.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx23.Location = New System.Drawing.Point(40, 400)
-        Me.PanelEx23.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx23.Location = New System.Drawing.Point(30, 320)
         Me.PanelEx23.Name = "PanelEx23"
-        Me.PanelEx23.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx23.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx23.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx23.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx23.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1029,10 +1045,9 @@ Partial Class Main
         Me.PanelEx26.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx26.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx26.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx26.Location = New System.Drawing.Point(40, 269)
-        Me.PanelEx26.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx26.Location = New System.Drawing.Point(30, 215)
         Me.PanelEx26.Name = "PanelEx26"
-        Me.PanelEx26.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx26.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx26.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx26.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx26.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1051,10 +1066,9 @@ Partial Class Main
         Me.PanelEx20.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx20.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx20.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx20.Location = New System.Drawing.Point(40, 94)
-        Me.PanelEx20.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx20.Location = New System.Drawing.Point(30, 75)
         Me.PanelEx20.Name = "PanelEx20"
-        Me.PanelEx20.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx20.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx20.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx20.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx20.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1073,10 +1087,9 @@ Partial Class Main
         Me.PanelEx21.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx21.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx21.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx21.Location = New System.Drawing.Point(40, 312)
-        Me.PanelEx21.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx21.Location = New System.Drawing.Point(30, 250)
         Me.PanelEx21.Name = "PanelEx21"
-        Me.PanelEx21.Size = New System.Drawing.Size(145, 36)
+        Me.PanelEx21.Size = New System.Drawing.Size(109, 29)
         Me.PanelEx21.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx21.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx21.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1099,13 +1112,26 @@ Partial Class Main
         '
         'SuperTabControlPanel5
         '
+        Me.SuperTabControlPanel5.Controls.Add(Me.CogToolBlockEditV22)
         Me.SuperTabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel5.Location = New System.Drawing.Point(0, 31)
-        Me.SuperTabControlPanel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel5.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel5.Name = "SuperTabControlPanel5"
-        Me.SuperTabControlPanel5.Size = New System.Drawing.Size(1113, 817)
+        Me.SuperTabControlPanel5.Size = New System.Drawing.Size(835, 650)
         Me.SuperTabControlPanel5.TabIndex = 2
         Me.SuperTabControlPanel5.TabItem = Me.SuperTabItem5
+        '
+        'CogToolBlockEditV22
+        '
+        Me.CogToolBlockEditV22.AllowDrop = True
+        Me.CogToolBlockEditV22.ContextMenuCustomizer = Nothing
+        Me.CogToolBlockEditV22.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CogToolBlockEditV22.Location = New System.Drawing.Point(0, 0)
+        Me.CogToolBlockEditV22.MinimumSize = New System.Drawing.Size(489, 0)
+        Me.CogToolBlockEditV22.Name = "CogToolBlockEditV22"
+        Me.CogToolBlockEditV22.ShowNodeToolTips = True
+        Me.CogToolBlockEditV22.Size = New System.Drawing.Size(835, 650)
+        Me.CogToolBlockEditV22.SuspendElectricRuns = False
+        Me.CogToolBlockEditV22.TabIndex = 0
         '
         'SuperTabItem5
         '
@@ -1116,13 +1142,26 @@ Partial Class Main
         '
         'SuperTabControlPanel4
         '
+        Me.SuperTabControlPanel4.Controls.Add(Me.CogToolBlockEditV21)
         Me.SuperTabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel4.Location = New System.Drawing.Point(0, 31)
-        Me.SuperTabControlPanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel4.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel4.Name = "SuperTabControlPanel4"
-        Me.SuperTabControlPanel4.Size = New System.Drawing.Size(1113, 817)
+        Me.SuperTabControlPanel4.Size = New System.Drawing.Size(835, 650)
         Me.SuperTabControlPanel4.TabIndex = 0
         Me.SuperTabControlPanel4.TabItem = Me.SuperTabItem4
+        '
+        'CogToolBlockEditV21
+        '
+        Me.CogToolBlockEditV21.AllowDrop = True
+        Me.CogToolBlockEditV21.ContextMenuCustomizer = Nothing
+        Me.CogToolBlockEditV21.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CogToolBlockEditV21.Location = New System.Drawing.Point(0, 0)
+        Me.CogToolBlockEditV21.MinimumSize = New System.Drawing.Size(489, 0)
+        Me.CogToolBlockEditV21.Name = "CogToolBlockEditV21"
+        Me.CogToolBlockEditV21.ShowNodeToolTips = True
+        Me.CogToolBlockEditV21.Size = New System.Drawing.Size(835, 650)
+        Me.CogToolBlockEditV21.SuspendElectricRuns = False
+        Me.CogToolBlockEditV21.TabIndex = 0
         '
         'SuperTabItem4
         '
@@ -1142,10 +1181,9 @@ Partial Class Main
         Me.SuperTabControlPanel2.Controls.Add(Me.Btn_Delete_Log)
         Me.SuperTabControlPanel2.Controls.Add(Me.DATAGRIDVIEW_LOG)
         Me.SuperTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 31)
-        Me.SuperTabControlPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel2.Name = "SuperTabControlPanel2"
-        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(1113, 817)
+        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(835, 650)
         Me.SuperTabControlPanel2.TabIndex = 0
         Me.SuperTabControlPanel2.TabItem = Me.SuperTabItem2
         '
@@ -1154,10 +1192,9 @@ Partial Class Main
         Me.PE_LOG_COUNT.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_LOG_COUNT.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PE_LOG_COUNT.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_LOG_COUNT.Location = New System.Drawing.Point(141, 762)
-        Me.PE_LOG_COUNT.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_LOG_COUNT.Location = New System.Drawing.Point(106, 610)
         Me.PE_LOG_COUNT.Name = "PE_LOG_COUNT"
-        Me.PE_LOG_COUNT.Size = New System.Drawing.Size(129, 44)
+        Me.PE_LOG_COUNT.Size = New System.Drawing.Size(97, 35)
         Me.PE_LOG_COUNT.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_LOG_COUNT.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_LOG_COUNT.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1171,10 +1208,9 @@ Partial Class Main
         Me.ButtonX9.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.ButtonX9.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.ButtonX9.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ButtonX9.Location = New System.Drawing.Point(279, 762)
-        Me.ButtonX9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonX9.Location = New System.Drawing.Point(209, 610)
         Me.ButtonX9.Name = "ButtonX9"
-        Me.ButtonX9.Size = New System.Drawing.Size(133, 44)
+        Me.ButtonX9.Size = New System.Drawing.Size(100, 35)
         Me.ButtonX9.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.ButtonX9.Symbol = ""
         Me.ButtonX9.TabIndex = 44
@@ -1186,10 +1222,9 @@ Partial Class Main
         Me.PanelEx43.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx43.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx43.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx43.Location = New System.Drawing.Point(5, 762)
-        Me.PanelEx43.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx43.Location = New System.Drawing.Point(4, 610)
         Me.PanelEx43.Name = "PanelEx43"
-        Me.PanelEx43.Size = New System.Drawing.Size(128, 44)
+        Me.PanelEx43.Size = New System.Drawing.Size(96, 35)
         Me.PanelEx43.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx43.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx43.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1204,10 +1239,9 @@ Partial Class Main
         Me.Btn_Save_Log.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Save_Log.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Save_Log.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Save_Log.Location = New System.Drawing.Point(780, 762)
-        Me.Btn_Save_Log.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Save_Log.Location = New System.Drawing.Point(585, 610)
         Me.Btn_Save_Log.Name = "Btn_Save_Log"
-        Me.Btn_Save_Log.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Save_Log.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Save_Log.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Save_Log.Symbol = ""
         Me.Btn_Save_Log.TabIndex = 38
@@ -1219,10 +1253,9 @@ Partial Class Main
         Me.Btn_Query_All_Log.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Query_All_Log.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Query_All_Log.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Query_All_Log.Location = New System.Drawing.Point(444, 762)
-        Me.Btn_Query_All_Log.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Query_All_Log.Location = New System.Drawing.Point(333, 610)
         Me.Btn_Query_All_Log.Name = "Btn_Query_All_Log"
-        Me.Btn_Query_All_Log.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Query_All_Log.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Query_All_Log.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Query_All_Log.Symbol = ""
         Me.Btn_Query_All_Log.TabIndex = 43
@@ -1234,10 +1267,9 @@ Partial Class Main
         Me.Btn_Query_Log.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Query_Log.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Query_Log.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Query_Log.Location = New System.Drawing.Point(612, 762)
-        Me.Btn_Query_Log.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Query_Log.Location = New System.Drawing.Point(459, 610)
         Me.Btn_Query_Log.Name = "Btn_Query_Log"
-        Me.Btn_Query_Log.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Query_Log.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Query_Log.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Query_Log.Symbol = ""
         Me.Btn_Query_Log.TabIndex = 39
@@ -1249,10 +1281,9 @@ Partial Class Main
         Me.Btn_Delete_Log.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Delete_Log.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Delete_Log.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Delete_Log.Location = New System.Drawing.Point(948, 762)
-        Me.Btn_Delete_Log.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Delete_Log.Location = New System.Drawing.Point(711, 610)
         Me.Btn_Delete_Log.Name = "Btn_Delete_Log"
-        Me.Btn_Delete_Log.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Delete_Log.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Delete_Log.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Delete_Log.Symbol = ""
         Me.Btn_Delete_Log.TabIndex = 40
@@ -1280,8 +1311,7 @@ Partial Class Main
         Me.DATAGRIDVIEW_LOG.DefaultCellStyle = DataGridViewCellStyle5
         Me.DATAGRIDVIEW_LOG.EnableHeadersVisualStyles = False
         Me.DATAGRIDVIEW_LOG.GridColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer))
-        Me.DATAGRIDVIEW_LOG.Location = New System.Drawing.Point(4, 4)
-        Me.DATAGRIDVIEW_LOG.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DATAGRIDVIEW_LOG.Location = New System.Drawing.Point(3, 3)
         Me.DATAGRIDVIEW_LOG.Name = "DATAGRIDVIEW_LOG"
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
@@ -1292,7 +1322,7 @@ Partial Class Main
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DATAGRIDVIEW_LOG.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DATAGRIDVIEW_LOG.RowTemplate.Height = 23
-        Me.DATAGRIDVIEW_LOG.Size = New System.Drawing.Size(1104, 751)
+        Me.DATAGRIDVIEW_LOG.Size = New System.Drawing.Size(828, 601)
         Me.DATAGRIDVIEW_LOG.TabIndex = 1
         '
         'SuperTabItem2
@@ -1313,10 +1343,9 @@ Partial Class Main
         Me.SuperTabControlPanel3.Controls.Add(Me.Btn_Query_Data)
         Me.SuperTabControlPanel3.Controls.Add(Me.DATAGRIDVIEW_data)
         Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 31)
-        Me.SuperTabControlPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
-        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(1113, 817)
+        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(835, 650)
         Me.SuperTabControlPanel3.TabIndex = 0
         Me.SuperTabControlPanel3.TabItem = Me.SuperTabItem3
         '
@@ -1325,10 +1354,9 @@ Partial Class Main
         Me.PanelEx10.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx10.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx10.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx10.Location = New System.Drawing.Point(377, 782)
-        Me.PanelEx10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx10.Location = New System.Drawing.Point(283, 626)
         Me.PanelEx10.Name = "PanelEx10"
-        Me.PanelEx10.Size = New System.Drawing.Size(63, 26)
+        Me.PanelEx10.Size = New System.Drawing.Size(47, 21)
         Me.PanelEx10.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx10.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx10.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1344,11 +1372,10 @@ Partial Class Main
         '
         Me.TX_Qeuery_SN.Border.Class = "TextBoxBorder"
         Me.TX_Qeuery_SN.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.TX_Qeuery_SN.Location = New System.Drawing.Point(107, 782)
-        Me.TX_Qeuery_SN.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TX_Qeuery_SN.Location = New System.Drawing.Point(80, 626)
         Me.TX_Qeuery_SN.Name = "TX_Qeuery_SN"
         Me.TX_Qeuery_SN.PreventEnterBeep = True
-        Me.TX_Qeuery_SN.Size = New System.Drawing.Size(268, 25)
+        Me.TX_Qeuery_SN.Size = New System.Drawing.Size(201, 21)
         Me.TX_Qeuery_SN.TabIndex = 56
         '
         'PanelEx9
@@ -1356,10 +1383,9 @@ Partial Class Main
         Me.PanelEx9.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx9.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx9.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx9.Location = New System.Drawing.Point(9, 782)
-        Me.PanelEx9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx9.Location = New System.Drawing.Point(7, 626)
         Me.PanelEx9.Name = "PanelEx9"
-        Me.PanelEx9.Size = New System.Drawing.Size(95, 26)
+        Me.PanelEx9.Size = New System.Drawing.Size(71, 21)
         Me.PanelEx9.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx9.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx9.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1374,10 +1400,9 @@ Partial Class Main
         Me.Btn_Delete_Data.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Delete_Data.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Delete_Data.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Delete_Data.Location = New System.Drawing.Point(947, 765)
-        Me.Btn_Delete_Data.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Delete_Data.Location = New System.Drawing.Point(710, 612)
         Me.Btn_Delete_Data.Name = "Btn_Delete_Data"
-        Me.Btn_Delete_Data.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Delete_Data.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Delete_Data.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Delete_Data.Symbol = ""
         Me.Btn_Delete_Data.TabIndex = 53
@@ -1389,10 +1414,9 @@ Partial Class Main
         Me.Btn_Save_Data.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Save_Data.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Save_Data.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Save_Data.Location = New System.Drawing.Point(780, 765)
-        Me.Btn_Save_Data.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Save_Data.Location = New System.Drawing.Point(585, 612)
         Me.Btn_Save_Data.Name = "Btn_Save_Data"
-        Me.Btn_Save_Data.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Save_Data.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Save_Data.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Save_Data.Symbol = ""
         Me.Btn_Save_Data.TabIndex = 50
@@ -1404,10 +1428,9 @@ Partial Class Main
         Me.Btn_Query_All_Data.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Query_All_Data.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Query_All_Data.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Query_All_Data.Location = New System.Drawing.Point(444, 765)
-        Me.Btn_Query_All_Data.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Query_All_Data.Location = New System.Drawing.Point(333, 612)
         Me.Btn_Query_All_Data.Name = "Btn_Query_All_Data"
-        Me.Btn_Query_All_Data.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Query_All_Data.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Query_All_Data.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Query_All_Data.Symbol = ""
         Me.Btn_Query_All_Data.TabIndex = 52
@@ -1419,10 +1442,9 @@ Partial Class Main
         Me.Btn_Query_Data.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Query_Data.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Query_Data.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Query_Data.Location = New System.Drawing.Point(612, 765)
-        Me.Btn_Query_Data.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Query_Data.Location = New System.Drawing.Point(459, 612)
         Me.Btn_Query_Data.Name = "Btn_Query_Data"
-        Me.Btn_Query_Data.Size = New System.Drawing.Size(160, 44)
+        Me.Btn_Query_Data.Size = New System.Drawing.Size(120, 35)
         Me.Btn_Query_Data.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Query_Data.Symbol = ""
         Me.Btn_Query_Data.TabIndex = 51
@@ -1450,8 +1472,7 @@ Partial Class Main
         Me.DATAGRIDVIEW_data.DefaultCellStyle = DataGridViewCellStyle8
         Me.DATAGRIDVIEW_data.EnableHeadersVisualStyles = False
         Me.DATAGRIDVIEW_data.GridColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer))
-        Me.DATAGRIDVIEW_data.Location = New System.Drawing.Point(5, 4)
-        Me.DATAGRIDVIEW_data.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DATAGRIDVIEW_data.Location = New System.Drawing.Point(4, 3)
         Me.DATAGRIDVIEW_data.Name = "DATAGRIDVIEW_data"
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
@@ -1462,7 +1483,7 @@ Partial Class Main
         DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DATAGRIDVIEW_data.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.DATAGRIDVIEW_data.RowTemplate.Height = 23
-        Me.DATAGRIDVIEW_data.Size = New System.Drawing.Size(1104, 754)
+        Me.DATAGRIDVIEW_data.Size = New System.Drawing.Size(828, 603)
         Me.DATAGRIDVIEW_data.TabIndex = 0
         '
         'SuperTabItem3
@@ -1487,16 +1508,6 @@ Partial Class Main
         Me.ButtonItem3.Name = "ButtonItem3"
         Me.ButtonItem3.Text = "UNLOAD"
         '
-        'NumericUpDown1
-        '
-        Me.NumericUpDown1.Enabled = False
-        Me.NumericUpDown1.Location = New System.Drawing.Point(351, 6)
-        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(46, 25)
-        Me.NumericUpDown1.TabIndex = 1
-        Me.NumericUpDown1.Visible = False
-        '
         'GroupPanel1
         '
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
@@ -1510,10 +1521,9 @@ Partial Class Main
         Me.GroupPanel1.Controls.Add(Me.PanelEx3)
         Me.GroupPanel1.Controls.Add(Me.PanelEx1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel1.Location = New System.Drawing.Point(385, 856)
-        Me.GroupPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupPanel1.Location = New System.Drawing.Point(289, 685)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(1113, 40)
+        Me.GroupPanel1.Size = New System.Drawing.Size(835, 32)
         '
         '
         '
@@ -1549,10 +1559,9 @@ Partial Class Main
         Me.PE_NO_WORK.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_NO_WORK.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PE_NO_WORK.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_NO_WORK.Location = New System.Drawing.Point(996, 4)
-        Me.PE_NO_WORK.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_NO_WORK.Location = New System.Drawing.Point(747, 3)
         Me.PE_NO_WORK.Name = "PE_NO_WORK"
-        Me.PE_NO_WORK.Size = New System.Drawing.Size(100, 29)
+        Me.PE_NO_WORK.Size = New System.Drawing.Size(75, 23)
         Me.PE_NO_WORK.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_NO_WORK.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_NO_WORK.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1568,10 +1577,9 @@ Partial Class Main
         Me.OP_Style.CanvasColor = System.Drawing.SystemColors.Control
         Me.OP_Style.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.OP_Style.DisabledBackColor = System.Drawing.Color.Empty
-        Me.OP_Style.Location = New System.Drawing.Point(737, 4)
-        Me.OP_Style.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OP_Style.Location = New System.Drawing.Point(553, 3)
         Me.OP_Style.Name = "OP_Style"
-        Me.OP_Style.Size = New System.Drawing.Size(153, 29)
+        Me.OP_Style.Size = New System.Drawing.Size(115, 23)
         Me.OP_Style.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.OP_Style.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.OP_Style.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1587,10 +1595,9 @@ Partial Class Main
         Me.HIP_Style.CanvasColor = System.Drawing.SystemColors.Control
         Me.HIP_Style.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.HIP_Style.DisabledBackColor = System.Drawing.Color.Empty
-        Me.HIP_Style.Location = New System.Drawing.Point(439, 4)
-        Me.HIP_Style.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.HIP_Style.Location = New System.Drawing.Point(329, 3)
         Me.HIP_Style.Name = "HIP_Style"
-        Me.HIP_Style.Size = New System.Drawing.Size(156, 29)
+        Me.HIP_Style.Size = New System.Drawing.Size(117, 23)
         Me.HIP_Style.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.HIP_Style.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.HIP_Style.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1606,10 +1613,9 @@ Partial Class Main
         Me.Laser_Style.CanvasColor = System.Drawing.SystemColors.Control
         Me.Laser_Style.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Laser_Style.DisabledBackColor = System.Drawing.Color.Empty
-        Me.Laser_Style.Location = New System.Drawing.Point(132, 4)
-        Me.Laser_Style.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Laser_Style.Location = New System.Drawing.Point(99, 3)
         Me.Laser_Style.Name = "Laser_Style"
-        Me.Laser_Style.Size = New System.Drawing.Size(152, 29)
+        Me.Laser_Style.Size = New System.Drawing.Size(114, 23)
         Me.Laser_Style.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.Laser_Style.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.Laser_Style.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1625,10 +1631,9 @@ Partial Class Main
         Me.PanelEx5.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx5.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx5.Location = New System.Drawing.Point(901, 4)
-        Me.PanelEx5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx5.Location = New System.Drawing.Point(676, 3)
         Me.PanelEx5.Name = "PanelEx5"
-        Me.PanelEx5.Size = New System.Drawing.Size(93, 29)
+        Me.PanelEx5.Size = New System.Drawing.Size(70, 23)
         Me.PanelEx5.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx5.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx5.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1644,10 +1649,9 @@ Partial Class Main
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx2.Location = New System.Drawing.Point(603, 4)
-        Me.PanelEx2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx2.Location = New System.Drawing.Point(452, 3)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(132, 29)
+        Me.PanelEx2.Size = New System.Drawing.Size(99, 23)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1663,10 +1667,9 @@ Partial Class Main
         Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx3.Location = New System.Drawing.Point(292, 4)
-        Me.PanelEx3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx3.Location = New System.Drawing.Point(219, 3)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(144, 29)
+        Me.PanelEx3.Size = New System.Drawing.Size(108, 23)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1682,10 +1685,9 @@ Partial Class Main
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx1.Location = New System.Drawing.Point(4, 4)
-        Me.PanelEx1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx1.Location = New System.Drawing.Point(3, 3)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(125, 29)
+        Me.PanelEx1.Size = New System.Drawing.Size(94, 23)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -1701,10 +1703,9 @@ Partial Class Main
         Me.Btn_Language.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Language.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Language.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Language.Location = New System.Drawing.Point(4, 294)
-        Me.Btn_Language.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Language.Location = New System.Drawing.Point(3, 235)
         Me.Btn_Language.Name = "Btn_Language"
-        Me.Btn_Language.Size = New System.Drawing.Size(140, 44)
+        Me.Btn_Language.Size = New System.Drawing.Size(105, 35)
         Me.Btn_Language.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Language.Symbol = ""
         Me.Btn_Language.TabIndex = 35
@@ -1721,10 +1722,9 @@ Partial Class Main
         Me.GP_DataCode.Controls.Add(Me.PE_RIGHT_SN)
         Me.GP_DataCode.Controls.Add(Me.PE_LEFT_SN)
         Me.GP_DataCode.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GP_DataCode.Location = New System.Drawing.Point(3, 802)
-        Me.GP_DataCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GP_DataCode.Location = New System.Drawing.Point(2, 642)
         Me.GP_DataCode.Name = "GP_DataCode"
-        Me.GP_DataCode.Size = New System.Drawing.Size(375, 96)
+        Me.GP_DataCode.Size = New System.Drawing.Size(281, 77)
         '
         '
         '
@@ -1764,11 +1764,10 @@ Partial Class Main
         Me.Text_SN_Right.Border.Class = "TextBoxBorder"
         Me.Text_SN_Right.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.Text_SN_Right.Enabled = False
-        Me.Text_SN_Right.Location = New System.Drawing.Point(97, 38)
-        Me.Text_SN_Right.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Text_SN_Right.Location = New System.Drawing.Point(73, 30)
         Me.Text_SN_Right.Name = "Text_SN_Right"
         Me.Text_SN_Right.PreventEnterBeep = True
-        Me.Text_SN_Right.Size = New System.Drawing.Size(271, 25)
+        Me.Text_SN_Right.Size = New System.Drawing.Size(203, 21)
         Me.Text_SN_Right.TabIndex = 2
         '
         'Text_SN_Left
@@ -1779,11 +1778,10 @@ Partial Class Main
         Me.Text_SN_Left.Border.Class = "TextBoxBorder"
         Me.Text_SN_Left.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.Text_SN_Left.Enabled = False
-        Me.Text_SN_Left.Location = New System.Drawing.Point(97, 4)
-        Me.Text_SN_Left.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Text_SN_Left.Location = New System.Drawing.Point(73, 3)
         Me.Text_SN_Left.Name = "Text_SN_Left"
         Me.Text_SN_Left.PreventEnterBeep = True
-        Me.Text_SN_Left.Size = New System.Drawing.Size(271, 25)
+        Me.Text_SN_Left.Size = New System.Drawing.Size(203, 21)
         Me.Text_SN_Left.TabIndex = 2
         '
         'PE_RIGHT_SN
@@ -1791,10 +1789,9 @@ Partial Class Main
         Me.PE_RIGHT_SN.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_RIGHT_SN.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PE_RIGHT_SN.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_RIGHT_SN.Location = New System.Drawing.Point(4, 38)
-        Me.PE_RIGHT_SN.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_RIGHT_SN.Location = New System.Drawing.Point(3, 30)
         Me.PE_RIGHT_SN.Name = "PE_RIGHT_SN"
-        Me.PE_RIGHT_SN.Size = New System.Drawing.Size(91, 26)
+        Me.PE_RIGHT_SN.Size = New System.Drawing.Size(68, 21)
         Me.PE_RIGHT_SN.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_RIGHT_SN.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_RIGHT_SN.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1813,10 +1810,9 @@ Partial Class Main
         Me.PE_LEFT_SN.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_LEFT_SN.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PE_LEFT_SN.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_LEFT_SN.Location = New System.Drawing.Point(4, 4)
-        Me.PE_LEFT_SN.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_LEFT_SN.Location = New System.Drawing.Point(3, 3)
         Me.PE_LEFT_SN.Name = "PE_LEFT_SN"
-        Me.PE_LEFT_SN.Size = New System.Drawing.Size(91, 26)
+        Me.PE_LEFT_SN.Size = New System.Drawing.Size(68, 21)
         Me.PE_LEFT_SN.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_LEFT_SN.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_LEFT_SN.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1840,10 +1836,9 @@ Partial Class Main
         Me.Btn_DIO_Set.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_DIO_Set.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_DIO_Set.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_DIO_Set.Location = New System.Drawing.Point(4, 246)
-        Me.Btn_DIO_Set.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_DIO_Set.Location = New System.Drawing.Point(3, 197)
         Me.Btn_DIO_Set.Name = "Btn_DIO_Set"
-        Me.Btn_DIO_Set.Size = New System.Drawing.Size(140, 44)
+        Me.Btn_DIO_Set.Size = New System.Drawing.Size(105, 35)
         Me.Btn_DIO_Set.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_DIO_Set.Symbol = ""
         Me.Btn_DIO_Set.TabIndex = 35
@@ -1864,10 +1859,9 @@ Partial Class Main
         Me.Btn_Param_Set.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Param_Set.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Param_Set.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Param_Set.Location = New System.Drawing.Point(152, 199)
-        Me.Btn_Param_Set.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Param_Set.Location = New System.Drawing.Point(114, 159)
         Me.Btn_Param_Set.Name = "Btn_Param_Set"
-        Me.Btn_Param_Set.Size = New System.Drawing.Size(140, 44)
+        Me.Btn_Param_Set.Size = New System.Drawing.Size(105, 35)
         Me.Btn_Param_Set.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Param_Set.Symbol = ""
         Me.Btn_Param_Set.TabIndex = 35
@@ -1879,10 +1873,9 @@ Partial Class Main
         Me.Btn_Updata_Logain_PassWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Updata_Logain_PassWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Updata_Logain_PassWord.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Updata_Logain_PassWord.Location = New System.Drawing.Point(4, 101)
-        Me.Btn_Updata_Logain_PassWord.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Updata_Logain_PassWord.Location = New System.Drawing.Point(3, 81)
         Me.Btn_Updata_Logain_PassWord.Name = "Btn_Updata_Logain_PassWord"
-        Me.Btn_Updata_Logain_PassWord.Size = New System.Drawing.Size(287, 44)
+        Me.Btn_Updata_Logain_PassWord.Size = New System.Drawing.Size(215, 35)
         Me.Btn_Updata_Logain_PassWord.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Updata_Logain_PassWord.Symbol = ""
         Me.Btn_Updata_Logain_PassWord.TabIndex = 35
@@ -1894,10 +1887,9 @@ Partial Class Main
         Me.Btn_Query_All.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Query_All.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Query_All.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Btn_Query_All.Location = New System.Drawing.Point(152, 246)
-        Me.Btn_Query_All.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Query_All.Location = New System.Drawing.Point(114, 197)
         Me.Btn_Query_All.Name = "Btn_Query_All"
-        Me.Btn_Query_All.Size = New System.Drawing.Size(140, 44)
+        Me.Btn_Query_All.Size = New System.Drawing.Size(105, 35)
         Me.Btn_Query_All.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Query_All.Symbol = ""
         Me.Btn_Query_All.TabIndex = 48
@@ -1911,10 +1903,9 @@ Partial Class Main
         Me.GP_Current_Style.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.GP_Current_Style.Controls.Add(Me.DX_ENC_POS)
         Me.GP_Current_Style.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GP_Current_Style.Location = New System.Drawing.Point(3, 0)
-        Me.GP_Current_Style.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GP_Current_Style.Location = New System.Drawing.Point(2, 0)
         Me.GP_Current_Style.Name = "GP_Current_Style"
-        Me.GP_Current_Style.Size = New System.Drawing.Size(373, 96)
+        Me.GP_Current_Style.Size = New System.Drawing.Size(280, 77)
         '
         '
         '
@@ -1955,11 +1946,10 @@ Partial Class Main
         Me.DX_ENC_POS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DX_ENC_POS.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2
         Me.DX_ENC_POS.Location = New System.Drawing.Point(0, 0)
-        Me.DX_ENC_POS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DX_ENC_POS.Name = "DX_ENC_POS"
         Me.DX_ENC_POS.ReadOnly = True
         Me.DX_ENC_POS.RowTemplate.Height = 23
-        Me.DX_ENC_POS.Size = New System.Drawing.Size(371, 73)
+        Me.DX_ENC_POS.Size = New System.Drawing.Size(278, 57)
         Me.DX_ENC_POS.TabIndex = 0
         '
         '轴名称
@@ -1981,10 +1971,9 @@ Partial Class Main
         Me.Btn_User_Manage.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_User_Manage.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_User_Manage.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_User_Manage.Location = New System.Drawing.Point(5, 4)
-        Me.Btn_User_Manage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_User_Manage.Location = New System.Drawing.Point(4, 3)
         Me.Btn_User_Manage.Name = "Btn_User_Manage"
-        Me.Btn_User_Manage.Size = New System.Drawing.Size(287, 44)
+        Me.Btn_User_Manage.Size = New System.Drawing.Size(215, 35)
         Me.Btn_User_Manage.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_User_Manage.Symbol = ""
         Me.Btn_User_Manage.TabIndex = 35
@@ -2015,10 +2004,9 @@ Partial Class Main
         Me.PE_Trigger_Left.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_Trigger_Left.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PE_Trigger_Left.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_Trigger_Left.Location = New System.Drawing.Point(1505, 258)
-        Me.PE_Trigger_Left.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_Trigger_Left.Location = New System.Drawing.Point(1129, 206)
         Me.PE_Trigger_Left.Name = "PE_Trigger_Left"
-        Me.PE_Trigger_Left.Size = New System.Drawing.Size(148, 36)
+        Me.PE_Trigger_Left.Size = New System.Drawing.Size(111, 29)
         Me.PE_Trigger_Left.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_Trigger_Left.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_Trigger_Left.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -2037,10 +2025,9 @@ Partial Class Main
         Me.Trigger_Left.CanvasColor = System.Drawing.SystemColors.Control
         Me.Trigger_Left.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Trigger_Left.DisabledBackColor = System.Drawing.Color.Empty
-        Me.Trigger_Left.Location = New System.Drawing.Point(1659, 256)
-        Me.Trigger_Left.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Trigger_Left.Location = New System.Drawing.Point(1244, 205)
         Me.Trigger_Left.Name = "Trigger_Left"
-        Me.Trigger_Left.Size = New System.Drawing.Size(148, 36)
+        Me.Trigger_Left.Size = New System.Drawing.Size(111, 29)
         Me.Trigger_Left.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.Trigger_Left.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.Trigger_Left.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -2056,12 +2043,11 @@ Partial Class Main
         '
         '
         Me.SW_LOOP.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.SW_LOOP.Location = New System.Drawing.Point(1505, 1)
-        Me.SW_LOOP.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SW_LOOP.Location = New System.Drawing.Point(1129, 1)
         Me.SW_LOOP.Name = "SW_LOOP"
         Me.SW_LOOP.OffText = "循环关"
         Me.SW_LOOP.OnText = "循环开"
-        Me.SW_LOOP.Size = New System.Drawing.Size(301, 36)
+        Me.SW_LOOP.Size = New System.Drawing.Size(226, 29)
         Me.SW_LOOP.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.SW_LOOP.TabIndex = 42
         Me.SW_LOOP.Visible = False
@@ -2080,10 +2066,9 @@ Partial Class Main
         Me.Btn_Changle_User.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.Btn_Changle_User.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.Btn_Changle_User.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_Changle_User.Location = New System.Drawing.Point(5, 52)
-        Me.Btn_Changle_User.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Btn_Changle_User.Location = New System.Drawing.Point(4, 42)
         Me.Btn_Changle_User.Name = "Btn_Changle_User"
-        Me.Btn_Changle_User.Size = New System.Drawing.Size(287, 44)
+        Me.Btn_Changle_User.Size = New System.Drawing.Size(215, 35)
         Me.Btn_Changle_User.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.Btn_Changle_User.Symbol = ""
         Me.Btn_Changle_User.TabIndex = 49
@@ -2097,12 +2082,11 @@ Partial Class Main
         '
         Me.SW_INSPECTION.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.SW_INSPECTION.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.SW_INSPECTION.Location = New System.Drawing.Point(1504, 514)
-        Me.SW_INSPECTION.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SW_INSPECTION.Location = New System.Drawing.Point(1128, 411)
         Me.SW_INSPECTION.Name = "SW_INSPECTION"
         Me.SW_INSPECTION.OffText = "全检"
         Me.SW_INSPECTION.OnText = "部分检"
-        Me.SW_INSPECTION.Size = New System.Drawing.Size(303, 36)
+        Me.SW_INSPECTION.Size = New System.Drawing.Size(227, 29)
         Me.SW_INSPECTION.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.SW_INSPECTION.TabIndex = 40
         Me.SW_INSPECTION.TabStop = False
@@ -2112,10 +2096,9 @@ Partial Class Main
         Me.PE_OK.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_OK.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PE_OK.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_OK.Location = New System.Drawing.Point(1659, 171)
-        Me.PE_OK.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_OK.Location = New System.Drawing.Point(1244, 137)
         Me.PE_OK.Name = "PE_OK"
-        Me.PE_OK.Size = New System.Drawing.Size(148, 36)
+        Me.PE_OK.Size = New System.Drawing.Size(111, 29)
         Me.PE_OK.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_OK.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_OK.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -2130,10 +2113,9 @@ Partial Class Main
         Me.PE_NG.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_NG.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PE_NG.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_NG.Location = New System.Drawing.Point(1659, 214)
-        Me.PE_NG.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_NG.Location = New System.Drawing.Point(1244, 171)
         Me.PE_NG.Name = "PE_NG"
-        Me.PE_NG.Size = New System.Drawing.Size(148, 36)
+        Me.PE_NG.Size = New System.Drawing.Size(111, 29)
         Me.PE_NG.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_NG.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_NG.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -2148,10 +2130,9 @@ Partial Class Main
         Me.PanelEx7.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx7.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx7.Location = New System.Drawing.Point(1505, 172)
-        Me.PanelEx7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx7.Location = New System.Drawing.Point(1129, 138)
         Me.PanelEx7.Name = "PanelEx7"
-        Me.PanelEx7.Size = New System.Drawing.Size(148, 36)
+        Me.PanelEx7.Size = New System.Drawing.Size(111, 29)
         Me.PanelEx7.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx7.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -2170,10 +2151,9 @@ Partial Class Main
         Me.PanelEx8.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx8.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx8.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx8.Location = New System.Drawing.Point(1505, 215)
-        Me.PanelEx8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx8.Location = New System.Drawing.Point(1129, 172)
         Me.PanelEx8.Name = "PanelEx8"
-        Me.PanelEx8.Size = New System.Drawing.Size(148, 36)
+        Me.PanelEx8.Size = New System.Drawing.Size(111, 29)
         Me.PanelEx8.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx8.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx8.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -2195,10 +2175,9 @@ Partial Class Main
         Me.PE_PLC.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_PLC.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PE_PLC.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_PLC.Location = New System.Drawing.Point(1659, 341)
-        Me.PE_PLC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_PLC.Location = New System.Drawing.Point(1244, 273)
         Me.PE_PLC.Name = "PE_PLC"
-        Me.PE_PLC.Size = New System.Drawing.Size(148, 36)
+        Me.PE_PLC.Size = New System.Drawing.Size(111, 29)
         Me.PE_PLC.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_PLC.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_PLC.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -2215,12 +2194,11 @@ Partial Class Main
         '
         Me.SW_OP.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.SW_OP.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.SW_OP.Location = New System.Drawing.Point(1507, 129)
-        Me.SW_OP.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SW_OP.Location = New System.Drawing.Point(1130, 103)
         Me.SW_OP.Name = "SW_OP"
         Me.SW_OP.OffText = "OP站开"
         Me.SW_OP.OnText = "OP站关"
-        Me.SW_OP.Size = New System.Drawing.Size(301, 36)
+        Me.SW_OP.Size = New System.Drawing.Size(226, 29)
         Me.SW_OP.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.SW_OP.TabIndex = 40
         Me.SW_OP.TabStop = False
@@ -2232,10 +2210,9 @@ Partial Class Main
         Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.GroupPanel2.Controls.Add(Me.DX_MESSAGE_RIGHT)
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel2.Location = New System.Drawing.Point(3, 590)
-        Me.GroupPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupPanel2.Location = New System.Drawing.Point(2, 472)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(375, 209)
+        Me.GroupPanel2.Size = New System.Drawing.Size(281, 167)
         '
         '
         '
@@ -2299,7 +2276,6 @@ Partial Class Main
         Me.DX_MESSAGE_RIGHT.EnableHeadersVisualStyles = False
         Me.DX_MESSAGE_RIGHT.GridColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.DX_MESSAGE_RIGHT.Location = New System.Drawing.Point(0, 0)
-        Me.DX_MESSAGE_RIGHT.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DX_MESSAGE_RIGHT.Name = "DX_MESSAGE_RIGHT"
         Me.DX_MESSAGE_RIGHT.ReadOnly = True
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -2312,7 +2288,7 @@ Partial Class Main
         Me.DX_MESSAGE_RIGHT.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DX_MESSAGE_RIGHT.RowHeadersVisible = False
         Me.DX_MESSAGE_RIGHT.RowTemplate.Height = 23
-        Me.DX_MESSAGE_RIGHT.Size = New System.Drawing.Size(373, 186)
+        Me.DX_MESSAGE_RIGHT.Size = New System.Drawing.Size(279, 147)
         Me.DX_MESSAGE_RIGHT.TabIndex = 3
         '
         'DataGridViewTextBoxColumn1
@@ -2329,10 +2305,9 @@ Partial Class Main
         Me.GroupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.GroupPanel3.Controls.Add(Me.DX_MESSAGE_COM)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel3.Location = New System.Drawing.Point(1, 164)
-        Me.GroupPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupPanel3.Location = New System.Drawing.Point(1, 131)
         Me.GroupPanel3.Name = "GroupPanel3"
-        Me.GroupPanel3.Size = New System.Drawing.Size(375, 209)
+        Me.GroupPanel3.Size = New System.Drawing.Size(281, 167)
         '
         '
         '
@@ -2396,7 +2371,6 @@ Partial Class Main
         Me.DX_MESSAGE_COM.EnableHeadersVisualStyles = False
         Me.DX_MESSAGE_COM.GridColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.DX_MESSAGE_COM.Location = New System.Drawing.Point(0, 0)
-        Me.DX_MESSAGE_COM.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DX_MESSAGE_COM.Name = "DX_MESSAGE_COM"
         Me.DX_MESSAGE_COM.ReadOnly = True
         DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -2409,7 +2383,7 @@ Partial Class Main
         Me.DX_MESSAGE_COM.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.DX_MESSAGE_COM.RowHeadersVisible = False
         Me.DX_MESSAGE_COM.RowTemplate.Height = 23
-        Me.DX_MESSAGE_COM.Size = New System.Drawing.Size(373, 186)
+        Me.DX_MESSAGE_COM.Size = New System.Drawing.Size(279, 147)
         Me.DX_MESSAGE_COM.TabIndex = 3
         '
         'DataGridViewTextBoxColumn2
@@ -2435,10 +2409,9 @@ Partial Class Main
         Me.GP_SysSet_Button.Controls.Add(Me.Btn_Home_Set)
         Me.GP_SysSet_Button.Controls.Add(Me.Btn_Param_Set)
         Me.GP_SysSet_Button.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GP_SysSet_Button.Location = New System.Drawing.Point(1507, 554)
-        Me.GP_SysSet_Button.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GP_SysSet_Button.Location = New System.Drawing.Point(1130, 443)
         Me.GP_SysSet_Button.Name = "GP_SysSet_Button"
-        Me.GP_SysSet_Button.Size = New System.Drawing.Size(300, 342)
+        Me.GP_SysSet_Button.Size = New System.Drawing.Size(225, 274)
         '
         '
         '
@@ -2474,10 +2447,9 @@ Partial Class Main
         Me.PanelEx4.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx4.Location = New System.Drawing.Point(1505, 342)
-        Me.PanelEx4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelEx4.Location = New System.Drawing.Point(1129, 274)
         Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(148, 36)
+        Me.PanelEx4.Size = New System.Drawing.Size(111, 29)
         Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -2496,10 +2468,9 @@ Partial Class Main
         Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.ButtonX1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ButtonX1.Location = New System.Drawing.Point(1504, 425)
-        Me.ButtonX1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonX1.Location = New System.Drawing.Point(1128, 340)
         Me.ButtonX1.Name = "ButtonX1"
-        Me.ButtonX1.Size = New System.Drawing.Size(303, 44)
+        Me.ButtonX1.Size = New System.Drawing.Size(227, 35)
         Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.ButtonX1.Symbol = ""
         Me.ButtonX1.SymbolColor = System.Drawing.Color.Black
@@ -2512,10 +2483,9 @@ Partial Class Main
         Me.PE_PROVISON.CanvasColor = System.Drawing.SystemColors.Control
         Me.PE_PROVISON.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.PE_PROVISON.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PE_PROVISON.Location = New System.Drawing.Point(1507, 44)
-        Me.PE_PROVISON.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PE_PROVISON.Location = New System.Drawing.Point(1130, 35)
         Me.PE_PROVISON.Name = "PE_PROVISON"
-        Me.PE_PROVISON.Size = New System.Drawing.Size(301, 36)
+        Me.PE_PROVISON.Size = New System.Drawing.Size(226, 29)
         Me.PE_PROVISON.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PE_PROVISON.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PE_PROVISON.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -2536,12 +2506,11 @@ Partial Class Main
         '
         Me.SwitchButton2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.SwitchButton2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.SwitchButton2.Location = New System.Drawing.Point(1504, 384)
-        Me.SwitchButton2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SwitchButton2.Location = New System.Drawing.Point(1128, 307)
         Me.SwitchButton2.Name = "SwitchButton2"
         Me.SwitchButton2.OffText = "OP站正常过料"
         Me.SwitchButton2.OnText = "OP站调试顶料"
-        Me.SwitchButton2.Size = New System.Drawing.Size(303, 36)
+        Me.SwitchButton2.Size = New System.Drawing.Size(227, 29)
         Me.SwitchButton2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.SwitchButton2.TabIndex = 40
         Me.SwitchButton2.TabStop = False
@@ -2573,12 +2542,11 @@ Partial Class Main
         '
         Me.SwitchButton_runing.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.SwitchButton_runing.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.SwitchButton_runing.Location = New System.Drawing.Point(1504, 472)
-        Me.SwitchButton_runing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SwitchButton_runing.Location = New System.Drawing.Point(1128, 378)
         Me.SwitchButton_runing.Name = "SwitchButton_runing"
         Me.SwitchButton_runing.OffText = "暂停(调试模式)"
         Me.SwitchButton_runing.OnText = "正常运行"
-        Me.SwitchButton_runing.Size = New System.Drawing.Size(303, 36)
+        Me.SwitchButton_runing.Size = New System.Drawing.Size(227, 29)
         Me.SwitchButton_runing.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.SwitchButton_runing.TabIndex = 56
         Me.SwitchButton_runing.TabStop = False
@@ -2587,9 +2555,9 @@ Partial Class Main
         '
         'Main
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1813, 902)
+        Me.ClientSize = New System.Drawing.Size(1360, 722)
         Me.ControlBox = False
         Me.Controls.Add(Me.SwitchButton_runing)
         Me.Controls.Add(Me.PE_PROVISON)
@@ -2622,7 +2590,6 @@ Partial Class Main
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Main"
@@ -2634,12 +2601,19 @@ Partial Class Main
         Me.CM_MSG.ResumeLayout(False)
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControl1.ResumeLayout(False)
+        Me.SuperTabControlPanel1.ResumeLayout(False)
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CogRecordDisplay2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CogRecordDisplay1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControlPanel6.ResumeLayout(False)
+        Me.SuperTabControlPanel5.ResumeLayout(False)
+        CType(Me.CogToolBlockEditV22, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SuperTabControlPanel4.ResumeLayout(False)
+        CType(Me.CogToolBlockEditV21, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControlPanel2.ResumeLayout(False)
         CType(Me.DATAGRIDVIEW_LOG, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControlPanel3.ResumeLayout(False)
         CType(Me.DATAGRIDVIEW_data, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel1.ResumeLayout(False)
         Me.GP_DataCode.ResumeLayout(False)
         Me.GP_Current_Style.ResumeLayout(False)
@@ -2711,10 +2685,12 @@ Partial Class Main
     Private WithEvents Btn_Query_All As DevComponents.DotNetBar.ButtonX
     Private WithEvents Btn_User_Manage As DevComponents.DotNetBar.ButtonX
     Friend WithEvents Timer_Free As System.Windows.Forms.Timer
+    Friend WithEvents CogRecordDisplay1 As Cognex.VisionPro.CogRecordDisplay
     Friend WithEvents NO_Right As System.ComponentModel.BackgroundWorker
     Friend WithEvents LINKCAMERAWORKER As System.ComponentModel.BackgroundWorker
     Friend WithEvents OP_Style As DevComponents.DotNetBar.PanelEx
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents CogRecordDisplay2 As Cognex.VisionPro.CogRecordDisplay
     Friend WithEvents RUN_LASER As System.ComponentModel.BackgroundWorker
     Private WithEvents PE_Trigger_Left As DevComponents.DotNetBar.PanelEx
     Friend WithEvents Trigger_Left As DevComponents.DotNetBar.PanelEx
@@ -2725,6 +2701,7 @@ Partial Class Main
     Friend WithEvents 消息 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SuperTabControlPanel4 As DevComponents.DotNetBar.SuperTabControlPanel
     Friend WithEvents SuperTabItem4 As DevComponents.DotNetBar.SuperTabItem
+    Friend WithEvents CogToolBlockEditV21 As Cognex.VisionPro.ToolBlock.CogToolBlockEditV2
     Private WithEvents PanelEx9 As DevComponents.DotNetBar.PanelEx
     Private WithEvents Btn_Delete_Data As DevComponents.DotNetBar.ButtonX
     Private WithEvents Btn_Save_Data As DevComponents.DotNetBar.ButtonX
@@ -2732,6 +2709,7 @@ Partial Class Main
     Private WithEvents Btn_Query_Data As DevComponents.DotNetBar.ButtonX
     Private WithEvents Btn_Changle_User As DevComponents.DotNetBar.ButtonX
     Friend WithEvents SuperTabControlPanel5 As DevComponents.DotNetBar.SuperTabControlPanel
+    Friend WithEvents CogToolBlockEditV22 As Cognex.VisionPro.ToolBlock.CogToolBlockEditV2
     Friend WithEvents SuperTabItem5 As DevComponents.DotNetBar.SuperTabItem
     Private WithEvents SW_INSPECTION As DevComponents.DotNetBar.Controls.SwitchButton
     Friend WithEvents PE_OK As DevComponents.DotNetBar.PanelEx

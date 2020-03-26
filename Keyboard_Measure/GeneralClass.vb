@@ -8572,8 +8572,6 @@ Public Module GeneralClass
         ''' <remarks></remarks>
         Function DataBase_Initialization(Optional ByVal Server_Add As String = "127.0.0.1", Optional ByVal Use_ID As String = "SA", Optional ByVal Pass_Word As String = Nothing, Optional ByVal Initial_Catalog_Name As String = Nothing, Optional ByVal TimeOut As Integer = 50, Optional ByVal SubName As String = Nothing, Optional ByVal ErrLine As String = Nothing) As Boolean
             Dim ret As Boolean = False
-            Return False
-
             Try
                 SubName = ErrName & GetCurrentMethod.Name & ":"
                 Select Case DataBase_Link_Boolean

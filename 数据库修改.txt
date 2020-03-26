@@ -1,0 +1,8 @@
+
+
+数据表 PROJECT_MEASURE_DATA   增加列，类型同 snap_06 hook_06
+
+ Snap_07
+ Snap_08
+ Hook_07
+ Hook_08

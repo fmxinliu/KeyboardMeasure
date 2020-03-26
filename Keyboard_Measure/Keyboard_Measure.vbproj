@@ -16,7 +16,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,6 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -67,29 +67,64 @@
   <PropertyGroup>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cognex.VisionPro, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Blob, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.Blob.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.CalibFix, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.CalibFix.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Core, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.CorePlus, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.Display.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.ImageFile, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.ImageProcessing, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
-    <Reference Include="Cognex.VisionPro.PMAlign, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.PMAlign.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.QuickBuild.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.QuickBuild.Core, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.QuickBuild.IO, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.ToolGroup, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro.ToolGroup.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
-    <Reference Include="Cognex.VisionPro3D.Core, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Blob, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.Blob.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Blob.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.Blob.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.CalibFix, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.CalibFix.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.CalibFix.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.CalibFix.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Core, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.CorePlus, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro.CorePlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Display.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro.Display.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ImageFile, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro.ImageFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ImageProcessing, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro.ImageProcessing.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.PMAlign, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.PMAlign.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.PMAlign.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.PMAlign.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.QuickBuild.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.QuickBuild.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.QuickBuild.Core, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.QuickBuild.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.QuickBuild.IO, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.QuickBuild.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ToolGroup, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.ToolGroup.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ToolGroup.Controls, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <HintPath>config\Cognex.VisionPro.ToolGroup.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro3D.Core, Version=53.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505">
+      <HintPath>config\Cognex.VisionPro3D.Core.dll</HintPath>
+    </Reference>
     <Reference Include="DevComponents.DotNetBar.Design">
       <HintPath>.\DevComponents.DotNetBar.Design.dll</HintPath>
     </Reference>
@@ -142,7 +177,6 @@
     <Compile Include="Adlink_DIO_Dialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="APS168.vb" />
     <Compile Include="APS_Define.vb" />
     <Compile Include="Auto_InsertPos_Dialog.Designer.vb">
@@ -275,7 +309,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -307,7 +340,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
