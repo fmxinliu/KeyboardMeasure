@@ -1,0 +1,2436 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Keyboard_Measure
+</name>
+</assembly>
+<members>
+<member name="T:Keyboard_Measure.Home_Dialog.Home_Moel_Enum">
+	<summary>
+ 回原点模式，ALL:所有轴回原点 SIN：单轴回原点
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Home_Dialog.SET_AXIS_PITCH_SUB">
+	<summary>
+ 设置轴导程
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.Main.Work_Coordinatess">
+	<summary>
+ 坐标系参数
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Card_Init">
+	<summary>
+ 卡初始化
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.SET_AXIS_PITCH_SUB">
+	<summary>
+ 设置轴导程
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Read_Language(System.String,Keyboard_Measure.Main.LGE)">
+	<summary>
+ 语言切换
+ </summary>
+	<param name="Path">路径</param>
+	<param name="language">语言</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Home_Param_Move(System.Int32)">
+	<summary>
+ 回原点
+ </summary>
+	<param name="Index"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.READ_EMG_STOP">
+	<summary>
+ 读取急停状态
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.STOP_SPORT(System.Int32)">
+	<summary>
+ 停止运动
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Read_ADLINK_DIO">
+	<summary>
+ 读取IO
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Read_Deice_Param">
+	<summary>
+ 读取设备参数
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Read_Project_Param">
+	<summary>
+ 读取项目参数
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Move_Public_MidPos(Keyboard_Measure.Main.LR_STATION)">
+	<summary>
+ 运动到中间位放料位置
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.RETURN_ZERO_SUB">
+	<summary>
+ 回原点
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.ADLINK_RETURN_MSG(System.Int32)">
+	<summary>
+ 返回错误信息
+ </summary>
+	<param name="Rtn_Int"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.READ_ENCODER_POSITION(System.Double[]@)">
+	<summary>
+ 读取轴位置与报警信息
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Init_Pos_DataGridView">
+	<summary>
+ 初始化位置显示
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Check_Positon(Keyboard_Measure.Main.Work_Coordinatess[])">
+	<summary>
+ 检查坐标是否设置过近
+ </summary>
+	<param name="Motion_Coord_List"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.READ_SINGLE_COODNATE_PARAM(System.String,Keyboard_Measure.Main.Work_Coordinatess[]@)">
+	<summary>
+ 读取单个坐标名称的坐标
+ </summary>
+	<param name="Coordinate_name"></param>
+	<param name="Motion_Coord_List"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Start_Left">
+	<summary>
+ 左工位开始初始化变量
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.End_Left">
+	<summary>
+ 左工位结束变量赋值
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Start_Right">
+	<summary>
+ 右工位开始初始化变量
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.End_Right">
+	<summary>
+ 右工位结束赋值变量
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Change_RedYellowGreen(Keyboard_Measure.Main.LIGHT)">
+	<summary>
+ 改变红黄绿灯状态
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Laser_Ser_Trigger(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TABLE_COMPARE_DIRECTION_ENUM,System.Int32[])">
+	<summary>
+ 镭射设置触发
+ </summary>
+	<param name="_DIRECTION"></param>
+	<param name="DataArayy"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Close_Trigger_Right">
+	<summary>
+ 关闭所有触发
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Init_key_Param">
+	<summary>
+ 初始化键参数
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Updata_HIP_Table(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 更新HIP数据库
+ </summary>
+	<param name="Result_All">总结果</param>
+	<param name="Barcode">条码</param>
+	<param name="Table_Name">表名</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Main.Omron_CRC(System.String)">
+	<summary>
+ 欧姆龙PLC CRC 校验
+ </summary>
+	<param name="Fcs_Str"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Adlink_DIO_Dialog.Dim_CARD_ORGPELMEL">
+	<summary>
+ 定义原点和限位
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Adlink_DIO_Dialog.Dim_CARD_DI_Name">
+	<summary>
+ 定义输入输出名称
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Adlink_DIO_Dialog.Dim_CARD_DI_Statue">
+	<summary>
+ 定义输入输出状态
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.Adlink_DIO_Dialog.Dim_CARD_CHECK">
+	<summary>
+ 定义点击输出
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.SQL_Database.DataBase_Initialization(System.String,System.String,System.String,System.String,System.String@)">
+	<summary>
+ 初始化数据库
+ </summary>
+	<param name="Server_ADD">数据库地址</param>
+	<param name="Use_ID">数据库用户名</param>
+	<param name="Pass_Word">数据库密码，缺省无密码</param>
+	<param name="Initial_Catalog_Name">数据库名称</param>
+	<returns>返回值：TRUE（初始化成功），FALSE（初始化失败）</returns>
+	<param name="Rtn_Message">返回处理消息</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.SQL_Database.Close_DataBase">
+	<summary>
+ 关闭数据库
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Client_Conn_Server">
+	<summary>
+ 客户端连接服务器
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Init_Client(System.Net.Sockets.Socket,System.String,System.String)">
+	<summary>
+ 初始化客户端
+ </summary>
+	<param name="_ClientSocket"></param>
+	<param name="ServerIP"></param>
+	<param name="ServerPort"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Init_Server(System.Net.Sockets.TcpListener,System.String,System.String)">
+	<summary>
+ 初始化服务器
+ </summary>
+	<param name="TcpListener"></param>
+	<param name="ServerIP"></param>
+	<param name="ServerPort"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Dispos_Client">
+	<summary>
+ 释放客户端资源
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Dispos_Server">
+	<summary>
+ 释放服务器端资源
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Client_Send_Data(System.String,System.String)">
+	<summary>
+ 客户端发送数据
+ </summary>
+	<param name="Send_Str">发送的数据</param>
+	<param name="CBCRLF">是否加回车换行</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Server_Send_Data(System.String,System.String)">
+	<summary>
+ 服务器发送数据
+ </summary>
+	<param name="Send_Str">发送的数据</param>
+	<param name="CBCRLF">是否加回车换行</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Clinet_Recive_Data(System.String@)">
+	<summary>
+ 客户端接收数据
+ </summary>
+	<param name="Recive_str"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Server_Recive_Data(System.String@)">
+	<summary>
+ 服务器接收数据
+ </summary>
+	<param name="Recive_str"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.ServerBreak_ClientConn(System.Object,System.Int16,System.Int16)">
+	<summary>
+ 服务器断开连接，客户端重连
+ </summary>
+	<param name="T">显示的控件</param>
+	<param name="Conn_Index">重连接次数</param>
+	<param name="Wait_Time">重连等待时间</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.DISPLAY_MESSAGE(System.Windows.Forms.ListBox,System.String)">
+	<summary>
+ 显示消息
+ </summary>
+	<param name="ListBox_Message">显示窗体</param>
+	<param name="Message_Str">显示内容</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Server_Start_Listen(System.String@)">
+	<summary>
+ 服务器开始监听
+ </summary>
+	<param name="ServerStr">返回的消息</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.TCP_IP.Server_Break_Listen">
+	<summary>
+ TCP监控到客户端断开允许重连
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.WARING.#ctor(System.String,System.Int64)">
+	<summary>
+	</summary>
+	<param name="Waring_Str">显示字符串</param>
+	<param name="Waring_Second">倒计时</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.WARING.Get_SYS_TIME_S(System.Int64@)">
+	<summary>
+ 获取系统时间，单位S
+ </summary>
+	<param name="time"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.ADLINK_1903.Init_1903(Keyboard_Measure.ADLINK_1903.ChanelRange,Keyboard_Measure.ADLINK_1903.ChanelRange,Keyboard_Measure.ADLINK_1903.ChanelRange,Keyboard_Measure.ADLINK_1903.ChanelRange,Keyboard_Measure.ADLINK_1903.ChanelRange,Keyboard_Measure.ADLINK_1903.ChanelRange,Keyboard_Measure.ADLINK_1903.ChanelRange,Keyboard_Measure.ADLINK_1903.ChanelRange,System.String@)">
+	<summary>
+初始化1903
+ </summary>
+	<param name="KG_1">通道1KG设定</param>
+	<param name="KG_2">通道2KG设定</param>
+	<param name="KG_3">通道3KG设定</param>
+	<param name="KG_4">通道4KG设定</param>
+	<param name="KG_5">通道5KG设定</param>
+	<param name="KG_6">通道6KG设定</param>
+	<param name="KG_7">通道7KG设定</param>
+	<param name="KG_8">通道8KG设定</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.OPT_CRC(System.String)">
+	<summary>
+ OPT_CRC
+ </summary>
+	<param name="FCS_STR"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.DEC_TO_HEX(System.Int32)">
+	<summary>
+ 十进制转十六进制
+ </summary>
+	<param name="DEC"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.HEX_TO_DEC(System.String)">
+	<summary>
+ 十六进制转十进制
+ </summary>
+	<param name="HEX"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.BIN_TO_DEC(System.String)">
+	<summary>
+ 二进制转十进制
+ </summary>
+	<param name="BIN"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.DEC_TO_BIN(System.Int32)">
+	<summary>
+ 十进制转二进制
+ </summary>
+	<param name="DEC"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.HEX_TO_BIN(System.String)">
+	<summary>
+ 十六进制转二进制
+ </summary>
+	<param name="HEX"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.BIN_TO_HEX(System.String)">
+	<summary>
+ 二进制转十六进制
+ </summary>
+	<param name="BIN"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.Get_Linearity_Correction(System.Double[],System.Double[],System.Double@,System.Double@,System.Double@)">
+	<summary>
+ 线性校正函数
+ </summary>
+	<param name="Data1">数据列1</param>
+	<param name="Data2">数据列2</param>
+	<param name="Correlation">相关性系数</param>
+	<param name="Slope">斜率</param>
+	<param name="Intercept">截距</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.Get_Stdev(System.Double[])">
+	<summary>
+ 获取标准差，求传入数组的标准差
+ </summary>
+	<param name="Data">数据列</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.GetForewarnInterval(System.Double[],System.Double[]@)">
+	<summary>
+ 获取预警区间，（均值-标准差，均值+标准差）
+ </summary>
+	<param name="Data">数据列</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.GetCoefficientofVariation(System.Double[])">
+	<summary>
+ 获取离散系数，求传入数组的标准差/均值即离散系数。
+ </summary>
+	<param name="Data"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.KillProcess(System.String)">
+	<summary>
+结束指定进程
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.Save_Excel(DevComponents.DotNetBar.Controls.DataGridViewX,System.String,Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.Save_Data_Format)">
+	<summary>
+ 保存Excel数据
+ </summary>
+	<param name="DataGridView_Test_Data">要保存的数据表</param>
+	<param name="Excel_File_Dir">保存路径</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.Save_Excel(System.Windows.Forms.DataGridView,System.String,Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.Save_Data_Format)">
+	<summary>
+ 保存Excel数据
+ </summary>
+	<param name="DataGridView_Test_Data">要保存的数据表</param>
+	<param name="Excel_File_Dir">保存路径</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.Omron_CRC(System.String)">
+	<summary>
+ 欧姆龙PLC CRC 校验
+ </summary>
+	<param name="Fcs_Str"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.HDID(System.String@)">
+	<summary>
+ 讀取硬盤序列號
+ </summary>
+	<param name="ReadHd">硬盤序列號</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.MBID(System.String@)">
+	<summary>
+ 讀取主板序列號
+ </summary>
+	<param name="ReadMb">主板序列號</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.DATA_CONVERSION_LIB.CPID(System.String@)">
+	<summary>
+ 讀取CPU序列號
+ </summary>
+	<param name="ReadCP">CPU序列號</param>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_ERROR_CODE_ENUM.ERR_NoError">
+	<summary>
+ 无错误
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRB_EMG_LOGIC">
+	<summary>
+ 急停信号
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRB_DO_LOGIC">
+	<summary>
+ 输出信号
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRB_DI_LOGIC">
+	<summary>
+ 输入信号
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_HOME_SHIFT">
+	<summary>
+ 原点偏移距离
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_HOME_EZA">
+	<summary>
+ 归零EZ信号
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_HOME_VO">
+	<summary>
+ 离开原点速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_CURVE">
+	<summary>
+ 曲线加速系数
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_SF">
+	<summary>
+ 平滑系数
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_ACC">
+	<summary>
+ 加速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_DEC">
+	<summary>
+ 减速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_VS">
+	<summary>
+ 开始速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_VM">
+	<summary>
+ 最大速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_VE">
+	<summary>
+ 终点速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_HOME_MODE">
+	<summary>
+ 原点模式设置
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_HOME_DIR">
+	<summary>
+ 原点方向
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM.PRA_HOME_CURVE">
+	<summary>
+ 归零曲线加速系数
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.command_position">
+	<summary>
+ 指令脉冲
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.feedback_position">
+	<summary>
+ 反馈脉冲
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.target_position">
+	<summary>
+ 目标脉冲
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.error_position">
+	<summary>
+ 错位脉冲
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.command_velocity">
+	<summary>
+ 指令速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.feedback_velocity">
+	<summary>
+ 反馈速度
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.motion_io">
+	<summary>
+ 电机IO
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS.motion_status">
+	<summary>
+ 电机状态
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.MANUAL">
+	<summary>
+ 手动触发
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER0">
+	<summary>
+ 比较轴1编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER1">
+	<summary>
+ 比较轴2编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER2">
+	<summary>
+ 比较轴3编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER3">
+	<summary>
+ 比较轴4编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER4">
+	<summary>
+ 比较轴5编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER5">
+	<summary>
+ 比较轴6编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER6">
+	<summary>
+ 比较轴7编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TRIGGER_PRA_STRU.ENCODER7">
+	<summary>
+ 比较轴8编码器
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.INITIAL_CARD(System.Int32@,System.Int32,System.String@,System.String@)">
+	<summary>
+ 初始化设备
+ </summary>
+	<param name="BoardID_InBits">卡ID信息</param>
+	<param name="Mode">模式</param>
+	<param name="SubName">函数名称</param>
+	<param name="ErrLine">异常所在的行数</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.CLOSE_CARD(System.String@,System.String@)">
+	<summary>
+ 关闭设备
+ </summary>
+	<param name="SubName">函数名称</param>
+	<param name="ErrLine">异常所在的行数</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.SET_BOARD_PARAM(System.Int32,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM,System.Int32,System.String,System.String)">
+	<summary>
+ 板卡参数设置
+ </summary>
+	<param name="Board_ID">板卡ID，0~31</param>
+	<param name="BOD_Param_No">板卡参数号</param>
+	<param name="BOD_Param">板卡参数值</param>
+	<param name="SubName">函数名称</param>
+	<param name="ErrLine">异常所在的行数</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_BOARD_PARAM(System.Int32,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM,System.Int32@,System.String,System.String)">
+	<summary>
+ 获取板卡参数
+ </summary>
+	<param name="Board_ID">板卡ID，0~31</param>
+	<param name="BOD_Param_No">板卡参数号</param>
+	<param name="BOD_Param">板卡参数值</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.SET_AXIS_PARAM(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM,System.Int32,System.String,System.String)">
+	<summary>
+ 设置轴参数
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="AXS_Param_No">参数号</param>
+	<param name="AXS_Param">参数值</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_AXIS_PARAM(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PAR_AMETER_TABLE_ENUM,System.Int32@,System.String,System.String)">
+	<summary>
+ 读取轴参数
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="AXS_Param_No">参数号</param>
+	<param name="AXS_Param">参数值</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_CARD_NAME(System.Int32,System.Int32@,System.String,System.String)">
+	<summary>
+ 获取卡名称
+ </summary>
+	<param name="Board_ID">卡ID</param>
+	<param name="CardName">卡名称</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_FIRST_AXIS_ID(System.Int32,System.Int32@,System.Int32@,System.String,System.String)">
+	<summary>
+ 获取第一个轴ID
+ </summary>
+	<param name="Board_ID">卡ID</param>
+	<param name="Start_Axis_Id">轴开始编号</param>
+	<param name="Total_Axis_Num">轴数量</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.LOAD_PARAM_FILE(System.String,System.String,System.String)">
+	<summary>
+ 加载控制卡配置文件
+ </summary>
+	<param name="FilePath">配置文件绝对路径</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.LOAD_PARAM_FILE_MU(System.String,System.String,System.String)">
+	<summary>
+ 加载控制卡配置文件
+ </summary>
+	<param name="FilePath"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.SET_COMMAND(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Int32,System.String,System.String)">
+	<summary>
+ 设置指令位置
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="CommandCnt">指令位置</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_COMMAND(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Int32@,System.String,System.String)">
+	<summary>
+ 获取指令位置
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="CommandCnt">指令位置</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.MOTION_STATUS(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.String,System.String)">
+	<summary>
+ 获取电机状态
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.MOTION_IO_STATUS(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.String,System.String)">
+	<summary>
+ 获取电机IO状态
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.SET_SERVO_STATUS(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_OUT_STATUS_ENUM,System.String,System.String)">
+	<summary>
+ 设置伺服电机ON OR OFF
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="Servo_On">ON.OFF状态</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_POSITION(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Double@,System.String,System.String)">
+	<summary>
+ 获取电机实际位置
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="Position">实际位置</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.SET_POSITION(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Double,System.String,System.String)">
+	<summary>
+ 设置电机实际位置
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="Position">实际位置</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_ERROR_POSITION(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Int32@,System.String,System.String)">
+	<summary>
+ 获取跟随误差
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="Err_Pos">跟随误差</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.RELATIVE_MOVE(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Int32,System.Int32,System.String,System.String)">
+	<summary>
+ 相对运动
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="Distance">距离</param>
+	<param name="Max_Speed">最大速度</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.ABSOLUTE_MOVE(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Int32,System.Int32,System.String,System.String)">
+	<summary>
+ 绝对运动
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="Position">距离</param>
+	<param name="Max_Speed">最大速度</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.HOME_MOVE(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.String,System.String)">
+	<summary>
+ 指定轴归零
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.STOP_MOVE(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.String,System.String)">
+	<summary>
+ 指定轴停止
+ </summary>
+	<param name="Axis_Id">轴ID</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.ABSOLUTE_LINER_MOVE(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_DIMENSION_ENUM,System.Int32[],System.Int32[],System.Int32,System.String,System.String)">
+	<summary>
+ 绝对路径插补
+ </summary>
+	<param name="Dimension">坐标维数</param>
+	<param name="Axis_Id_Array">轴数组</param>
+	<param name="Position_Array">坐标数组</param>
+	<param name="Max_Linear_Speed">最大速度</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.RELATIVE_LINER_MOVE(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_DIMENSION_ENUM,System.Int32[],System.Int32[],System.Int32,System.String,System.String)">
+	<summary>
+ 相对路径插补
+ </summary>
+	<param name="Dimension">坐标维数</param>
+	<param name="Axis_Id_Array">轴数组</param>
+	<param name="Position_Array">坐标数组</param>
+	<param name="Max_Linear_Speed">最大速度</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.get_version_info(System.Int32,System.Int32[]@,System.String,System.String)">
+	<summary>
+ 获取控制卡版本信息
+ </summary>
+	<param name="Array_size"></param>
+	<param name="Board_ID"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_AXIS_STATUS(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.AXIS_STATUS@,System.String,System.String)">
+	<summary>
+ 获取轴状态
+ </summary>
+	<param name="Axis_Id"></param>
+	<param name="P_Axis_status"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.CHECK_MOTION_DONE(Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_AXIS_ID_ENUM,System.Int32@,System.String,System.String)">
+	<summary>
+ 查询轴运动状态
+ </summary>
+	<param name="Axis_Id"></param>
+	<param name="Stop_Code"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.GET_DI_BIT(System.Int32,System.Int32,System.String,System.String)">
+	<summary>
+ 读取输入点状态
+ </summary>
+	<param name="Board_ID">控制卡ID</param>
+	<param name="DI_ID">输入点ID</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.SET_DO_BIT(System.Int32,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_DO_ENUM,Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.PRA_OUT_STATUS_ENUM,System.String,System.String)">
+	<summary>
+ 输出指定端口IO
+ </summary>
+	<param name="Board_ID">卡号</param>
+	<param name="DO_ID">输出ID</param>
+	<param name="DO_ON_OFF">输出类型ON OR OFF</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.SET_DO_ALL_OFF(System.Int32,System.String,System.String)">
+	<summary>
+ 关闭所有输出
+ </summary>
+	<param name="Board_ID">控制卡ID</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_COMPARE_ENCODER">
+	<summary>
+ 设置通道0比较来源
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_COMPARE_DIRECTION">
+	<summary>
+ 设置通道0比较方向
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_TRIGGER">
+	<summary>
+ 设置通道0 ON/OFF
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_TRIGGER_OUTPUT_MODE">
+	<summary>
+ 比较输出模式
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_TRIGGER_LOGIC">
+	<summary>
+ 输出电平逻辑
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_TRIGGER_PULSE_WIDTH">
+	<summary>
+ 输出脉冲宽度 *20NS
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_MANUAL_TRIGGER">
+	<summary>
+ 手动触发开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_TABLE_CMP0">
+	<summary>
+ 点表触发通道0开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_TABLE_CMP1">
+	<summary>
+ 点表触发通道1开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_LINEAR_CMP0">
+	<summary>
+ 线性触发通道0开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH0_LINEAR_CMP1">
+	<summary>
+ 线性触发通道1开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_COMPARE_ENCODER">
+	<summary>
+ 设置通道1比较来源
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_COMPARE_DIRECTION">
+	<summary>
+ 设置通道1比较方向
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_TRIGGER">
+	<summary>
+ 设置通道1 ON/OFF
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_TRIGGER_OUTPUT_MODE">
+	<summary>
+ 比较输出模式
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_TRIGGER_LOGIC">
+	<summary>
+ 输出电平逻辑
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_TRIGGER_PULSE_WIDTH">
+	<summary>
+ 输出脉冲宽度 *20NS
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_MANUAL_TRIGGER">
+	<summary>
+ 手动触发开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_TABLE_CMP0">
+	<summary>
+ 点表触发通道0开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_TABLE_CMP1">
+	<summary>
+ 点表触发通道1开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_LINEAR_CMP0">
+	<summary>
+ 线性触发通道0开关
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Keyboard_Measure.GeneralClass.ADLINK_LIB.MOTION.TrgParam_STR.CH1_LINEAR_CMP1">
+	<summary>
+ 线性触发通道1开关
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_A001.DataBase_Initialization(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+	<summary>
+ 初始化数据库
+ </summary>
+	<param name="Server_ADD">数据库地址</param>
+	<param name="Use_ID">数据库用户名</param>
+	<param name="Pass_Word">数据库密码，缺省无密码</param>
+	<param name="Initial_Catalog_Name">数据库名称</param>
+	<returns>返回值：TRUE（初始化成功），FALSE（初始化失败）</returns>
+	<param name="TimeOut">超时</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_A001.Close_DataBase(System.String,System.String)">
+	<summary>
+ 关闭数据库
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_A001.Insert_Result(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 插入测量结果，主表AOI
+ </summary>
+	<param name="Station_Name"></param>
+	<param name="Machine_NO"></param>
+	<param name="Project_Name"></param>
+	<param name="Tray_Code"></param>
+	<param name="Language"></param>
+	<param name="Layout"></param>
+	<param name="Result"></param>
+	<param name="Fail_Location"></param>
+	<param name="Order_NO"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_A001.Query_ID(System.String,System.String)">
+	<summary>
+ 查询ID
+ </summary>
+	<param name="Tray_Code"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_A001.Query_Order_NO(System.String,System.String@)">
+	<summary>
+ 查询工单号
+ </summary>
+	<param name="Tray_Code"></param>
+	<param name="Order_NO"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816.DataBase_Initialization(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+	<summary>
+ 初始化数据库
+ </summary>
+	<param name="Server_ADD">数据库地址</param>
+	<param name="Use_ID">数据库用户名</param>
+	<param name="Pass_Word">数据库密码，缺省无密码</param>
+	<param name="Initial_Catalog_Name">数据库名称</param>
+	<returns>返回值：TRUE（初始化成功），FALSE（初始化失败）</returns>
+	<param name="TimeOut">超时</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816.Close_DataBase(System.String,System.String)">
+	<summary>
+ 关闭数据库
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816.Insert_Result(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 插入测量结果，主表AOI
+ </summary>
+	<param name="Station_Name"></param>
+	<param name="Machine_NO"></param>
+	<param name="Project_Name"></param>
+	<param name="Tray_Code"></param>
+	<param name="Language"></param>
+	<param name="Layout"></param>
+	<param name="Result"></param>
+	<param name="Fail_Location"></param>
+	<param name="Order_NO"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816.Query_Order_NO(System.String,System.String@)">
+	<summary>
+ 查询工单号
+ </summary>
+	<param name="Tray_Code"></param>
+	<param name="Order_NO"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816.Query_ID(System.String,System.String)">
+	<summary>
+ 查询ID
+ </summary>
+	<param name="Tray_Code"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.DataBase_Initialization(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+	<summary>
+ 初始化数据库
+ </summary>
+	<param name="Server_ADD">数据库地址</param>
+	<param name="Use_ID">数据库用户名</param>
+	<param name="Pass_Word">数据库密码，缺省无密码</param>
+	<param name="Initial_Catalog_Name">数据库名称</param>
+	<returns>返回值：TRUE（初始化成功），FALSE（初始化失败）</returns>
+	<param name="TimeOut">超时</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.Close_DataBase(System.String,System.String)">
+	<summary>
+ 关闭数据库
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.Query_Table_Exist(System.String)">
+	<summary>
+ 查询表是否存在
+ </summary>
+	<param name="Tab_Name">表名称</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.Copy_Talbe_B(System.String)">
+	<summary>
+ 查询表是否存在
+ </summary>
+	<param name="Tab_Name">表名称</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.Get_Sql_Time(System.String@)">
+	<summary>
+ 获取数据库系统时间
+ </summary>
+	<param name="Sql_Time">数据库系统时间</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.Insert_Measure_Result(System.String,System.String,System.String,System.String,System.String[],System.Object[],System.String@)">
+	<summary>
+ 插入测量结果
+ </summary>
+	<param name="Table_Name">表明</param>
+	<param name="Test_Time">测试时间</param>
+	<param name="BarCode">条码</param>
+	<param name="Key_Name">键名</param>
+	<param name="Parameter_Name">参数名</param>
+	<param name="Parameter_Value">参数值</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.Updata_Product_ID(System.String,System.String,System.String)">
+	<summary>
+ 更新产品ID
+ </summary>
+	<param name="Table_Name"></param>
+	<param name="Tray_Code"></param>
+	<param name="Product_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB_X816RSAOI.Update_Project_Parameter(System.String[],System.Object[],System.Int32,System.Boolean,System.String,System.String)">
+	<summary>
+ 更新产品参数
+ </summary>
+	<param name="Parameter_Name">项目参数</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.DataBase_Initialization(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+	<summary>
+ 初始化数据库
+ </summary>
+	<param name="Server_ADD">数据库地址</param>
+	<param name="Use_ID">数据库用户名</param>
+	<param name="Pass_Word">数据库密码，缺省无密码</param>
+	<param name="Initial_Catalog_Name">数据库名称</param>
+	<returns>返回值：TRUE（初始化成功），FALSE（初始化失败）</returns>
+	<param name="TimeOut">超时</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Close_DataBase(System.String,System.String)">
+	<summary>
+ 关闭数据库
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Insert_Measure_Result(System.String,System.String,System.String,System.String,System.String[],System.Object[],System.String@,System.String@,System.String@)">
+	<summary>
+ 插入测量结果
+ </summary>
+	<param name="Table_Name">表明</param>
+	<param name="Test_Time">测试时间</param>
+	<param name="BarCode">条码</param>
+	<param name="Key_Name">键名</param>
+	<param name="Parameter_Name">参数名</param>
+	<param name="Parameter_Value">参数值</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Delete_Image_Left(System.String,System.String)">
+	<summary>
+ 删除图片
+ </summary>
+	<param name="BarCode"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Delete_Image_Right(System.String,System.String)">
+	<summary>
+ 删除图片
+ </summary>
+	<param name="BarCode"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Insert_Image_Left(System.String,System.String,System.String,System.String,System.Byte[],System.String)">
+	<summary>
+ 插入图片
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="BarCode"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Insert_Image_Right(System.String,System.String,System.String,System.String,System.Byte[],System.String)">
+	<summary>
+ 插入图片
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="BarCode"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Query_Data_Sum(System.String,System.String,System.String,System.Double[]@)">
+	<summary>
+ 查询数据总数
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="BarCode"></param>
+	<param name="Key_Name"></param>
+	<param name="Parameter_Value"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_User_Password(System.String,System.String@,System.String@,System.String@,System.String,System.String)">
+	<summary>
+ 读取密码
+ </summary>
+	<param name="UserName"></param>
+	<param name="LoginPass"></param>
+	<param name="ClearDataPass"></param>
+	<param name="DeleteProductPass"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Updata_Vision_File(System.String,System.String,DevComponents.DotNetBar.PanelEx@,System.String@)">
+	<summary>
+ 更新控制卡配置文件
+ </summary>
+	<param name="Vision_File"></param>
+	<param name="Rtn_Message"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Clear_All_Information(System.String,System.String)">
+	<summary>
+ 清空所有项目消息
+ </summary>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Clear_All_MeasureData(System.String,System.String,System.String)">
+	<summary>
+ 清空所有项目消息
+ </summary>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Clear_SN_MeasureData(System.String,System.String,System.String,System.String)">
+	<summary>
+ 清空所有项目消息
+ </summary>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Clear_All_CoorName_Pos(System.String,System.String,System.String,System.String)">
+	<summary>
+ 删除所有坐标名称里的坐标
+ </summary>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Clear_Project_Information(System.String,System.String,System.String)">
+	<summary>
+ 清空指定项目消息
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_All_Project_Information(System.Int32@,System.String,System.String)">
+	<summary>
+ 统计所有项目消息数量
+ </summary>
+	<param name="Including_number"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Insert_Image(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 插入图片
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="BarCode"></param>
+	<param name="Factory_number"></param>
+	<param name="Image_File_Path"></param>
+	<param name="Image_File_Name"></param>
+	<param name="Image_Info"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Insert_Image(System.String,System.String,System.String,System.Byte[],System.String)">
+	<summary>
+ 插入图片
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="BarCode"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Image_Introductions(DevComponents.DotNetBar.Controls.ComboBoxEx@,System.String,System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="Combobox_Mode"></param>
+	<param name="Product_Name"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Image(System.Windows.Forms.PictureBox@,System.Int32,System.String,System.String)">
+	<summary>
+ 读取图片
+ </summary>
+	<param name="imagebox"></param>
+	<param name="ID"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Save_Image(System.String,System.Windows.Forms.PictureBox,System.String,System.String)">
+	<summary>
+ 保存图像
+ </summary>
+	<param name="Image_Save_Dir"></param>
+	<param name="ImageBox"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.DownLoad_FileStream(System.String,System.String,System.String)">
+	<summary>
+ 下载更新软件
+ </summary>
+	<param name="Version"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Delete_Coordinates(System.Int32,System.String,System.String)">
+	<summary>
+ 删除坐标
+ </summary>
+	<param name="ID"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Name(DevComponents.DotNetBar.Controls.ComboBoxEx@,System.String[]@,System.String,System.String)">
+	<summary>
+ 查询项目名称
+ </summary>
+	<param name="Product_Name_ComboBox">显示查询到的项目名称</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Name(DevComponents.DotNetBar.Controls.ComboBoxEx@,System.String[]@,System.String[]@,System.String[]@,System.String[]@,System.String,System.String)">
+	<summary>
+ 查询项目名称
+ </summary>
+	<param name="Product_Name_ComboBox">显示查询到的项目名称</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Name(DevComponents.DotNetBar.Controls.DataGridViewX@,System.String,System.String)">
+	<summary>
+ 查询项目名称
+ </summary>
+	<param name="Project_Name_DataViewGrid">显示查询到的项目名称</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Coordinate_Name(System.String,System.String,System.Data.DataSet@,DevComponents.DotNetBar.Controls.DataGridViewX@,System.String,System.String)">
+	<summary>
+ 读取坐标系名称
+ </summary>
+	<param name="Station">左右工位</param>
+	<param name="Coordinate_Dataset">坐标系名称数据源</param>
+	<param name="Coordinate_DataViewGrid">坐标系名称列表</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Laser_Pos(System.String,DevComponents.DotNetBar.Controls.DataGridViewX@,System.String,System.String)">
+	<summary>
+ 读取激光位置
+ </summary>
+	<param name="Project_Name_DataViewGrid">显示查询到的项目名称</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Name(System.String[]@,System.String,System.String)">
+	<summary>
+ 查询项目名称
+ </summary>
+	<param name="Product_Name_Array">显示查询到的项目名称</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Device_Parameter(System.String[],System.Object[]@,System.Int32,System.String@)">
+	<summary>
+ 读取参数
+ </summary>
+	<param name="Parameter_Name">参数表</param>
+	<param name="Device_Parameter">控件表</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Vision_File(System.String,DevComponents.DotNetBar.PanelEx@,System.String@)">
+	<summary>
+ 更新控制卡配置文件
+ </summary>
+	<param name="Rtn_Message"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Query_results(System.String,DevComponents.DotNetBar.PanelEx@,DevComponents.DotNetBar.PanelEx@,DevComponents.DotNetBar.PanelEx@,System.String)">
+	<summary>
+ 查询测量结果
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="OK_Number"></param>
+	<param name="NG_Number"></param>
+	<param name="Total_Number"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Vision_File(System.String,System.String@,System.String,System.String)">
+	<summary>
+ 更新控制卡配置文件
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Column_Pos(System.String,System.String,System.String,System.Double,System.String,System.String)">
+ 统一列坐标
+
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Speed(System.String,System.String,System.Double,System.String,System.String)">
+	<summary>
+ 更新速度
+ </summary>
+	<param name="STATION_NAME"></param>
+	<param name="SPEED_VALUE"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_ACC_DCC(System.String,System.String,System.Double,System.String,System.String)">
+	<summary>
+ 更新加减速度
+ </summary>
+	<param name="STATION_NAME"></param>
+	<param name="SPEED_VALUE"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Exists_Project_Name(System.String,System.String,System.String)">
+	<summary>
+ 查询项目名称是否存在
+ </summary>
+	<param name="Project_Name">要查询的项目名称</param>
+	<returns>返回值：TEUE（存在），FALSE（不存在）</returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Exists_Coordinate_Name(System.String,System.String,System.String,System.String)">
+	<summary>
+ 判断坐标系名称是否存在
+ </summary>
+	<param name="COORDINATE_NAME">坐标系名称</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Exists_Project_Name(DevComponents.DotNetBar.Controls.ComboBoxEx,System.String,System.String)">
+	<summary>
+ 查询项目名称是否存在
+ </summary>
+	<param name="Project_Name_ComboBox">要查询的项目名称</param>
+	<returns>返回值：TEUE（存在），FALSE（不存在）</returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Exists_Project_Name(DevComponents.DotNetBar.Controls.TextBoxX,System.String,System.String)">
+	<summary>
+ 查询项目名称是否存在
+ </summary>
+	<param name="Project_Name_TextBox">要查询的项目名称</param>
+	<returns>返回值：TEUE（存在），FALSE（不存在）</returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Exists_Project_Name(System.Windows.Forms.TextBox,System.String,System.String)">
+	<summary>
+ 查询项目名称是否存在
+ </summary>
+	<param name="Project_Name_TextBox">要查询的项目名称</param>
+	<returns>返回值：TEUE（存在），FALSE（不存在）</returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Parameter(System.String[],System.Object[]@,System.Boolean,System.String@)">
+	<summary>
+ 查询项目参数
+ </summary>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Val">返回数据数组</param>
+	<param name="Rtn_Message">返回处理信息</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Parameter(System.String,System.String[],System.Object[]@,System.String,System.String)">
+	<summary>
+ 查询项目参数
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Val">返回数据数组</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Object_Parameter(System.String,System.String[],DevComponents.DotNetBar.Controls.DataGridViewX@,System.String,System.String)">
+	<summary>
+ 查询对象参数
+ </summary>
+	<param name="Table_Name">项目名称</param>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_DataGrid">返回数据数组</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Object_Parameter(System.String,System.String[],System.Object[]@,System.UInt32,System.String,System.String)">
+	<summary>
+ 查询对象参数
+ </summary>
+	<param name="Table_Name">项目名称</param>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Val">返回数据数组</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Parameter(System.String,System.String[],DevComponents.Editors.DoubleInput[]@,System.String,System.String)">
+	<summary>
+ 查询项目参数
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Panel">返回数据数组</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Hardware_Parameter(System.String[],System.Object[]@,System.Boolean,System.String,System.String)">
+	<summary>
+ 查询硬件参数
+ </summary>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Val">返回数据数组</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Parameter(System.String,System.String[],DevComponents.DotNetBar.PanelEx[]@,System.String,System.String)">
+	<summary>
+ 查询项目参数
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Panel">返回数据数组</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Project_Parameter(System.String,System.String[],DevComponents.DotNetBar.Controls.DataGridViewX@,System.Object[]@,System.Boolean,System.String,System.String)">
+	<summary>
+ 读取项目参数
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">参数数组</param>
+	<param name="Project_Parameter_DataGridView">参数表</param>
+	<param name="Parameter_Object">参数数据</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Project_Parameter_Left(System.String[],System.Object[],System.Int32,System.Boolean,System.String,System.String)">
+	<summary>
+ 更新产品参数
+ </summary>
+	<param name="Parameter_Name">项目参数</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Project_Parameter_Right(System.String[],System.Object[],System.Int32,System.Boolean,System.String,System.String)">
+	<summary>
+ 更新产品参数
+ </summary>
+	<param name="Parameter_Name">项目参数</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Project_Parameter(System.String[],System.Object[],System.Int32,System.Boolean,System.String,System.String)">
+	<summary>
+ 更新产品参数
+ </summary>
+	<param name="Parameter_Name">项目参数</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Project_Parameter(System.String,System.String[],System.Object[],System.String,System.String)">
+	<summary>
+ 更新产品参数
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">项目参数</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Laser_Pos(System.String,System.Int64,System.String[],System.Object[],System.String,System.String)">
+	<summary>
+ 更新激光位置
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">项目参数</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Coordinate_Parameter(System.String,System.String,System.String,System.String)">
+	<summary>
+ 更新坐标系参数
+ </summary>
+	<param name="Old_Product_Name">原产品名称</param>
+	<param name="New_Product_Name">新产品名称</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Speed(System.String,System.Int32,System.String,System.String)">
+	<summary>
+ 统一更新运行速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Runing_Speed">运行数据</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Speed(System.String,DevComponents.DotNetBar.PanelEx,System.String,System.String)">
+	<summary>
+ 统一更新运行速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Runing_Speed_Panel">运行数据</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Speed(System.String,DevComponents.DotNetBar.Controls.TextBoxX,System.String,System.String)">
+	<summary>
+ 统一更新运行速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Runing_Speed_TextBox">运行数据</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Speed(System.String,DevComponents.Editors.IntegerInput,System.String,System.String)">
+	<summary>
+ 统一更新运行速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Runing_Speed_IntegerInput">运行数据</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Speed(System.String,System.Windows.Forms.TextBox,System.String,System.String)">
+	<summary>
+ 统一更新运行速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Runing_Speed_TextBox">运行数据</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Acc_Dec(System.String,System.Double,System.String,System.String)">
+	<summary>
+ 统一更新加减速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Acc">加减速时间</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Acc_Dec(System.String,DevComponents.Editors.DoubleInput,System.String,System.String)">
+	<summary>
+ 统一更新加减速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Acc">加减速时间</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Acc_Dec(System.String,DevComponents.DotNetBar.Controls.TextBoxX,System.String,System.String)">
+	<summary>
+ 统一更新加减速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Acc_TextBox">加减速时间</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Running_Acc_Dec(System.String,System.Windows.Forms.TextBox,System.String,System.String)">
+	<summary>
+ 统一更新加减速度
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Acc_TextBox">加减速时间</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Coordinates(System.String,System.Int32,System.String[],System.Object[],System.Boolean,System.String,System.String)">
+	<summary>
+ 更新坐标
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="F_ID "></param>
+	<param name="Parameter_Name"></param>
+	<param name="Parameter_Value"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Coordinates(System.String,System.String,System.String[],System.Object[],System.Int32,System.Boolean,System.String,System.String)">
+	<summary>
+ 更新坐标
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="PROJECT_COORDINATE_NAME"></param>
+	<param name="Parameter_Name"></param>
+	<param name="Parameter_Value"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Coordinates(System.String,System.String,System.String[],DevComponents.DotNetBar.Controls.DataGridViewX@,System.Boolean,System.String,System.String)">
+	<summary>
+ 读取坐标datagridview
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="Parameter_Name"></param>
+	<param name="PROJECT_COORDINATE_NAME"></param>
+	<param name="Coordinates_DataGridView"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Coordinates(System.String,System.String,System.String[],System.Single[]@,System.String,System.String)">
+	<summary>
+ 读取坐标
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="Parameter_Name"></param>
+	<param name="PROJECT_COORDINATE_NAME"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Coordinates(System.String,System.String,System.String[],System.Data.DataSet@,System.String,System.String)">
+	<summary>
+ 读取坐标dataset
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="Parameter_Name"></param>
+	<param name="PROJECT_COORDINATE_NAME"></param>
+	<param name="Coordinates_DataSet"></param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Create_Coordinates(System.String,System.String,System.String[],System.Object[],System.String,System.String)">
+	<summary>
+ 新增项目
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Cheng_New_Coordinate_AxisSystem(System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 新增
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="PROJECT_COORDINATE_NAME"></param>
+	<param name="Coordinate_Str"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Cheng_Updata_Coordinate_AxisSystem(System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 更新
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="PROJECT_COORDINATE_NAME"></param>
+	<param name="Coordinate_Str"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Cheng_Query_Coordinate_AxisSystem(System.String,System.String,System.String@,System.String@,System.String,System.String)">
+	<summary>
+ 查询
+ </summary>
+	<param name="Project_Name"></param>
+	<param name="PROJECT_COORDINATE_NAME"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Create_Project(System.String[],System.Object[],System.String,System.String)">
+	<summary>
+ 新增项目
+ </summary>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Create_Project(System.String,System.String[],System.Object[],System.String,System.String)">
+	<summary>
+ 新增项目
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">参数名称数组</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Delete_Project(System.String,System.String,System.String)">
+	<summary>
+ 删除项目
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Query_All_ColNamesOfTable(System.String,System.String[]@)">
+	<summary>
+ 查询表中所有的列名
+ </summary>
+	<param name="Tab_Name">表名</param>
+	<param name="Column_Names">查询到的列名</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Copy_Project(System.String,System.String,System.String,System.String)">
+	<summary>
+ 复制项目参数
+ </summary>
+	<param name="Old_Project_Name">原项目名称</param>
+	<param name="New_Project_Name">新项目名称</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Copy_Coordinate_Name(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+	<summary>
+ 复制坐标名称
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Old_Coor_Station">复制坐标工位</param>
+	<param name="New_Coor_Station">粘贴坐标工位</param>
+	<param name="Copy_Coor_Name">坐标名称</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Delete_Param_ID(System.String,System.Int32,System.String,System.String)">
+	<summary>
+ 删除项目
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Updata_HOme_Param_ID(System.String[],System.Object[],System.Int32,System.String,System.String)">
+	<summary>
+ 删除项目
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Hardware_IO(System.String[],System.Object[]@,System.String,System.String)">
+	<summary>
+ 读取硬件参数
+ </summary>
+	<param name="Hardware_Parameter">硬件参数表</param>
+	<param name="Hardware_IO">硬件输入输出表</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Hardware_IO(System.String[],DevComponents.DotNetBar.Controls.ComboBoxEx[]@,System.String,System.String)">
+	<summary>
+ 读取硬件参数
+ </summary>
+	<param name="Hardware_Parameter">硬件参数表</param>
+	<param name="Hardware_IO">硬件输入输出表</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Update_Hardware_IO_Parameter(System.String[],DevComponents.DotNetBar.Controls.ComboBoxEx[],System.String,System.String)">
+	<summary>
+ 更新产品参数
+ </summary>
+	<param name="Parameter_Name">项目参数</param>
+	<param name="Parameter_Value">参数变量</param>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.SQL_LIB.Read_Measure_Data(System.String,System.String[],DevComponents.DotNetBar.Controls.DataGridViewX@,System.Boolean,System.String,System.String)">
+	<summary>
+ 读取测量数据
+ </summary>
+	<param name="Project_Name">项目名称</param>
+	<param name="Parameter_Name">项目参数表</param>
+	<param name="Measure_Data_DataGridView">显示测量数据表</param>
+	<param name="Fit_Bool"></param>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DeviceStatus">
+	<summary>设备通信状态</summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Rc">
+	<summary>
+ 返回值定义
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_MEASURE_DATA_INFO">
+	<summary>
+ Definition that indicates the validity of a measurement value
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_JUDGE_RESULT">
+	<summary>
+ Definition that indicates the tolerance judgment result of the measurement
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.BatchPos">
+ Get batch profile position specification method designation
+
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.SettingDepth">
+ Setting value storage level designation
+
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.SettingType">
+ Definition that indicates the "setting type" in LJV7IF_TARGET_SETTING structure.
+
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileBank">
+ Get profile target buffer designation
+
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfilePos">
+ Get profile position specification method designation
+
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_ETHERNET_CONFIG">
+	<summary>
+ Ethernet settings structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_TIME">
+	<summary>
+ Date and time structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_TARGET_SETTING">
+	<summary>
+ Setting item designation structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_MEASURE_DATA">
+	<summary>
+ Measurement results structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO">
+	<summary>
+ Profile information structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_HEADER">
+	<summary>
+ Profile header information structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_FOOTER">
+	<summary>
+ Profile footer information structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_PROFILE_REQ">
+	<summary>
+ High-speed mode get profile request structure (batch measurement: off)
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_REQ">
+	<summary>
+ High-speed mode get profile request structure (batch measurement: on)
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_ADVANCE_REQ">
+	<summary>
+ Advanced mode get profile request structure (batch measurement: on)
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_PROFILE_RSP">
+	<summary>
+ High-speed mode get profile response structure (batch measurement: off)
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_RSP">
+	<summary>
+ High-speed mode get profile response structure (batch measurement: on)
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_ADVANCE_RSP">
+	<summary>
+ Advanced mode get profile response structure (batch measurement: on)
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_STRAGE_STATUS_REQ">
+	<summary>
+ Storage status request structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_STRAGE_STATUS_RSP">
+	<summary>
+ Storage status response structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_STORAGE_INFO">
+	<summary>
+ Storage information structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_STORAGE_REQ">
+	<summary>
+ Get storage data request structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_STORAGE_REQ">
+	<summary>
+ Get batch profile storage request structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_STORAGE_RSP">
+	<summary>
+ Get storage data response structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_STORAGE_RSP">
+	<summary>
+ Get batch profile storage response structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_HIGH_SPEED_PRE_START_REQ">
+	<summary>
+ High-speed communication start preparation request structure
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.HighSpeedDataCallBack">
+	<summary>
+ Callback function for high-speed communication
+ </summary>
+	<param name="buffer">Received profile data pointer</param>
+	<param name="size">Size in units of bytes of one profile</param>
+	<param name="count">Number of profiles</param>
+	<param name="notify">Finalization condition</param>
+	<param name="user">Thread ID</param>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.NativeMethods.MeasurementDataCount">
+	<summary>
+ Get measurement results (the data of all 16 OUTs, including those that are not being measured, is stored).
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.NativeMethods.DeviceCount">
+	<summary>
+ Number of connectable devices
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.NativeMethods.EnvironmentSettingSize">
+	<summary>
+ Fixed value for the bytes of environment settings data 
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.NativeMethods.CommonSettingSize">
+	<summary>
+ Fixed value for the bytes of common measurement settings data 
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.NativeMethods.ProgramSettingSize">
+	<summary>
+ Fixed value for the bytes of program settings data 
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.NativeMethods">
+	<summary>
+ Function definitions
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData._offsetTime">
+	<summary>
+ Elapsed time(ms)
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData._data">
+	<summary>
+ Measurement results
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.OffsetTime">
+	<summary>
+ Elapsed time(ms)
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.Data">
+	<summary>
+ Measurement results
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.#ctor(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_MEASURE_DATA[])">
+	<summary>
+ Constructor
+ </summary>
+	<param name="data">Measurement results</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.#ctor(System.Byte[])">
+	<summary>
+ Constructor
+ </summary>
+	<param name="data">Measurement results</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.#ctor(System.UInt32,Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_MEASURE_DATA[])">
+	<summary>
+ Constructor
+ </summary>
+	<param name="offsetTime">Elapsed time</param>
+	<param name="data">Measurement results</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.#ctor(System.Byte[],System.Int32)">
+	<summary>
+ Constructor
+ </summary>
+	<param name="data">Start position</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.GetByteSize">
+	<summary>
+ Size acquisition
+ </summary>
+	<returns>Data size</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData.ToString">
+	<summary>
+ ToString override
+ </summary>
+	<returns>String for display</returns>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData">
+	<summary>
+ Measurement data class
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.TypeOfStruct">
+	<summary>
+ Structure classification
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.STORAGE_INFO_STATUS_EMPTY">
+	<summary>
+ Storage structure (storage status)
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.STORAGE_INFO_TARGET_DATA">
+	<summary>
+ Storage structure (storage target)
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.GetByteSize(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.TypeOfStruct)">
+	<summary>
+ Get the byte size of the structure.
+ </summary>
+	<returns>Byte size</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_STORAGE_INFO)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_STORAGE_RSP)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_MEASURE_DATA)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_STORAGE_RSP)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_RSP)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_BATCH_PROFILE_ADVANCE_RSP)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_TIME)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_PROFILE_RSP)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility.ConvertToLogString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_GET_STRAGE_STATUS_RSP)">
+	<summary>
+ Get the string for log output.
+ </summary>
+	<returns>String for log output</returns>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.Utility">
+	<summary>
+ Utility class
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData._triggerCnt">
+	<summary>
+ Trigger count
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData._encoderCnt">
+	<summary>
+ Encoder count
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData._profData">
+	<summary>
+ Profile data
+ </summary>
+</member><member name="F:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData._profileInfo">
+	<summary>
+ Profile information
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.TriggerCnt">
+	<summary>
+ Trigger count
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.EncodeCnt">
+	<summary>
+ Encoder count
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.ProfDatas">
+	<summary>
+ Profile Data
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.ProfInfo">
+	<summary>
+ Profile Imformation
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.#ctor(System.Int32[],Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO)">
+	<summary>
+ Constructor
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.#ctor(System.Byte[],System.Int32,Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO)">
+	<summary>
+ Constructor
+ </summary>
+	<param name="receiveBuffer">Receive buffer</param>
+	<param name="startIndex">Start position</param>
+	<param name="profileInfo">Profile information</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.#ctor(System.Int32[],System.Int32,Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO)">
+	<summary>
+ Constructor Overload
+ </summary>
+	<param name="receiveBuffer">Receive buffer</param>
+	<param name="startIndex">Start position</param>
+	<param name="profileInfo">Profile information</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.SetData(System.Int32[],Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO)">
+	<summary>
+ Set the members to the arguments.
+ </summary>
+	<param name="receiveBuffer">Receive buffer</param>
+	<param name="profileInfo">Profile information</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.GetStringData">
+	<summary>
+ Get the data string.
+ </summary>
+	<returns>Retained data</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.CalculateDataSize(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO)">
+	<summary>
+ Data size calculation
+ </summary>
+	<param name="profileInfo">Profile information</param>
+	<returns>Profile data size</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.ToString">
+	<summary>
+ ToString override
+ </summary>
+	<returns>String for display</returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData.GetXPosString(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.LJV7IF_PROFILE_INFO)">
+	<summary>
+ Create the X-position string from the profile information.
+ </summary>
+	<param name="profileInfo">Profile information</param>
+	<returns>X-position string</returns>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData">
+	<summary>
+ Profile data class
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.PinnedObject.Pointer">
+	<summary>
+ Get the address.
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.PinnedObject.#ctor(System.Object)">
+	<summary>
+ Constructor
+ </summary>
+	<param name="target">Target to protect from the garbage collector</param>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.PinnedObject.Dispose">
+	<summary>
+ Interface
+ </summary>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.PinnedObject">
+	<summary>
+ Object pinning class
+ </summary>
+</member><member name="P:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DeviceData.Status">
+	<summary>
+ Status property
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DeviceData.#ctor">
+	<summary>
+ Constructor
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DeviceData.GetStatusString">
+	<summary>
+ Connection status acquisition
+ </summary>
+	<returns>Connection status for display</returns>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DeviceData">
+	<summary>
+ Device data class
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.KEYENCE_FUN.EthernetOpen(System.Int32,System.String,System.Int32,System.String@,System.String@)">
+	<summary>
+ 用以太网打开控制器
+ </summary>
+	<param name="DeviceId">控制器ID</param>
+	<param name="IP">IP地址</param>
+	<param name="PortNo">通讯端口</param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DataExporter.ExportOneProfile(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.ProfileData[],System.Int32,System.String)">
+	<summary>
+ Profile output
+ </summary>
+	<param name="datas">Profile data</param>
+	<param name="profileNo">Profile information</param>
+	<param name="fileName">File name</param>
+	<returns></returns>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DataExporter.ExportMeasureData(Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.MeasureData[],System.String)">
+	<summary>
+ Measurement value output
+ </summary>
+	<param name="datas">Measurement data</param>
+	<param name="fileName">File name</param>
+	<returns></returns>
+</member><member name="T:Keyboard_Measure.GeneralClass.KEYENCE_LIB.LINE_LASER.DataExporter">
+	<summary>
+ Data export class
+ </summary>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.POINT_LASER.EthernetOpen(System.String,System.String@,System.String@)">
+	<summary>
+ 打开激光控制器
+ </summary>
+	<param name="DeviceIp"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.POINT_LASER.UsbOpen(System.String@,System.String@)">
+	<summary>
+ 打开激光控制器
+ </summary>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.POINT_LASER.DataStorageStart(System.String@,System.String@)">
+	<summary>
+ 开始存储数据
+ </summary>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.POINT_LASER.DataStorageStop(System.String@,System.String@)">
+	<summary>
+ 停止存储数据
+ </summary>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.GeneralClass.KEYENCE_LIB.POINT_LASER.DataStorageGetData(System.Int32,System.Double[]@,System.String@,System.String@)">
+	<summary>
+ 读取批量存储数据
+ </summary>
+	<param name="OutNo"></param>
+	<param name="Measure_Data"></param>
+	<param name="SubName"></param>
+	<param name="ErrLine"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Keyboard_Measure.My.Resources.Resources.ResourceManager">
+	<summary>
+  返回此类使用的缓存的 ResourceManager 实例。
+</summary>
+</member><member name="P:Keyboard_Measure.My.Resources.Resources.Culture">
+	<summary>
+  使用此强类型资源类，为所有资源查找
+  重写当前线程的 CurrentUICulture 属性。
+</summary>
+</member><member name="T:Keyboard_Measure.My.Resources.Resources">
+	<summary>
+  一个强类型的资源类，用于查找本地化的字符串等。
+</summary>
+</member><member name="T:Keyboard_Measure.ParamModel.AutoInsertPosParam">
+	<summary>
+ 自动插入坐标
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.HOME_PARAM">
+	<summary>
+ 原点运动参数
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.Device_ParamType">
+	<summary>
+ Device参数类型
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.DEVICEPARAM_TABLENAME">
+	<summary>
+ DEVICE参数表名
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.Work_Coordinatess">
+	<summary>
+ 坐标系参数
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.ADLINK_Err_Code">
+	<summary>
+ 凌华卡的错误返回值
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.ADLINK_Err_MSG">
+	<summary>
+ 凌华卡的错误返回信息
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.STOP_TYPE">
+	<summary>
+ 急停类型，JOG_STOP：运动停止 EMG_STOP：急停
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.USER_NAME">
+	<summary>
+ 用户管理
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.STATION">
+	<summary>
+ 左右工位
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.COORDINATENAME">
+	<summary>
+ 坐标名称dataset
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Keyboard_Measure.ParamModel.COORDINATEPARAM">
+	<summary>
+ 实际坐标dataset
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.ParamModel.Save_Fixtrue_Data(System.String,System.String,System.String,System.String[],System.Object[])">
+	<summary>
+ 保存设备数据
+ </summary>
+	<param name="Data_Name">行名</param>
+	<param name="Data_Value">数据</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.ParamModel.Save_Laser_Data(System.String,System.String,System.String,System.String[],System.Object[])">
+	<summary>
+ 保存设备数据
+ </summary>
+	<param name="Data_Name">行名</param>
+	<param name="Data_Value">数据</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.System_SetDialog.SET_AXIS_PITCH_SUB">
+	<summary>
+ 设置轴导程
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.System_SetDialog.STOP_SPORT(System.Int32)">
+	<summary>
+ 停止运动
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.System_SetDialog.Read_Pos_Fun">
+	<summary>
+ 显示当前坐标
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.System_SetDialog.READ_ENCODER_POSITION(System.Double[]@)">
+	<summary>
+ 读取轴位置与报警信息
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.System_SetDialog.READ_EMG_STOP">
+	<summary>
+ 读取急停状态
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Keyboard_Measure.System_SetDialog.Inspect_Coordinate_Nomal(System.String)">
+	<summary>
+ 检测坐标系是否正常
+ </summary>
+	<param name="InputStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
